@@ -1,23 +1,33 @@
 import React from "react";
-import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
+import { SafeAreaProvider } from "react-native-safe-area-context";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
-import { RootStackParamList } from "./types/NavigationTypes";
-import HomeScreen from "./screens/HomeScreen/HomeScreen";
-import DescriptionCardScreen from "./screens/DescriptionCardScreen/DescriptionCardScreen";
-import SignUpScreen from "./screens/SignUp/Signup"; 
+import { RootStackParamList } from "./src/types/NavigationTypes";
+import HomeScreen from "./src/screens/HomeScreen/HomeScreen";
+import DescriptionCardScreen from "./src/screens/DescriptionCardScreen/DescriptionCardScreen";
+import SignUpScreen from "./src/screens/SignUp/Signup";
+import DetailScreen from "./src/screens/DetailScreen/DetailScreen";
+import { SafeAreaView } from "react-native";
 const Stack = createStackNavigator<RootStackParamList>();
 
 export default function App() {
   return (
     <NavigationContainer>
       <SafeAreaProvider>
-          <Stack.Navigator initialRouteName="SignUp">
+          <Stack.Navigator
+            initialRouteName="Detail"
+            screenOptions={{ headerShown: true }}
+          >
             <Stack.Screen name="SignUp" component={SignUpScreen} />
             <Stack.Screen name="Home" component={HomeScreen} />
             <Stack.Screen
               name="DescriptionCard"
               component={DescriptionCardScreen}
+            />
+              <Stack.Screen
+              name="Detail"
+              component={DetailScreen}
+              options={{headerShown: true }}
             />
           </Stack.Navigator>
       </SafeAreaProvider>
