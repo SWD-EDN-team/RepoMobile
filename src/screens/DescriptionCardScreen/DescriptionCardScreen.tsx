@@ -1,6 +1,6 @@
 import { View, Text, Button } from 'react-native'
 import React, { useState } from 'react'
-import { RootStackParamList } from '../../types/NavigationTypes'
+import { RootStackParamList } from '../../src/types/NavigationTypes'
 import { RouteProp } from '@react-navigation/native'
 import { StackNavigationProp } from '@react-navigation/stack'
 type Props= {

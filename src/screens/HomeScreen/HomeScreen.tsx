@@ -9,18 +9,21 @@ const HomeScreen: React.FC<{
 
   return (
     <View style={styles.homeScreen}>
-      <Text>HomeScreen</Text>
-      <Text>This is a scrollview</Text>
-      <Text>This is a scrollview</Text>
-      <Text>This is a scrollview</Text>
-      <Text>This is a scrollview</Text>
-      <Text>This is a scrollview</Text>
-      <Text>This is a scrollview</Text>
-      <Text>This is a scrollview</Text>
+
       <TouchableOpacity  style={styles.button}
         onPress={() => navigation.navigate("DescriptionCard")}
       >
         <Text>Go to DescriptionCard</Text>
+      </TouchableOpacity>
+      <TouchableOpacity  style={styles.button}
+        onPress={() => navigation.navigate("Detail")}
+      >
+        <Text>Go to details</Text>
+      </TouchableOpacity>
+      <TouchableOpacity  style={styles.button}
+        onPress={() => navigation.navigate("SignUp")}
+      >
+        <Text>Go to SignUp</Text>
       </TouchableOpacity>
     </View>
   );
@@ -28,15 +31,12 @@ const HomeScreen: React.FC<{
 
 const styles = StyleSheet.create({
   homeScreen: {
-    flex: 1, // Fill the screen
-    justifyContent: "center", // Center vertically
-    alignItems: "center", // Center horizontally
-    padding: 16, // Add some padding around the edges
+    flex: 1, 
   },
   button:{
     marginTop: 10,
     padding: 10,
-    backgroundColor: "blue",
+    backgroundColor: "gray",
     color: "white",
     borderRadius: 5,
   }
