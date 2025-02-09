@@ -56,7 +56,7 @@ const styles = StyleSheet.create({
   count: {
     flexDirection: "row",
     height: 50,
-    width: 100,
+    width: "30%",
     justifyContent: "space-around",
     alignItems: "center",
     backgroundColor: "#F4F4F4",
@@ -70,7 +70,7 @@ const styles = StyleSheet.create({
   },
   buttonAdd: {
     height: 50,
-    width: 170,
+    width: "50%",
     backgroundColor: "#FB741A",
     flexDirection: "row",
     alignItems: "center",
