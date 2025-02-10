@@ -16,7 +16,10 @@ const Signup: React.FC<{
   }
 
   const navigationToLogin = () => {
-    alert("Sign Up")
+    navigation.reset({
+      index: 0,
+      routes: [{ name: "SignIn" }],
+    });
   }
   return (
     <View style={styles.container}>
@@ -76,7 +79,7 @@ const Signup: React.FC<{
       </TouchableHighlight>
         <View style={styles.isAccount}>
           <Text style={styles.text}>Already have an account?</Text>
-          <Text style={styles.link} onPress={() => navigation.navigate("SignIn")}>Login</Text>
+          <Text style={styles.link} onPress={navigationToLogin}>Login</Text>
         </View>
       </View>
     </View>

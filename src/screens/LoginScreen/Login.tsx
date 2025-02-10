@@ -75,7 +75,6 @@ const styles = StyleSheet.create({
     alignSelf: "flex-start",
     color: "#333333",
     lineHeight: 43.7,
-    marginLeft: 15,
     marginBottom: 20,
   },
   input: {
