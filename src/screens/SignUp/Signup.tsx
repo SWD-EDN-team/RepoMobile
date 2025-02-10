@@ -1,7 +1,11 @@
 import { View, Text, TextInput, StyleSheet, Button, TouchableHighlight } from "react-native";
 import React, { useState } from "react";
+import { StackNavigationProp } from "@react-navigation/stack";
+import { RootStackParamList } from "../../types/NavigationTypes";
 
-const Signup = () => {
+const Signup: React.FC<{
+  navigation: StackNavigationProp<RootStackParamList, "Home">;
+}> = ({ navigation }) => {
   const [isFocusedFullName, setIsFocusedFullName] = useState<boolean>(false);
   const [isFocusedEmail, setIsFocusedEmail] = useState<boolean>(false);
   const [isFocusedPassword, setIsFocusedPassword] = useState<boolean>(false);
@@ -72,7 +76,7 @@ const Signup = () => {
       </TouchableHighlight>
         <View style={styles.isAccount}>
           <Text style={styles.text}>Already have an account?</Text>
-          <Text style={styles.link} onPress={navigationToLogin}>Login</Text>
+          <Text style={styles.link} onPress={() => navigation.navigate("SignIn")}>Login</Text>
         </View>
       </View>
     </View>

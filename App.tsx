@@ -8,6 +8,7 @@ import DescriptionCardScreen from "./src/screens/DescriptionCardScreen/Descripti
 import SignUpScreen from "./src/screens/SignUp/Signup";
 import DetailScreen from "./src/screens/DetailScreen/DetailScreen";
 import { SafeAreaView } from "react-native";
+import Login from "./src/screens/LoginScreen/Login";
 const Stack = createStackNavigator<RootStackParamList>();
 
 export default function App() {
@@ -15,10 +16,11 @@ export default function App() {
     <NavigationContainer>
       <SafeAreaProvider>
           <Stack.Navigator
-            initialRouteName="Detail"
+            initialRouteName="SignUp"
             screenOptions={{ headerShown: true }}
           >
             <Stack.Screen name="SignUp" component={SignUpScreen} />
+            <Stack.Screen name="SignIn" component={Login} />
             <Stack.Screen name="Home" component={HomeScreen} />
             <Stack.Screen
               name="DescriptionCard"
