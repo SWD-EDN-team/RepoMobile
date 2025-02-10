@@ -1,7 +1,11 @@
 import { View, Text, TextInput, StyleSheet, Button, TouchableHighlight } from "react-native";
 import React, { useState } from "react";
+import { StackNavigationProp } from "@react-navigation/stack";
+import { RootStackParamList } from "../../types/NavigationTypes";
 
-const Signup = () => {
+const Signup: React.FC<{
+  navigation: StackNavigationProp<RootStackParamList, "Home">;
+}> = ({ navigation }) => {
   const [isFocusedFullName, setIsFocusedFullName] = useState<boolean>(false);
   const [isFocusedEmail, setIsFocusedEmail] = useState<boolean>(false);
   const [isFocusedPassword, setIsFocusedPassword] = useState<boolean>(false);
@@ -12,7 +16,10 @@ const Signup = () => {
   }
 
   const navigationToLogin = () => {
-    alert("Sign Up")
+    navigation.reset({
+      index: 0,
+      routes: [{ name: "SignIn" }],
+    });
   }
   return (
     <View style={styles.container}>

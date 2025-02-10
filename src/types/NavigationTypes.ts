@@ -5,4 +5,5 @@ export type RootStackParamList ={
   DescriptionCard: undefined;
   SignUp: undefined;
   Detail: undefined;
+  SignIn: undefined;
 }
