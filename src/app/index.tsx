@@ -17,6 +17,7 @@ import googleLogo from "@/assets/auth/google.png";
 import { LinearGradient } from "expo-linear-gradient";
 import TextBetweenLine from "@/components/text.between";
 import { Link, Redirect } from "expo-router";
+import { useState } from "react";
 
 const styles = StyleSheet.create({
   container: {

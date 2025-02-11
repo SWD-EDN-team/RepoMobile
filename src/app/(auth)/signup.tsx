@@ -3,6 +3,7 @@ import SocialButton from "@/components/button/social.button";
 import ShareInput from "@/components/input/share.input";
 import { APP_COLOR } from "@/utils/constant";
 import { Link } from "expo-router";
+import { useState } from "react";
 import { View, Text, TextInput, StyleSheet } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
@@ -29,6 +30,10 @@ const styles = StyleSheet.create({
 });
 
 const SignUpPage = () => {
+  const [name, setName] = useState<string>("");
+  const [email, setEmail] = useState<string>("");
+  const [password, setPassword] = useState<string>("");
+
   return (
     <SafeAreaView style={{ flex: 1 }}>
       <View style={styles.container}>
@@ -37,20 +42,34 @@ const SignUpPage = () => {
             style={{
               fontSize: 25,
               fontWeight: 600,
-              marginVertical: 30,
+              marginVertical: 10,
             }}
           >
             Sign Up
           </Text>
         </View>
-        <ShareInput title="Full Name"></ShareInput>
-        <ShareInput title="Email" keyboardType="email-address"></ShareInput>
-        <ShareInput title="Password" secureTextEntry></ShareInput>
-        <View style={{ marginVertical: 10 }} />
+        <ShareInput
+          title="Full Name"
+          value={name}
+          setValue={setName}
+        ></ShareInput>
+        <ShareInput
+          title="Email"
+          value={email}
+          setValue={setEmail}
+          keyboardType="email-address"
+        ></ShareInput>
+        <ShareInput
+          title="Password"
+          secureTextEntry
+          value={password}
+          setValue={setPassword}
+        ></ShareInput>
+        {/* <View style={{ marginVertical: 10 }} /> */}
         <ShareButton
           title="Sign Up "
           onPress={() => {
-            alert("ok");
+            console.log(">>>>", name, email, password);
           }}
           textStyleee={{
             textTransform: "uppercase",
@@ -79,7 +98,7 @@ const SignUpPage = () => {
           <Text
             style={{
               textAlign: "center",
-              color: "white",
+              color: "black",
               fontWeight: "bold",
             }}
           >
@@ -88,7 +107,7 @@ const SignUpPage = () => {
           <Link href={"/(auth)/signup"}>
             <Text
               style={{
-                color: "white",
+                color: "black",
                 fontWeight: "bold",
                 textDecorationLine: "underline",
               }}

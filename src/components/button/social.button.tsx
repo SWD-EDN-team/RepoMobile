@@ -1,4 +1,4 @@
-import TextBetweenLine from "../text.between";
+import TextBetweenLine from "@/components/text.between";
 import ShareButton from "./share.button";
 import { View, Text, Image, StyleSheet } from "react-native";
 import fbLogo from "@/assets/auth/facebook.png";
