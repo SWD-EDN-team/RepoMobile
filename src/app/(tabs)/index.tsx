@@ -4,6 +4,7 @@ import avt from "@/assets/homepage/avt.png";
 import { APP_COLOR } from "@/utils/constant";
 import Entypo from "@expo/vector-icons/Entypo";
 import BannerHome from "@/components/home/banner.home";
+import FlatlistHome from "@/components/home/flatlist.home";
 
 const styles = StyleSheet.create({
   container: {
@@ -19,13 +20,18 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
   },
   headerText: {
-    flex: 0.6,
+    flex: 0.3,
     alignItems: "center",
     justifyContent: "center",
   },
   bodyContainer: {
-    flex: 0.6,
+    flex: 0.3,
     borderColor: "green",
+    borderWidth: 1,
+  },
+  listContainer: {
+    flex: 0.6,
+    borderColor: "red",
     borderWidth: 1,
   },
 });
@@ -52,9 +58,12 @@ const HomeTab = () => {
           source={avt}
         ></ImageBackground>
       </View>
-      <Text style={styles.bodyContainer}>
+      <View style={styles.bodyContainer}>
         <BannerHome></BannerHome>
-      </Text>
+      </View>
+      <View style={styles.listContainer}>
+        <FlatlistHome></FlatlistHome>
+      </View>
     </SafeAreaView>
   );
 };
