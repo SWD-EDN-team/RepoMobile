@@ -24,7 +24,7 @@ const styles = StyleSheet.create({
     marginTop: 30,
   },
   itemContainer: {
-    flex: 1, // Đảm bảo mỗi item chiếm 50% chiều rộng
+    flex: 1, 
     flexDirection: "column",
     padding: 10,
     marginBottom: 10,
@@ -129,11 +129,11 @@ const FlatlistHome = () => {
   return (
     <View style={styles.container}>
       <FlatList
-        numColumns={2} // Hiển thị 2 item trong mỗi hàng
+        numColumns={2} 
         data={data}
         renderItem={renderItem}
         keyExtractor={(item) => item.id.toString()}
-        columnWrapperStyle={{ justifyContent: "space-between" }} // Căn chỉnh các item trong một hàng
+        columnWrapperStyle={{ justifyContent: "space-between" }}  
       />
     </View>
   );
