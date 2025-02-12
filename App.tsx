@@ -9,29 +9,31 @@ import SignUpScreen from "./src/screens/SignUp/Signup";
 import DetailScreen from "./src/screens/DetailScreen/DetailScreen";
 import { SafeAreaView } from "react-native";
 import Login from "./src/screens/LoginScreen/Login";
+import WishList from "./src/screens/WishListScreen/WishList";
 const Stack = createStackNavigator<RootStackParamList>();
 
 export default function App() {
   return (
     <NavigationContainer>
       <SafeAreaProvider>
-          <Stack.Navigator
-            initialRouteName="SignIn"
-            screenOptions={{ headerShown: true }}
-          >
-            <Stack.Screen name="SignUp" component={SignUpScreen} />
-            <Stack.Screen name="SignIn" component={Login} />
-            <Stack.Screen name="Home" component={HomeScreen} />
-            <Stack.Screen
-              name="DescriptionCard"
-              component={DescriptionCardScreen}
-            />
-              <Stack.Screen
-              name="Detail"
-              component={DetailScreen}
-              options={{headerShown: true }}
-            />
-          </Stack.Navigator>
+        <Stack.Navigator
+          initialRouteName="WishList"
+          screenOptions={{ headerShown: true }}
+        >
+          <Stack.Screen name="WishList" component={WishList} />
+          <Stack.Screen name="SignUp" component={SignUpScreen} />
+          <Stack.Screen name="SignIn" component={Login} />
+          <Stack.Screen name="Home" component={HomeScreen} />
+          <Stack.Screen
+            name="DescriptionCard"
+            component={DescriptionCardScreen}
+          />
+          <Stack.Screen
+            name="Detail"
+            component={DetailScreen}
+            options={{ headerShown: true }}
+          />
+        </Stack.Navigator>
       </SafeAreaProvider>
     </NavigationContainer>
   );
