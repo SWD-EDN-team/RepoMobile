@@ -16,29 +16,26 @@ export default function App() {
   return (
     <NavigationContainer>
       <SafeAreaProvider>
-          <Stack.Navigator
-            initialRouteName="Address"
-            screenOptions={{ headerShown: true }}
-          >
-            <Stack.Screen name="SignUp" component={SignUpScreen} />
-            <Stack.Screen name="SignIn" component={Login} />
-            <Stack.Screen name="Home" component={HomeScreen} />
-            <Stack.Screen
-              name="DescriptionCard"
-              component={DescriptionCardScreen}
-            />
-              <Stack.Screen
-              name="Detail"
-              component={DetailScreen}
-              options={{headerShown: true }}
-            />
-
-            <Stack.Screen
-              name="Address"
-              component={AddressScreen}
-              options={{headerShown: true }}
-            />
-          </Stack.Navigator>
+        <Stack.Navigator
+          initialRouteName="Home"
+          screenOptions={{ headerShown: false }}
+        >
+          <Stack.Screen name="SignUp" component={SignUpScreen} />
+          <Stack.Screen name="SignIn" component={Login} />
+          <Stack.Screen name="Home" component={HomeScreen} />
+          <Stack.Screen
+            name="DescriptionCard"
+            component={DescriptionCardScreen}
+          />
+          <Stack.Screen 
+            name="Detail"
+            component={DetailScreen}
+          />
+          <Stack.Screen
+            name="Address"
+            component={AddressScreen}
+          />
+        </Stack.Navigator>
       </SafeAreaProvider>
     </NavigationContainer>
   );
