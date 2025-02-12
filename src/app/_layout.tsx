@@ -3,7 +3,6 @@ import { View, Text } from "react-native";
 import { RootSiblingParent } from "react-native-root-siblings";
 import { SafeAreaView } from "react-native-safe-area-context";
 
-
 const RootLayout = () => {
   return (
     <RootSiblingParent>
@@ -25,6 +24,10 @@ const RootLayout = () => {
           ></Stack.Screen>
           <Stack.Screen
             name="(auth)"
+            options={{ headerShown: false }}
+          ></Stack.Screen>
+          <Stack.Screen
+            name="(tabs)"
             options={{ headerShown: false }}
           ></Stack.Screen>
           <Stack.Screen
