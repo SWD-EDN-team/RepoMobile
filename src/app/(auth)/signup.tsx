@@ -1,10 +1,12 @@
 import ShareButton from "@/components/button/share.button";
 import SocialButton from "@/components/button/social.button";
 import ShareInput from "@/components/input/share.input";
+import { registerApi } from "@/utils/api";
 import { APP_COLOR } from "@/utils/constant";
-import { Link } from "expo-router";
-import { useState } from "react";
-import { View, Text, TextInput, StyleSheet } from "react-native";
+import axios from "axios";
+import { Link, router } from "expo-router";
+import { useState, useEffect } from "react";
+import { View, Text, TextInput, StyleSheet, Platform } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 const styles = StyleSheet.create({
@@ -33,6 +35,35 @@ const SignUpPage = () => {
   const [name, setName] = useState<string>("");
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
+
+  const fetchApi = async () => {
+    const URL_BACKEND = process.env.EXPO_PUBLIC_API_URL;
+    console.log("URL_BACKEND", URL_BACKEND);
+
+    try {
+      const res = await axios.get(URL_BACKEND!);
+      console.log(res.data);
+      console.log("connected to successfully");
+    } catch (error: any) {
+      console.error("check error >> :", error.message);
+    }
+  };
+  useEffect(() => {
+    fetchApi();
+  }, []);
+
+  const handleSignUp = async () => {
+    const url = `${process.env.EXPO_PUBLIC_API_URL}/v1/api/users`;
+    try {
+      const res = await registerApi(name, email, password);
+      if(res.data) {
+        router.navigate("/(auth)/verify");
+      }
+      // console.log(res.data);
+    } catch (error) {
+      console.log("check error >>???? :", error);
+    }
+  };
 
   return (
     <SafeAreaView style={{ flex: 1 }}>
@@ -68,9 +99,7 @@ const SignUpPage = () => {
         {/* <View style={{ marginVertical: 10 }} /> */}
         <ShareButton
           title="Sign Up "
-          onPress={() => {
-            console.log(">>>>", name, email, password);
-          }}
+          onPress={handleSignUp}
           textStyleee={{
             textTransform: "uppercase",
             color: "#fff",
