@@ -24,11 +24,12 @@ const styles = StyleSheet.create({
     marginTop: 30,
   },
   itemContainer: {
-    flex: 1, 
+    flex: 1,
     flexDirection: "column",
     padding: 10,
     marginBottom: 10,
-    backgroundColor: "#f8f8f8",
+    marginHorizontal: 10,
+    backgroundColor: "white",
     borderRadius: 10,
     alignItems: "center",
   },
@@ -39,6 +40,7 @@ const styles = StyleSheet.create({
   },
   itemDetails: {
     marginLeft: 20,
+    // marginVertical: 10,
     flex: 1,
   },
   itemTitle: {
@@ -129,11 +131,11 @@ const FlatlistHome = () => {
   return (
     <View style={styles.container}>
       <FlatList
-        numColumns={2} 
+        numColumns={2}
         data={data}
         renderItem={renderItem}
         keyExtractor={(item) => item.id.toString()}
-        columnWrapperStyle={{ justifyContent: "space-between" }}  
+        columnWrapperStyle={{ justifyContent: "space-between" }}
       />
     </View>
   );
