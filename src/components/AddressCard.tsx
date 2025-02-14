@@ -19,6 +19,7 @@ interface AddressCardProps {
 
 const AddressCard: React.FC<AddressCardProps> = ({ data, onEdit, onDelete, onSelect, selectedId, isSelect=false}) => {
   return (
+  <View style={styles.container}>
     <TouchableOpacity style={styles.card} onPress={() => onSelect(data)}>
       <View style={styles.cardContent}>
         <FontAwesomeIcon icon={faLocationDot} style={styles.icon} size={25} />
@@ -44,13 +45,14 @@ const AddressCard: React.FC<AddressCardProps> = ({ data, onEdit, onDelete, onSel
         </View> }
       </View>
     </TouchableOpacity>
+  </View>
   );
 };
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    padding: 20,
-    backgroundColor: "#f8f8f8",
+    alignItems: 'center',
+    justifyContent: 'flex-start',
+    // backgroundColor: 'red'
   },
   title: {
     fontSize: 20,
@@ -61,16 +63,20 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff",
     padding: 20,
     borderRadius: 10,
+    marginTop: 5,
     marginBottom: 10,
     shadowColor: "#000",
     shadowOpacity: 0.1,
     shadowRadius: 4,
-    elevation: 3,
+    elevation: 10,
+    width: '95%',
+
   },
   cardContent: {
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between",
+
   },
   icon: {
     color: "#555",

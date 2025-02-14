@@ -13,9 +13,6 @@ const addresses: Address[] = [
     { id: "2", name: "Office", street: "4517 Washington Ave. Manchester, Kentucky 39495" },
     { id: "3", name: "Parent’s House", street: "8502 Preston Rd. Inglewood, Maine 98380" },
     { id: "4", name: "Friend’s House", street: "2464 Royal Ln. Mesa, New Jersey 45463" },
-    { id: "5", name: "Friend’s House", street: "2464 Royal Ln. Mesa, New Jersey 45463" },
-    { id: "6", name: "Friend’s House", street: "2464 Royal Ln. Mesa, New Jersey 45463" },
-    { id: "7", name: "Friend’s House", street: "2464 Royal Ln. Mesa, New Jersey 45463" },
   ];
 
 
@@ -42,7 +39,7 @@ const ShippingAddressScreen = () => {
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Shipping Address</Text>
-      <FlatList
+      <FlatList style={styles.flatList}
         data={addresses}
         keyExtractor={(item) => item.id}
         renderItem={({ item }) => (
@@ -69,9 +66,15 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 25,
     fontWeight: "bold",
-    marginBottom: 10,
+    marginBottom: 20,
     textAlign: "center",
     padding:10
+  },
+  flatList: {
+    paddingTop: 15,
+    gap: 20,
+    display: "flex",
+    
   }
 });
 
