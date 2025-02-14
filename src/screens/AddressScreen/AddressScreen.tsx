@@ -6,7 +6,9 @@ const AddressScreen = () => {
     const [fullName, setFullName] = useState("");
     const [mobileNumber, setMobileNumber] = useState("");
     const [street, setStreet] = useState("");
+    
   return (
+
     <View style={styles.container }>
       <View style={styles.header}>
         <Text style={styles.headerText}>A new address</Text>

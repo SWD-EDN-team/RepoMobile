@@ -7,6 +7,7 @@ export type RootStackParamList ={
   Detail: undefined;
   SignIn: undefined;
   Address: undefined;
+  Cart: undefined;
   Demo: undefined;
   Shipping: undefined;
 }
