@@ -11,6 +11,7 @@ import { SafeAreaView } from "react-native";
 import Login from "./src/screens/LoginScreen/Login";
 import AddressScreen from "./src/screens/AddressScreen/AddressScreen";
 import DemoScreen from "./src/screens/DemoScreen/DemoScreen";
+import ShippingAddressScreen from "./src/screens/ShippingScreen/ShippingScreen";
 const Stack = createStackNavigator<RootStackParamList>();
 
 export default function App() {
@@ -18,7 +19,7 @@ export default function App() {
     <NavigationContainer>
       <SafeAreaProvider>
         <Stack.Navigator
-          initialRouteName="Demo"
+          initialRouteName="Shipping"
           screenOptions={{ headerShown: false }}
         >
           <Stack.Screen name="SignUp" component={SignUpScreen} />
@@ -36,6 +37,10 @@ export default function App() {
           <Stack.Screen
             name="Address"
             component={AddressScreen}
+          />
+          <Stack.Screen
+            name="Shipping"
+            component={ShippingAddressScreen}
           />
         </Stack.Navigator>
       </SafeAreaProvider>
