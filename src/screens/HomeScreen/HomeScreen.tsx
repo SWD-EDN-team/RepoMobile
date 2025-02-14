@@ -1,15 +1,23 @@
-import { View, Text, Button, StyleSheet, TouchableOpacity } from "react-native";
+import { View, Text,ScrollView, Button, StyleSheet, TouchableOpacity } from "react-native";
 import React, { useState } from "react";
 import { StackNavigationProp } from "@react-navigation/stack";
 import { RootStackParamList } from "../../types/NavigationTypes";
+import StatusBar from "../../components/StatusBar";
 
 const HomeScreen: React.FC<{
   navigation: StackNavigationProp<RootStackParamList, "Home">;
 }> = ({ navigation }) => {
 
+  const handlePress = () => {
+    alert("Press button");
+  }
+
   return (
     <View style={styles.homeScreen}>
+            <ScrollView>
 
+            
+      
       <TouchableOpacity  style={styles.button}
         onPress={() => navigation.navigate("DescriptionCard")}
       >
@@ -25,6 +33,9 @@ const HomeScreen: React.FC<{
       >
         <Text>Go to SignUp</Text>
       </TouchableOpacity>
+      
+      </ScrollView>
+      <StatusBar title="title status bar" handlePress={handlePress}/>
     </View>
   );
 };

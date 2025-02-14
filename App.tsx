@@ -18,7 +18,7 @@ export default function App() {
     <NavigationContainer>
       <SafeAreaProvider>
           <Stack.Navigator
-            initialRouteName="Cart"
+            initialRouteName="Address"
             screenOptions={{ headerShown: true }}
           >
             <Stack.Screen name="SignUp" component={SignUpScreen} />
@@ -39,7 +39,7 @@ export default function App() {
               component={AddressScreen}
               options={{headerShown: true }}
             />
-
+            
             <Stack.Screen
               name="Cart"
               component={Cart}
