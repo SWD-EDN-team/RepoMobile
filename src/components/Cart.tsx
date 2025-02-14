@@ -1,46 +1,62 @@
-import { StackNavigationProp } from "@react-navigation/stack";
+import { View, Text, StyleSheet, Image, TouchableOpacity, Dimensions } from "react-native";
 import React from "react";
-import {
-  FlatList,
-  Text,
-  View,
-  StyleSheet,
-  Image,
-  Button,
-  TouchableOpacity,
-} from "react-native";
-import { RootStackParamList } from "../../types/NavigationTypes";
-import wishlistData from "../../../data/wishlistData";
-import Cart from "../../components/Cart";
+interface cartProps {
+  image: object;
+  name: string;
+  rating: number;
+  reviews: number;
+  price: string;
+  size: string;
+}
 
-const WishList: React.FC<{
-  navigation: StackNavigationProp<RootStackParamList, "SignIn">;
-}> = ({ navigation }) => {
+const { width,height } = Dimensions.get('window');
+
+const Cart: React.FC<cartProps> = ({
+  image,
+  name,
+  rating,
+  reviews,
+  price,
+  size,
+}) => {
   return (
-    <View style={styles.container}>
-      <Text style={styles.header}>WishList({wishlistData.length})</Text>
-      <FlatList
-        data={wishlistData}
-        contentContainerStyle={{ paddingBottom: 80 }}
-        keyExtractor={(item) => item.id}
-        renderItem={({ item }) => (<Cart image={item.image} name={item.name} price={item.price} size={item.size} rating={item.rating} reviews={item.reviews}  />)}
-      />
+    <View style={styles.wishList}>
+      <View style={{ marginBottom: 10 }}>
+        <Image
+          source={image}
+          style={[{ width: 120, height: 120 }, { borderRadius: 10 }]}
+        />
+      </View>
+      <View style={styles.item}>
+        <View>
+          <Text style={styles.name} numberOfLines={2}>
+            {name}
+          </Text>
+          <Text>{"⭐️".repeat(rating)}</Text>
+          <Text style={styles.review}>({reviews} reviews)</Text>
+          <View style={styles.priceItem}>
+            <Text style={styles.price} numberOfLines={1}>
+              {price}
+            </Text>
+          </View>
+        </View>
+        <View style={styles.size}>
+          <Text style={styles.sizeText}>{size}</Text>
+        </View>
+      </View>
+      <View style={styles.buttonItem}>
+        <TouchableOpacity style={styles.button}>
+          <Text style={styles.buttonText}>Add to cart</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.button}>
+          <Text style={styles.buttonText}>Remove</Text>
+        </TouchableOpacity>
+      </View>
     </View>
   );
 };
+
 const styles = StyleSheet.create({
-  container: {
-    backgroundColor: "#FFFFFF",
-  },
-  header: {
-    fontSize: 14,
-    fontFamily: "Roboto",
-    fontWeight: "700",
-    lineHeight: 19.6,
-    color: "#483028",
-    marginVertical: 30,
-    marginLeft: 20,
-  },
   wishList: {
     flex: 1,
     flexDirection: "row",
@@ -71,7 +87,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
-    width: "60%",
+    width: "65%",
     paddingLeft: 10,
   },
   size: {
@@ -137,4 +153,5 @@ const styles = StyleSheet.create({
     fontWeight: "600",
   },
 });
-export default WishList;
+
+export default Cart;

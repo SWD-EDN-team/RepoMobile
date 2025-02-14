@@ -9,6 +9,7 @@ import SignUpScreen from "./src/screens/SignUp/Signup";
 import DetailScreen from "./src/screens/DetailScreen/DetailScreen";
 import { SafeAreaView } from "react-native";
 import Login from "./src/screens/LoginScreen/Login";
+import AddressScreen from "./src/screens/AddressScreen/AddressScreen";
 import WishList from "./src/screens/WishListScreen/WishList";
 const Stack = createStackNavigator<RootStackParamList>();
 
@@ -18,7 +19,7 @@ export default function App() {
       <SafeAreaProvider>
         <Stack.Navigator
           initialRouteName="WishList"
-          screenOptions={{ headerShown: true }}
+          screenOptions={{ headerShown: false }}
         >
           <Stack.Screen name="WishList" component={WishList} />
           <Stack.Screen name="SignUp" component={SignUpScreen} />
@@ -28,10 +29,13 @@ export default function App() {
             name="DescriptionCard"
             component={DescriptionCardScreen}
           />
-          <Stack.Screen
+          <Stack.Screen 
             name="Detail"
             component={DetailScreen}
-            options={{ headerShown: true }}
+          />
+          <Stack.Screen
+            name="Address"
+            component={AddressScreen}
           />
         </Stack.Navigator>
       </SafeAreaProvider>

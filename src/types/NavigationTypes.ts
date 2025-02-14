@@ -7,4 +7,5 @@ export type RootStackParamList ={
   Detail: undefined;
   SignIn: undefined;
   WishList: undefined;
+  Address: undefined;
 }
