@@ -15,7 +15,7 @@ import Cart from "../../components/Cart";
 
 const WishList: React.FC<{
   navigation: StackNavigationProp<RootStackParamList, "SignIn">;
-}> = ({ navigation }) => {
+}> = ({  }) => {
   return (
     <View style={styles.container}>
       <Text style={styles.header}>WishList({wishlistData.length})</Text>
