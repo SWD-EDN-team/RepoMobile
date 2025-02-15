@@ -1,7 +1,10 @@
 import React, {useState} from "react";
-import { View, Text, FlatList, StyleSheet} from "react-native";
+import { View, Text, FlatList, StyleSheet, TouchableOpacity} from "react-native";
+import { useNavigation } from "@react-navigation/native";
 import AddressCard from "../../components/AddressCard";
 import StatusBar from "../../components/StatusBar";
+import AddressScreen from "../AddressScreen/AddressScreen";
+import { Colors } from "react-native/Libraries/NewAppScreen";
 interface Address {
   id: string;
   name: string;
@@ -17,6 +20,7 @@ const addresses: Address[] = [
 
 
 const ShippingAddressScreen = () => {
+  const navigation = useNavigation(); 
   const handleEdit = (id: string) => {
     console.log("Chỉnh sửa địa chỉ:", id);
   };
@@ -36,9 +40,19 @@ const ShippingAddressScreen = () => {
   const handleStatusBarPress = () => {
     alert("Bạn vừa bấm vào StatusBar!");
   };
+
+
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Shipping Address</Text>
+      <View style={styles.header}>
+        <Text style={styles.title}>Shipping Address</Text>
+                  <TouchableOpacity
+                    style={styles.button}
+                    onPress={() => navigation.navigate("Address")}
+                  >
+                    <Text style={{ color: "white" }}>Create</Text>
+                  </TouchableOpacity>
+      </View>
       <FlatList style={styles.flatList}
         data={addresses}
         keyExtractor={(item) => item.id}
@@ -68,14 +82,27 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     marginBottom: 20,
     textAlign: "center",
-    padding:10
+    padding:7
   },
   flatList: {
     paddingTop: 15,
     gap: 20,
     display: "flex",
-    
-  }
+  },
+  button: {
+    height: 40,
+    paddingHorizontal: 15, 
+    marginTop: 10,
+    marginLeft: 20,
+    backgroundColor: "#483028",
+    borderRadius: 10, 
+    alignItems: "center", 
+    justifyContent: "center", 
+    color: "#fff"
+  },
+
+  header: { flexDirection: "row", marginBottom: 10 },
+
 });
 
 export default ShippingAddressScreen;

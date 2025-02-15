@@ -17,7 +17,7 @@ interface AddressCardProps {
 }
 
 
-const AddressCard: React.FC<AddressCardProps> = ({ data, onEdit, onDelete, onSelect, selectedId, isSelect=false}) => {
+const AddressCard: React.FC<AddressCardProps> = ({ data, onEdit, onDelete, onSelect, selectedId, isSelect=true}) => {
   return (
   <View style={styles.container}>
     <TouchableOpacity style={styles.card} onPress={() => onSelect(data)}>

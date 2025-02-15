@@ -10,4 +10,5 @@ export type RootStackParamList ={
   Cart: undefined;
   Demo: undefined;
   Shipping: undefined;
+  
 }
