@@ -31,10 +31,6 @@ const RootLayout = () => {
             options={{ headerShown: false }}
           ></Stack.Screen>
           <Stack.Screen
-            name="(drawer)"
-            options={{ headerShown: false }}
-          ></Stack.Screen>
-          <Stack.Screen
             name="(auth)/verify"
             options={{ headerShown: false }}
           ></Stack.Screen>

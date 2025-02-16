@@ -5,7 +5,7 @@ const TabLayout = () => {
   return (
     <Tabs screenOptions={{ headerShown: false }}>
       <Tabs.Screen name="quandba1"></Tabs.Screen>
-      <Tabs.Screen name="setting"></Tabs.Screen>
+      <Tabs.Screen name="login"></Tabs.Screen>
     </Tabs>
   );
 };

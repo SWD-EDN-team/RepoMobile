@@ -64,7 +64,7 @@ const HomeTab = () => {
           name="menu"
           size={24}
           color="black"
-          onPress={() => router.push("/(drawer)")}
+          // onPress={alert("m")}
         />
 
         <View style={styles.headerText}>
@@ -72,7 +72,7 @@ const HomeTab = () => {
             Deliver to
           </Text>
           <Text style={{ color: APP_COLOR.ORANGE, fontWeight: 600 }}>
-            4102 Pretty View 
+            4102 Pretty View
           </Text>
         </View>
         <ImageBackground
