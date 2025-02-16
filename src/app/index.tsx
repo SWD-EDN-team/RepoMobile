@@ -54,7 +54,9 @@ const styles = StyleSheet.create({
 
 const WelcomePage = () => {
   if (true) {
-    return <Redirect href={"/(auth)/verify"}></Redirect>;
+    return (
+      <Redirect href={"/screens/CartScreen/ShoppingCartScreen"}></Redirect>
+    );
   }
   return (
     <ImageBackground style={{ flex: 1 }} source={BG2}>
