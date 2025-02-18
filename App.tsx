@@ -12,7 +12,7 @@ import Login from "./src/app/screens/LoginScreen/Login";
 import AddressScreen from "./src/app/screens/AddressScreen/AddressScreen";
 import Cart from "./src/app/screens/CartScreen/ShoppingCartScreen";
 import DemoScreen from "./src/app/screens/DemoScreen/DemoScreen";
-import ShippingAddressScreen from "./src/app/screens/ShippingScreen/ShippingScreen";
+// import ShippingAddressScreen from "./src/app/screens/ShippingScreen/ShippingScreen";
 const Stack = createStackNavigator<RootStackParamList>();
 
 export default function App() {
@@ -47,7 +47,7 @@ export default function App() {
             component={Cart}
             options={{ headerShown: true }}
           />
-          <Stack.Screen name="Shipping" component={ShippingAddressScreen} />
+          {/* <Stack.Screen name="Shipping" component={ShippingAddressScreen} /> */}
         </Stack.Navigator>
       </SafeAreaProvider>
     </NavigationContainer>

@@ -35,6 +35,10 @@ const SignUpPage = () => {
   const [name, setName] = useState<string>("");
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
+  
+  useEffect(() => {
+    fetchApi();
+  }, []);
 
   const fetchApi = async () => {
     const URL_BACKEND = process.env.EXPO_PUBLIC_API_URL;
@@ -48,9 +52,7 @@ const SignUpPage = () => {
       console.error("check error >> :", error.message);
     }
   };
-  useEffect(() => {
-    fetchApi();
-  }, []);
+
 
   const handleSignUp = async () => {
     const url = `${process.env.EXPO_PUBLIC_API_URL}/v1/api/users`;
