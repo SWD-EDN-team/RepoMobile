@@ -12,46 +12,45 @@ import Login from "./src/screens/LoginScreen/Login";
 import AddressScreen from "./src/screens/AddressScreen/AddressScreen";
 import Cart from "./src/screens/CartScreen/ShoppingCartScreen";
 import DemoScreen from "./src/screens/DemoScreen/DemoScreen";
-import ShippingAddressScreen from "./src/screens/ShippingScreen/ShippingScreen";
+import MyOrderScreen from "./src/screens/MyOrderScreen/MyOrderScreen";
+// import ShippingAddressScreen from "./src/screens/ShippingScreen/ShippingScreen";
 const Stack = createStackNavigator<RootStackParamList>();
 
 export default function App() {
   return (
     <NavigationContainer>
       <SafeAreaProvider>
-          <Stack.Navigator
-            initialRouteName="Address"
-            screenOptions={{ headerShown: true }}
-          >
-            <Stack.Screen name="SignUp" component={SignUpScreen} />
-            <Stack.Screen name="SignIn" component={Login} />
-            <Stack.Screen name="Home" component={HomeScreen} />
-            <Stack.Screen
-              name="DescriptionCard"
-              component={DescriptionCardScreen}
-            />
-              <Stack.Screen
-              name="Detail"
-              component={DetailScreen}
-              options={{headerShown: true }}
-            />
-
-            <Stack.Screen
-              name="Address"
-              component={AddressScreen}
-              options={{headerShown: true }}
-            />
-            
-            <Stack.Screen
-              name="Cart"
-              component={Cart}
-              options={{headerShown: true }}
-            />
-            <Stack.Screen
-            name="Shipping"
-            component={ShippingAddressScreen}
+        <Stack.Navigator
+          initialRouteName="MyOrders"
+          screenOptions={{ headerShown: true }}
+        >
+          <Stack.Screen name="SignUp" component={SignUpScreen} />
+          <Stack.Screen name="SignIn" component={Login} />
+          <Stack.Screen name="Home" component={HomeScreen} />
+          <Stack.Screen
+            name="DescriptionCard"
+            component={DescriptionCardScreen}
           />
-          </Stack.Navigator>
+          <Stack.Screen
+            name="Detail"
+            component={DetailScreen}
+            options={{ headerShown: true }}
+          />
+
+          <Stack.Screen
+            name="Address"
+            component={AddressScreen}
+            options={{ headerShown: true }}
+          />
+
+          <Stack.Screen
+            name="Cart"
+            component={Cart}
+            options={{ headerShown: true }}
+          />
+          {/* <Stack.Screen name="Shipping" component={ShippingAddressScreen} /> */}
+          <Stack.Screen name="MyOrders" component={MyOrderScreen} />
+        </Stack.Navigator>
       </SafeAreaProvider>
     </NavigationContainer>
   );
