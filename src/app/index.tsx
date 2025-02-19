@@ -55,7 +55,7 @@ const styles = StyleSheet.create({
 const WelcomePage = () => {
   // if (true) {
   //   return (
-  //     <Redirect href={"/screens/CartScreen/ShoppingCartScreen"}></Redirect>
+  //     <Redirect href={"(auth)/"}></Redirect>
   //   );
   // }
   return (

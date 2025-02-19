@@ -4,6 +4,7 @@ import { RootSiblingParent } from "react-native-root-siblings";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 
+
 const RootLayout = () => {
   return (
     <RootSiblingParent>
