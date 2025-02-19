@@ -4,6 +4,7 @@ import ShareButton from "@/components/button/share.button";
 import { APP_COLOR } from "@/utils/constant";
 import SocialButton from "@/components/button/social.button";
 import { useState } from "react";
+import { Formik } from "formik";
 
 const user = {
   email: "admin@gmail.com",
@@ -17,16 +18,20 @@ import {
   ImageBackground,
   Image,
   SafeAreaView,
+  TextInput,
 } from "react-native";
+import { LoginSchema } from "@/utils/validate.schema";
 
 const Login = () => {
-  const [email, setEmail] = useState<string>("");
-  const [password, setPassword] = useState<string>("");
+  // const [email, setEmail] = useState<string>("");
+  // const [password, setPassword] = useState<string>("");
+  const [Loading, setLoading] = useState<boolean>(false);
 
-  const handleLogin = () => {
+  const handleLogin = async (email: string, password: string) => {
+    setLoading(true);
+
     if (email === user.email && password === user.passwrod) {
-      alert("success!");
-
+      setLoading(false);
       router.navigate("/screens/DetailScreen/DetailScreen");
     } else {
       alert("Login Failed");
@@ -34,86 +39,99 @@ const Login = () => {
   };
   return (
     <SafeAreaView style={{ flex: 1 }}>
-      <View
-        style={{
-          flex: 1,
-          marginHorizontal: 20,
-          gap: 10,
-        }}
+      <Formik
+        validationSchema={LoginSchema}
+        initialValues={{ email: "", password: "" }}
+        onSubmit={(values) => handleLogin(values.email, values.password)}
       >
-        <View>
-          <Text
+        {({ handleChange, handleBlur, handleSubmit, values, errors }) => (
+          <View
             style={{
-              fontSize: 25,
-              fontWeight: 600,
-              marginVertical: 10,
+              flex: 1,
+              marginHorizontal: 20,
+              gap: 10,
             }}
           >
-            Login
-          </Text>
-        </View>
-        <ShareInput
-          title="Email"
-          value={email}
-          setValue={setEmail}
-          keyboardType="email-address"
-        ></ShareInput>
-        <ShareInput
-          title="Password"
-          secureTextEntry
-          value={password}
-          setValue={setPassword}
-        ></ShareInput>
-        {/* <View style={{ marginVertical: 10 }} /> */}
-        <ShareButton
-          title="Sign Up "
-          onPress={handleLogin}
-          textStyleee={{
-            textTransform: "uppercase",
-            color: "#fff",
-            paddingVertical: 5,
-            fontWeight: "bold",
-          }}
-          btnStyle={{
-            justifyContent: "center",
-            borderRadius: 30,
-            marginHorizontal: 50,
-            paddingVertical: 10,
-            backgroundColor: APP_COLOR.ORANGE,
-          }}
-          pressStyle={{ alignSelf: "stretch" }}
-        ></ShareButton>
-        <SocialButton></SocialButton>
-        <View
-          style={{
-            marginVertical: 15,
-            flexDirection: "row",
-            gap: 10,
-            justifyContent: "center",
-          }}
-        >
-          <Text
-            style={{
-              textAlign: "center",
-              color: "black",
-              fontWeight: "bold",
-            }}
-          >
-            Don't have an account?
-          </Text>
-          <Link href={"/(auth)/signup"}>
-            <Text
-              style={{
-                color: "black",
+            <View>
+              <Text
+                style={{
+                  fontSize: 25,
+                  fontWeight: 600,
+                  marginVertical: 10,
+                }}
+              >
+                Login
+              </Text>
+            </View>
+            <ShareInput
+              title="Email"
+              keyboardType="email-address"
+              onChangeText={handleChange("email")}
+              onBlur={handleBlur("email")}
+              value={values.email}
+              error={errors.email}
+            ></ShareInput>
+            <ShareInput
+              title="Password"
+              secureTextEntry
+              onChangeText={handleChange("password")}
+              onBlur={handleBlur("password")}
+              value={values.password}
+              error={errors.password}
+            ></ShareInput>
+            {/* <View style={{ marginVertical: 10 }} /> */}
+            <ShareButton
+              loading={Loading}
+              title="Sign Up "
+              onPress={handleSubmit as any}
+              textStyleee={{
+                textTransform: "uppercase",
+                color: "#fff",
+                paddingVertical: 5,
                 fontWeight: "bold",
-                textDecorationLine: "underline",
+              }}
+              btnStyle={{
+                justifyContent: "center",
+                borderRadius: 30,
+                marginHorizontal: 50,
+                paddingVertical: 10,
+                backgroundColor: APP_COLOR.ORANGE,
+              }}
+              pressStyle={{ alignSelf: "stretch" }}
+            ></ShareButton>
+            <SocialButton></SocialButton>
+            <View
+              style={{
+                marginVertical: 15,
+                flexDirection: "row",
+                gap: 10,
+                justifyContent: "center",
               }}
             >
-              Sign Up
-            </Text>
-          </Link>
-        </View>
-      </View>
+              <Text
+                style={{
+                  textAlign: "center",
+                  color: "black",
+                  fontWeight: "bold",
+                }}
+              >
+                Don't have an account?
+              </Text>
+              <Link href={"/(auth)/signup"}>
+                <Text
+                  style={{
+                    color: "black",
+                    fontWeight: "bold",
+                    textDecorationLine: "underline",
+                  }}
+                >
+                  Sign Up
+                </Text>
+              </Link>
+            </View>
+          </View>
+        )}
+      </Formik>
     </SafeAreaView>
   );
 };

@@ -37,10 +37,22 @@ interface Ipops {
   keyboardType?: KeyboardTypeOptions;
   secureTextEntry?: boolean;
   value: any;
-  setValue: (v: any) => void;
+  setValue?: (v: any) => void;
+  onChangeText?: any;
+  onBlur?: any;
+  error?: any;
 }
 const ShareInput = (props: Ipops) => {
-  const { title, keyboardType, secureTextEntry, value, setValue } = props;
+  const {
+    title,
+    keyboardType,
+    secureTextEntry,
+    value,
+    setValue,
+    onChangeText,
+    onBlur,
+    error,
+  } = props;
   const [isFocus, setIsFocus] = useState<boolean>(false);
   const [isShowPassword, setIsShowPassword] = useState<boolean>(false);
 
@@ -50,9 +62,12 @@ const ShareInput = (props: Ipops) => {
       <View>
         <TextInput
           value={value}
-          onChangeText={(t) => setValue(t)}
+          onChangeText={onChangeText}
           onFocus={() => setIsFocus(true)}
-          onBlur={() => setIsFocus(false)}
+          onBlur={(e) => {
+            if (onBlur) onBlur(e);
+            setIsFocus(false);
+          }}
           keyboardType={keyboardType}
           style={[
             styles.input,
@@ -64,6 +79,7 @@ const ShareInput = (props: Ipops) => {
               : secureTextEntry === true
           }
         ></TextInput>
+        {error && <Text style={{ color: "red", marginTop: 2 }}>{error}</Text>}
         {secureTextEntry && (
           <FontAwesome5
             style={styles.eye}

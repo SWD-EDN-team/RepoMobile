@@ -1,8 +1,11 @@
 import axios from "axios";
-//http://localhost:8081/v1/api/users/
+
 export const registerApi = (name: string, email: string, password: string) => {
   const url = `${process.env.EXPO_PUBLIC_API_URL}/v1/api/users`;
-  return axios.post<IBackendRes<any>>(url, { name, email, password });
+  console.log("url", url);
+  console.log("email", email, "name", name, "password", password);
+
+  return axios.post(url, { name, email, password });
 };
 
 export const verifyCodeApis = async (otp: string, email: string) => {

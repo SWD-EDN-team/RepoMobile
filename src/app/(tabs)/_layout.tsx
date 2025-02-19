@@ -4,7 +4,10 @@ import { View, Text } from "react-native";
 const TabLayout = () => {
   return (
     <Tabs screenOptions={{ headerShown: false }}>
-      <Tabs.Screen name="index"></Tabs.Screen>
+      <Tabs.Screen
+        name="(auth)/login"
+        options={{ tabBarStyle: { display: "none" } }}
+      ></Tabs.Screen>
     </Tabs>
   );
 };

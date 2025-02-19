@@ -16,7 +16,7 @@ import fbLogo from "@/assets/auth/facebook.png";
 import googleLogo from "@/assets/auth/google.png";
 import { LinearGradient } from "expo-linear-gradient";
 import TextBetweenLine from "@/components/text.between";
-import { Link, Redirect } from "expo-router";
+import { Link, Redirect, router } from "expo-router";
 import { useState } from "react";
 
 const styles = StyleSheet.create({
@@ -41,7 +41,7 @@ const styles = StyleSheet.create({
   },
   body: {
     fontSize: 30,
-    color: APP_COLOR.ORANGE,
+    color: APP_COLOR.GREY,
     marginVertical: 10,
     fontWeight: 600,
   },
@@ -53,9 +53,9 @@ const styles = StyleSheet.create({
 });
 
 const WelcomePage = () => {
-  if (true) {
-    return <Redirect href={"/(auth)/login"}></Redirect>;
-  }
+  // if (true) {
+  //   return <Redirect href={"/(auth)/login"}></Redirect>;
+  // }
   return (
     <ImageBackground style={{ flex: 1 }} source={BG2}>
       <LinearGradient
@@ -66,13 +66,16 @@ const WelcomePage = () => {
         <View style={styles.container}>
           <View style={styles.welcomeText}>
             <Text style={styles.heading}>Welcome toe</Text>
-            <Text style={styles.body}>@Quandba_clothers</Text>
+            <Text style={styles.body}>@_Clothers</Text>
             <Text style={styles.footer}>
               Nền tảng bán áo quần trực tuyến tại Việt Nam
             </Text>
           </View>
           <View style={styles.welcomeBtn}>
-            <TextBetweenLine title="Đăng nhập với"></TextBetweenLine>
+            <TextBetweenLine
+              title="Đăng nhập với"
+              textColor="white"
+            ></TextBetweenLine>
             <View
               style={{
                 display: "flex",
@@ -108,10 +111,10 @@ const WelcomePage = () => {
               <ShareButton
                 title="Đăng nhập với email"
                 onPress={() => {
-                  alert("ok");
+                  router.navigate("/(auth)/login");
                 }}
                 textStyleee={{
-                  color: "#fff",
+                  color: "white",
                   paddingVertical: 5,
                   fontWeight: "bold",
                 }}
@@ -137,7 +140,7 @@ const WelcomePage = () => {
               <Text
                 style={{
                   textAlign: "center",
-                  color: "black",
+                  color: "white",
                   fontWeight: "bold",
                 }}
               >
@@ -146,7 +149,7 @@ const WelcomePage = () => {
               <Link href={"/(auth)/signup"}>
                 <Text
                   style={{
-                    color: "black",
+                    color: "white",
                     fontWeight: "bold",
                     textDecorationLine: "underline",
                   }}

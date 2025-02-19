@@ -2,10 +2,11 @@ import { View, Text } from "react-native";
 
 interface Ipops {
   title: string;
+  textColor?: "white" | "black";
 }
 
 const TextBetweenLine = (props: Ipops) => {
-  const { title } = props;
+  const { title, textColor = "white" } = props;
   return (
     <View
       style={{
@@ -21,7 +22,7 @@ const TextBetweenLine = (props: Ipops) => {
           paddingHorizontal: 35,
         }}
       ></View>
-      <Text style={{ color: "black", position: "relative", top: 10 }}>
+      <Text style={{ color: textColor, position: "relative", top: 10 }}>
         {title}
       </Text>
       <View

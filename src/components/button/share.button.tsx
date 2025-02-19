@@ -9,6 +9,7 @@ import {
   TextStyle,
   StyleProp,
   ViewStyle,
+  ActivityIndicator,
 } from "react-native";
 import AntDesign from "@expo/vector-icons/AntDesign";
 
@@ -22,20 +23,31 @@ interface Ipops {
   pressStyle?: StyleProp<TextStyle>;
   btnStyle?: StyleProp<TextStyle>;
   icons?: ReactNode;
+  loading?: boolean;
 }
 
 const ShareButton = (props: Ipops) => {
-  const { title, onPress, textStyleee, pressStyle, btnStyle, icons } = props;
+  const {
+    title,
+    onPress,
+    textStyleee,
+    pressStyle,
+    btnStyle,
+    icons,
+    loading = false,
+  } = props;
 
   return (
     <Pressable
+      disabled={loading}
       style={({ pressed }) => [
-        { opacity: pressed ? 0.5 : 1, alignSelf: "flex-start" },
+        { opacity: pressed == true ? 0.5 : 1, alignSelf: "flex-start" },
         pressStyle as ViewStyle,
       ]}
       onPress={onPress}
     >
       <View style={[styles.btnContainer, btnStyle as ViewStyle]}>
+        {loading && <ActivityIndicator></ActivityIndicator>}
         {icons}
         <Text style={textStyleee}>{title}</Text>
       </View>

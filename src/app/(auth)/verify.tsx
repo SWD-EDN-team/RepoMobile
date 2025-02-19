@@ -1,7 +1,7 @@
 import LoadingOverlay from "@/components/loading/overlay";
 import { verifyCodeApis } from "@/utils/api";
 import { APP_COLOR } from "@/utils/constant";
-import { useLocalSearchParams } from "expo-router";
+import { router, useLocalSearchParams } from "expo-router";
 import { useState, useRef } from "react";
 import { View, Text, StyleSheet, Keyboard } from "react-native";
 import OTPTextView from "react-native-otp-textinput";
@@ -35,13 +35,26 @@ const VerifyPage = () => {
     if (code && code.length === 4 && i === 4) {
       Keyboard.dismiss();
       setIsSummit(true);
-      const res = await verifyCodeApis(code, "quandba154@gmail.com");
+      const res = await verifyCodeApis(code, email as string);
       setIsSummit(false);
-      // otpRef?.current.clear();
 
       if (res.data) {
-        alert("success");
-        // setIsSummit(false);
+        // alert("success");
+        otpRef?.current?.clear();
+        Toast.show("Kích hoạt tài khoản thành công", {
+          duration: Toast.durations.LONG,
+          textColor: "white",
+          backgroundColor: APP_COLOR.ORANGE,
+          opacity: 1,
+          position: -50,
+          containerStyle: {
+            shadowColor: "#000",
+            shadowOffset: { width: 0, height: 2 },
+            shadowOpacity: 0.3,
+            shadowRadius: 4,
+          },
+        });
+        router.navigate("/(auth)/login");
       } else {
         Toast.show("Please enter vô di", {
           duration: Toast.durations.LONG,
@@ -59,7 +72,12 @@ const VerifyPage = () => {
       }
     }
   };
+
   console.log("check code", code);
+
+  const handleResendCode = async () => {
+    otpRef?.current?.clear();
+  };
   return (
     <>
       <View style={styles.container}>
@@ -102,6 +120,7 @@ const VerifyPage = () => {
               textDecorationLine: "underline",
               color: APP_COLOR.ORANGE,
             }}
+            onPress={handleResendCode}
           >
             Please resend
           </Text>
