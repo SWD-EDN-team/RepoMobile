@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import { View, Text, SafeAreaView } from "react-native";
 import { Link,router } from "expo-router";
 import ShareInput from "@/components/input/share.input";
@@ -10,6 +11,17 @@ const user= {
   email:"admin@gmail.com",
   passwrod: "123456"
 }
+=======
+import {
+  View,
+  Text,
+  Button,
+  StyleSheet,
+  ImageBackground,
+  Image,
+} from "react-native";
+import { Link } from "expo-router";
+>>>>>>> a66d37f (init-s)
 
 const Login = () => {
   
@@ -26,6 +38,7 @@ const Login = () => {
         }
       };
   return (
+<<<<<<< HEAD
     <SafeAreaView style={{ flex: 1 }}>
       <View
         style={{
@@ -108,6 +121,12 @@ const Login = () => {
         </View>
       </View>
     </SafeAreaView>
+=======
+    <View>
+      <Text>login_index</Text>
+      {/* <Button>hello</Button> */}
+    </View>
+>>>>>>> a66d37f (init-s)
   );
 };
 

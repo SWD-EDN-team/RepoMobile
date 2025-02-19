@@ -2,9 +2,7 @@ import React, { useState } from "react";
 import { View, Text, StyleSheet } from "react-native";
 import DropDownPicker from "react-native-dropdown-picker";
 
-
 const Dropdownmenu = () => {
-  // State cho dropdown Tỉnh/Thành phố
   const [openProvince, setOpenProvince] = useState(false);
   const [selectedProvince, setSelectedProvince] = useState<string | null>(null);
   const [provinces, setProvinces] = useState([
@@ -13,12 +11,14 @@ const Dropdownmenu = () => {
     { label: "TP. Hồ Chí Minh", value: "hochiminh" },
   ]);
 
-  // State cho dropdown Quận/Huyện
   const [openDistrict, setOpenDistrict] = useState(false);
-  const [selectedDistricts, setSelectedDistricts] = useState<string | null>(null);
-  const [districts, setDistricts] = useState<{ label: string; value: string }[]>([]);
+  const [selectedDistricts, setSelectedDistricts] = useState<string | null>(
+    null
+  );
+  const [districts, setDistricts] = useState<
+    { label: string; value: string }[]
+  >([]);
 
-  // Dữ liệu Quận/Huyện theo Tỉnh/Thành phố
   const districtData: Record<string, { label: string; value: string }[]> = {
     danang: [
       { label: "Hải Châu", value: "haichau" },
@@ -76,7 +76,7 @@ const Dropdownmenu = () => {
         setValue={setSelectedDistricts}
         items={districts}
         placeholder="Select district"
-        zIndex={2000} 
+        zIndex={2000}
       />
     </View>
   );
