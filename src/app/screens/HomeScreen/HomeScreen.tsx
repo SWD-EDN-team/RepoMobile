@@ -6,9 +6,7 @@ import {
   StyleSheet,
   TouchableOpacity,
 } from "react-native";
-import React, { useState } from "react";
-import { StackNavigationProp } from "@react-navigation/stack";
-import { RootStackParamList } from "@/types/NavigationTypes";
+import React from "react";
 import StatusBar from "@/components/StatusBar";
 import { router } from "expo-router";
 const HomeScreen = () => {
@@ -50,6 +48,18 @@ const HomeScreen = () => {
           onPress={() => router.navigate("/screens/ShippingAddressScreen/ShippingAddressScreen")}
         >
           <Text>Go to shippingAddressScreen</Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={styles.button}
+          onPress={() => router.navigate("/screens/MyOrderScreen/MyOrderScreen")}
+        >
+          <Text>Go to MyOrderScreen</Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={styles.button}
+          onPress={() => router.navigate("/screens/WishListScreen/WishListScreen")}
+        >
+          <Text>Go to WishListScreen</Text>
         </TouchableOpacity>
       </ScrollView>
       <StatusBar title="title status bar" handlePress={handlePress} />
