@@ -1,17 +1,14 @@
-<<<<<<< HEAD
-import { View, Text, SafeAreaView } from "react-native";
-import { Link,router } from "expo-router";
+import { Link, router } from "expo-router";
 import ShareInput from "@/components/input/share.input";
 import ShareButton from "@/components/button/share.button";
 import { APP_COLOR } from "@/utils/constant";
 import SocialButton from "@/components/button/social.button";
 import { useState } from "react";
 
-const user= {
-  email:"admin@gmail.com",
-  passwrod: "123456"
-}
-=======
+const user = {
+  email: "admin@gmail.com",
+  passwrod: "123456",
+};
 import {
   View,
   Text,
@@ -19,26 +16,23 @@ import {
   StyleSheet,
   ImageBackground,
   Image,
+  SafeAreaView,
 } from "react-native";
-import { Link } from "expo-router";
->>>>>>> a66d37f (init-s)
 
 const Login = () => {
-  
-    const [email, setEmail] = useState<string>("");
-    const [password, setPassword] = useState<string>("");
+  const [email, setEmail] = useState<string>("");
+  const [password, setPassword] = useState<string>("");
 
-    const handleLogin = () => {
-        if(email===user.email && password===user.passwrod){
-          alert("success!");
+  const handleLogin = () => {
+    if (email === user.email && password === user.passwrod) {
+      alert("success!");
 
-          router.navigate("/screens/DetailScreen/DetailScreen")
-        }else{
-          alert("Login Failed")
-        }
-      };
+      router.navigate("/screens/DetailScreen/DetailScreen");
+    } else {
+      alert("Login Failed");
+    }
+  };
   return (
-<<<<<<< HEAD
     <SafeAreaView style={{ flex: 1 }}>
       <View
         style={{
@@ -121,12 +115,6 @@ const Login = () => {
         </View>
       </View>
     </SafeAreaView>
-=======
-    <View>
-      <Text>login_index</Text>
-      {/* <Button>hello</Button> */}
-    </View>
->>>>>>> a66d37f (init-s)
   );
 };
 

@@ -53,17 +53,9 @@ const styles = StyleSheet.create({
 });
 
 const WelcomePage = () => {
-<<<<<<< HEAD
-  // if (true) {
-  //   return (
-  //     <Redirect href={"/screens/CartScreen/ShoppingCartScreen"}></Redirect>
-  //   );
-  // }
-=======
   if (true) {
     return <Redirect href={"/(auth)/verify"}></Redirect>;
   }
->>>>>>> a66d37f (init-s)
   return (
     <ImageBackground style={{ flex: 1 }} source={BG2}>
       <LinearGradient
