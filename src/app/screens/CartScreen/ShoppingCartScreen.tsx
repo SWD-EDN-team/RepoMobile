@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { View, Text, FlatList, StyleSheet } from "react-native";
-import ProductCard from "@/components/FooterOrder";
+import ProductCard from "@/components/Product"
 import OrderSummary from "@/components/Summary";
 
 const initialProducts = [

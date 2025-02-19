@@ -53,11 +53,12 @@ const styles = StyleSheet.create({
 });
 
 const WelcomePage = () => {
-  // if (true) {
-  //   return (
-  //     <Redirect href={"/screens/CartScreen/ShoppingCartScreen"}></Redirect>
-  //   );
-  // }
+  if (true) {
+    return (
+      // <Redirect href={"/screens/DetailScreen/DetailScreen"}></Redirect>
+      <Redirect href={"/screens/HomeScreen/HomeScreen"}></Redirect>
+    );
+  } 
   return (
     <ImageBackground style={{ flex: 1 }} source={BG2}>
       <LinearGradient
@@ -74,7 +75,7 @@ const WelcomePage = () => {
             </Text>
           </View>
           <View style={styles.welcomeBtn}>
-            <TextBetweenLine title="Đăng nhập với"></TextBetweenLine>
+            <TextBetweenLine color="#fff"  title="Đăng nhập với"></TextBetweenLine>
             <View
               style={{
                 display: "flex",
@@ -139,16 +140,16 @@ const WelcomePage = () => {
               <Text
                 style={{
                   textAlign: "center",
-                  color: "black",
+                  color: "#fff",
                   fontWeight: "bold",
                 }}
               >
                 Chưa có tài khoản ?
               </Text>
-              <Link href={"/(auth)/signup"}>
+              <Link href={"/(auth)/login"}>
                 <Text
                   style={{
-                    color: "black",
+                    color: "#fff",
                     fontWeight: "bold",
                     textDecorationLine: "underline",
                   }}

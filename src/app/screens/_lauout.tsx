@@ -11,32 +11,27 @@ const RootLayout = () => {
         <SafeAreaView style={{ flex: 1 }}>
           <Stack
             screenOptions={{
-              headerShown:false,
-              // headerStyle: {
-              //   backgroundColor: "#f4511e",
-              // },
-              // headerTintColor: "#fff",
-              // headerTitleStyle: {
-              //   fontWeight: "bold",
-              // },
+              headerStyle: {
+                backgroundColor: "#f4511e",
+              },
+              headerTintColor: "#fff",
+              headerTitleStyle: {
+                fontWeight: "bold",
+              },
             }}
           >
             <Stack.Screen
-              name="index"
+              name="DescriptionCard"
               options={{ headerShown: false }}
             ></Stack.Screen>
-            <Stack.Screen
+            {/* <Stack.Screen
               name="(auth)"
               options={{ headerShown: false }}
             ></Stack.Screen>
             <Stack.Screen
               name="(auth)/verify"
               options={{ headerShown: false }}
-            ></Stack.Screen>
-            <Stack.Screen
-              name="screens/AddressScreen"
-              options={{ headerShown: false }}
-            ></Stack.Screen>
+            ></Stack.Screen> */}
           </Stack>
         </SafeAreaView>
       </RootSiblingParent>

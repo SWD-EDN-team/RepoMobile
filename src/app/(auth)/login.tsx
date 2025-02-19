@@ -18,9 +18,7 @@ const Login = () => {
 
     const handleLogin = () => {
         if(email===user.email && password===user.passwrod){
-          alert("success!");
-
-          router.navigate("/screens/DetailScreen/DetailScreen")
+          router.navigate("/screens/HomeScreen/HomeScreen")
         }else{
           alert("Login Failed")
         }

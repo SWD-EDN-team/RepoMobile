@@ -5,6 +5,7 @@ import {
   TextInput,
   TouchableOpacity,
   StyleSheet,
+  ScrollView
 } from "react-native";
 import Dropdownmenu from "./dropdowmenu";
 
@@ -14,7 +15,7 @@ const AddressScreen = () => {
   const [street, setStreet] = useState("");
 
   return (
-    <View style={styles.container}>
+    <ScrollView style={styles.container}>
       <View style={styles.header}>
         <Text style={styles.headerText}>A new address</Text>
       </View>
@@ -50,7 +51,7 @@ const AddressScreen = () => {
           <Text style={styles.saveButtonText}>SAVE</Text>
         </TouchableOpacity>
       </View>
-    </View>
+    </ScrollView>
   );
 };
 
@@ -121,6 +122,7 @@ const styles = StyleSheet.create({
   containerbutton: {
     justifyContent: "center",
     alignItems: "center",
+    marginBottom:30
   },
 });
 
