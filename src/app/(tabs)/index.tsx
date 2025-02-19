@@ -77,8 +77,8 @@ const HomeTab = () => {
         </View>
         <ImageBackground
           style={{
-            flex: 0.2,
-            height: 60,
+            flex: 0.15,
+            height: 55,
             borderRadius: 60,
             overflow: "hidden",
           }}
