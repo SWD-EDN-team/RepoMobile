@@ -13,7 +13,7 @@ const styles = StyleSheet.create({
 const SocialButton = () => {
   return (
     <View style={styles.welcomeBtn}>
-      <TextBetweenLine title="Đăng nhập với"></TextBetweenLine>
+      <TextBetweenLine title="Login with"></TextBetweenLine>
       <View
         style={{
           display: "flex",

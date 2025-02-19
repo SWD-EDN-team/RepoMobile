@@ -6,8 +6,16 @@ import { APP_COLOR } from "@/utils/constant";
 import axios from "axios";
 import { Link, router } from "expo-router";
 import { useState, useEffect } from "react";
-import { View, Text, TextInput, StyleSheet, Platform } from "react-native";
+import {
+  View,
+  Text,
+  TextInput,
+  StyleSheet,
+  Platform,
+  Animated,
+} from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
+import Toast from "react-native-root-toast";
 
 const styles = StyleSheet.create({
   container: {
@@ -36,32 +44,32 @@ const SignUpPage = () => {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
 
-  const fetchApi = async () => {
-    const URL_BACKEND = process.env.EXPO_PUBLIC_API_URL;
-    console.log("URL_BACKEND", URL_BACKEND);
-
-    try {
-      const res = await axios.get(URL_BACKEND!);
-      console.log(res.data);
-      console.log("connected to successfully");
-    } catch (error: any) {
-      console.error("check error >> :", error.message);
-    }
-  };
-  useEffect(() => {
-    fetchApi();
-  }, []);
-
   const handleSignUp = async () => {
-    const url = `${process.env.EXPO_PUBLIC_API_URL}/v1/api/users`;
     try {
+      //anhquan154gmail154
       const res = await registerApi(name, email, password);
-      if(res.data) {
-        router.navigate("/(auth)/verify");
+      if (res.data) {
+        router.navigate({
+          pathname: "/(auth)/verify",
+          params: { email: email },
+        });
+      } else {
+        Toast.show("Please enter vô di", {
+          duration: Toast.durations.LONG,
+          textColor: "white",
+          backgroundColor: APP_COLOR.ORANGE,
+          opacity: 1,
+          position: -50,
+          containerStyle: {
+            shadowColor: "#000",
+            shadowOffset: { width: 0, height: 2 },
+            shadowOpacity: 0.3,
+            shadowRadius: 4,
+          },
+        });
       }
-      // console.log(res.data);
     } catch (error) {
-      console.log("check error >>???? :", error);
+      console.log("Failed to register:", error);
     }
   };
 
@@ -115,6 +123,7 @@ const SignUpPage = () => {
           }}
           pressStyle={{ alignSelf: "stretch" }}
         ></ShareButton>
+
         <SocialButton></SocialButton>
         <View
           style={{
