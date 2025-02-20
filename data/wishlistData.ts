@@ -37,7 +37,7 @@ const wishlistData = [
   },
   {
     id: "5",
-    name: "Super Comfy Cream Denim Overall Shorts",
+    name: "Super Comfy Cream Denim Overall T-Shirt",
     price: "£23.00",
     image: require("../assets/WishList/Mask group.png"),
     size: "XL",
@@ -46,7 +46,7 @@ const wishlistData = [
   },
   {
     id: "6",
-    name: "Autumn Colour Relaxed Heavyweight T-Shirt",
+    name: "Autumn Colour Relaxed Heavyweight Shorts",
     price: "£18.00",
     image: require("../assets/WishList/Frame 49.png"),
     size: "XXL",
