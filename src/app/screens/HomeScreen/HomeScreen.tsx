@@ -61,6 +61,18 @@ const HomeScreen = () => {
         >
           <Text>Go to WishListScreen</Text>
         </TouchableOpacity>
+        <TouchableOpacity
+          style={styles.button}
+          onPress={() => router.navigate("/screens/ChoseShipping/ChoseShipping")}
+        >
+          <Text>Go to ChoseShipping</Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={styles.button}
+          onPress={() => router.navigate("/screens/Siderbar/DrawerNavigator")}
+        >
+          <Text>Go to Siderbar</Text>
+        </TouchableOpacity>
       </ScrollView>
       <StatusBar title="title status bar" handlePress={handlePress} />
     </View>
