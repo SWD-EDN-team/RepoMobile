@@ -8,7 +8,7 @@ import { Formik } from "formik";
 
 const user = {
   email: "admin@gmail.com",
-  passwrod: "123456",
+  password: "123456",
 };
 import {
   View,
@@ -30,13 +30,14 @@ const Login = () => {
   const handleLogin = async (email: string, password: string) => {
     setLoading(true);
 
-    if (email === user.email && password === user.passwrod) {
+    if (email === user.email && password === user.password) {
       setLoading(false);
       router.navigate("/screens/DetailScreen/DetailScreen");
     } else {
       alert("Login Failed");
     }
   };
+
   return (
     <SafeAreaView style={{ flex: 1 }}>
       <Formik
@@ -79,7 +80,7 @@ const Login = () => {
               value={values.password}
               error={errors.password}
             ></ShareInput>
-            {/* <View style={{ marginVertical: 10 }} /> */}
+            <View style={{ marginVertical: 10 }} />
             <ShareButton
               loading={Loading}
               title="Sign Up "
@@ -117,7 +118,7 @@ const Login = () => {
               >
                 Don't have an account?
               </Text>
-              <Link href={"/(auth)/signup"}>
+              <Link href={"/auths/signup"}>
                 <Text
                   style={{
                     color: "black",

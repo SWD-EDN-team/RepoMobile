@@ -1,7 +1,7 @@
 import { View, Text, Image, StyleSheet } from "react-native";
 import React from "react";
 import { ScrollView } from "react-native-gesture-handler";
-import FooterOrder from "@/components/FooterOrder";
+// import FooterOrder from "@/components/FooterOrder";
 
 const DetailScreen = () => {
   return (
@@ -47,33 +47,6 @@ const DetailScreen = () => {
             autumn warmth. Embrace the season in style and comfort with this
             irresistibly soft, light pink cocoon of coziness.
           </Text>
-          <Text style={styles.description}>
-            Wrap yourself in warmth with our dreamy light pink oversized crew
-            sweatshirt, a quintessential choice for the cozy autumn days ahead.
-            This ultra-comfortable gem offers a loose fit that embraces you in
-            softness. Picture yourself snuggled up, pairing it with leggings and
-            your favorite kicks, creating a snug, off-duty look that exudes
-            autumn warmth. Embrace the season in style and comfort with this
-            irresistibly soft, light pink cocoon of coziness.
-          </Text>
-          <Text style={styles.description}>
-            Wrap yourself in warmth with our dreamy light pink oversized crew
-            sweatshirt, a quintessential choice for the cozy autumn days ahead.
-            This ultra-comfortable gem offers a loose fit that embraces you in
-            softness. Picture yourself snuggled up, pairing it with leggings and
-            your favorite kicks, creating a snug, off-duty look that exudes
-            autumn warmth. Embrace the season in style and comfort with this
-            irresistibly soft, light pink cocoon of coziness.
-          </Text>
-          <Text style={styles.description}>
-            Wrap yourself in warmth with our dreamy light pink oversized crew
-            sweatshirt, a quintessential choice for the cozy autumn days ahead.
-            This ultra-comfortable gem offers a loose fit that embraces you in
-            softness. Picture yourself snuggled up, pairing it with leggings and
-            your favorite kicks, creating a snug, off-duty look that exudes
-            autumn warmth. Embrace the season in style and comfort with this
-            irresistibly soft, light pink cocoon of coziness.
-          </Text>
         </View>
       </ScrollView>
       {/* <FooterOrder /> */}
@@ -92,6 +65,7 @@ const styles = StyleSheet.create({
     marginTop: 10,
   },
   imageClothers: {
+    borderRadius: 16,
     width: "100%",
     height: 250,
     resizeMode: "cover",

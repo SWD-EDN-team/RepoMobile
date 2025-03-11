@@ -20,8 +20,8 @@ interface PizzaItem {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingHorizontal: 20,
-    marginTop: 30,
+    // paddingHorizontal: 20,
+    marginTop: 10,
   },
   itemContainer: {
     flex: 1,
@@ -40,7 +40,6 @@ const styles = StyleSheet.create({
   },
   itemDetails: {
     marginLeft: 20,
-    // marginVertical: 10,
     flex: 1,
   },
   itemTitle: {
@@ -64,7 +63,7 @@ const styles = StyleSheet.create({
   },
 });
 
-const FlatlistHome = () => {
+const FlatListHome = () => {
   const data: PizzaItem[] = [
     {
       id: 1,
@@ -141,4 +140,4 @@ const FlatlistHome = () => {
   );
 };
 
-export default FlatlistHome;
+export default FlatListHome;

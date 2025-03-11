@@ -11,7 +11,6 @@ const data = [
   require("@/assets/homepage/bn1.jpg"),
   require("@/assets/homepage/bn2.jpg"),
   require("@/assets/homepage/bn3.jpg"),
-  require("@/assets/homepage/Sale Banner Photo.png"),
 ];
 
 const width = Dimensions.get("window").width;
@@ -47,6 +46,8 @@ const BannerHome = () => {
             />
           </View>
         )}
+        autoPlay
+        autoPlayInterval={5000} // 5s
       />
       <Pagination.Basic
         progress={progress}

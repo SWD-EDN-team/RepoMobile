@@ -54,7 +54,7 @@ const VerifyPage = () => {
             shadowRadius: 4,
           },
         });
-        router.navigate("/(auth)/login");
+        router.navigate("/screens/CartScreen/ShoppingCartScreen");
       } else {
         Toast.show("Please enter vô di", {
           duration: Toast.durations.LONG,
@@ -81,7 +81,7 @@ const VerifyPage = () => {
   return (
     <>
       <View style={styles.container}>
-        <Text style={styles.heading}>Vefification Code</Text>
+        <Text style={styles.heading}>Verification Code</Text>
         <Text style={{ marginVertical: 10, fontSize: 16, opacity: 0.5 }}>
           Please type the verification code sent to {email}
         </Text>

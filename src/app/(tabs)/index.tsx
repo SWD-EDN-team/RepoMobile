@@ -9,12 +9,14 @@ import {
 import { SafeAreaView } from "react-native-safe-area-context";
 import avt from "@/assets/homepage/avt.png";
 import { APP_COLOR } from "@/utils/constant";
-import Entypo from "@expo/vector-icons/Entypo";
 import BannerHome from "@/components/home/banner.home";
-import FlatlistHome from "@/components/home/flatlist.home";
+import FlatListHome from "@/components/home/flatlist.home";
 import { useNavigation, DrawerActions } from "@react-navigation/native";
 import { router } from "expo-router";
 import FontAwesome from "@expo/vector-icons/FontAwesome";
+import HeaderHome from "@/components/home/header.home";
+import { EvilIcons } from "@expo/vector-icons";
+import SearchHome from "@/components/home/search.home";
 
 const styles = StyleSheet.create({
   container: {
@@ -39,20 +41,15 @@ const styles = StyleSheet.create({
     flex: 0.6,
   },
   searchSection: {
-    flexDirection: "row",
-    backgroundColor: "white",
+    display: "flex",
     alignItems: "center",
-    marginHorizontal: 10,
-    paddingVertical: 5,
-    paddingHorizontal: 28,
-    borderRadius: 10,
-  },
-  searchIcon: {
-    // fontSize: 24,
-    color: "black",
-    opacity: 0.8,
-    marginHorizontal: 10,
-    position: "absolute",
+    backgroundColor: APP_COLOR.GREY,
+    gap: 5,
+    flexDirection: "row",
+    margin: 5,
+    paddingHorizontal: 3,
+    paddingVertical: 10,
+    borderRadius: 8,
   },
 });
 const HomeTab = () => {
@@ -60,45 +57,16 @@ const HomeTab = () => {
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.headerContainer}>
-        <Entypo
-          name="menu"
-          size={24}
-          color="black"
-          // onPress={alert("m")}
-        />
-
-        <View style={styles.headerText}>
-          <Text style={{ color: APP_COLOR.GREY, fontWeight: "bold" }}>
-            Deliver to
-          </Text>
-          <Text style={{ color: APP_COLOR.ORANGE, fontWeight: 600 }}>
-            4102 Pretty View
-          </Text>
-        </View>
-        <ImageBackground
-          style={{
-            flex: 0.15,
-            height: 55,
-            borderRadius: 60,
-            overflow: "hidden",
-          }}
-          source={avt}
-        ></ImageBackground>
+        <HeaderHome></HeaderHome>
       </View>
       <View style={styles.bodyContainer}>
         <BannerHome></BannerHome>
       </View>
-      <View style={styles.searchSection}>
-        <FontAwesome
-          style={styles.searchIcon}
-          name="search"
-          size={20}
-          color="black"
-        />
-        <TextInput placeholder="Search..."></TextInput>
+      <View>
+        <SearchHome></SearchHome>
       </View>
       <View style={styles.listContainer}>
-        <FlatlistHome></FlatlistHome>
+        <FlatListHome></FlatListHome>
       </View>
     </SafeAreaView>
   );

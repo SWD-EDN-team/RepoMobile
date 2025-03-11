@@ -57,7 +57,7 @@ const SignUpPage = () => {
 
       if (res.data && name && email && password) {
         router.navigate({
-          pathname: "/(auth)/verify",
+          pathname: "/auths/verify",
           params: { email: email },
         });
       } else {
@@ -169,7 +169,7 @@ const SignUpPage = () => {
               >
                 Đã có tài khoản ?
               </Text>
-              <Link href={"/(auth)/signup"}>
+              <Link href={"/auths/login"}>
                 <Text
                   style={{
                     color: "black",

@@ -18,6 +18,7 @@ import { LinearGradient } from "expo-linear-gradient";
 import TextBetweenLine from "@/components/text.between";
 import { Link, Redirect, router } from "expo-router";
 import { useState } from "react";
+import { StatusBar } from "expo-status-bar";
 
 const styles = StyleSheet.create({
   container: {
@@ -53,11 +54,12 @@ const styles = StyleSheet.create({
 });
 
 const WelcomePage = () => {
-  // if (true) {
-  //   return <Redirect href={"/(auth)/login"}></Redirect>;
-  // }
+  if (true) {
+    return <Redirect href={"/screens/AddressScreen/AddressScreen"}></Redirect>;
+  }
   return (
     <ImageBackground style={{ flex: 1 }} source={BG2}>
+      <StatusBar translucent backgroundColor="transparent" style="dark" />
       <LinearGradient
         style={{ flex: 1 }}
         colors={["transparent", "rgba(0,0,0,0.8)"]}
@@ -111,7 +113,7 @@ const WelcomePage = () => {
               <ShareButton
                 title="Đăng nhập với email"
                 onPress={() => {
-                  router.navigate("/(auth)/login");
+                  router.navigate("/auths/login");
                 }}
                 textStyleee={{
                   color: "white",
@@ -146,7 +148,7 @@ const WelcomePage = () => {
               >
                 Chưa có tài khoản ?
               </Text>
-              <Link href={"/(auth)/signup"}>
+              <Link href={"/auths/signup"}>
                 <Text
                   style={{
                     color: "white",
