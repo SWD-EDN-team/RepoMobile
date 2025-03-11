@@ -17,6 +17,7 @@ import FontAwesome from "@expo/vector-icons/FontAwesome";
 import HeaderHome from "@/components/home/header.home";
 import { EvilIcons } from "@expo/vector-icons";
 import SearchHome from "@/components/home/search.home";
+import { useCurrentTheme } from "@/context/app.context";
 
 const styles = StyleSheet.create({
   container: {
@@ -54,6 +55,7 @@ const styles = StyleSheet.create({
 });
 const HomeTab = () => {
   const navigation = useNavigation();
+  const { theme, setTheme } = useCurrentTheme();
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.headerContainer}>
