@@ -1,3 +1,4 @@
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import axios from "axios";
 
 export const registerApi = (name: string, email: string, password: string) => {
@@ -6,6 +7,15 @@ export const registerApi = (name: string, email: string, password: string) => {
   console.log("email", email, "name", name, "password", password);
 
   return axios.post(url, { name, email, password });
+};
+
+export const loginApi = (email: string, password: string) => {
+  const url = `http://172.16.11.96:8080/v1/api/users/sign-in`; // Dùng IP máy tính
+  // http://localhost:8080/v1/api/users/sign-in
+  console.log("url", url);
+  console.log("email", email, "password", password);
+
+  return axios.post(url, { email, password });
 };
 
 export const verifyCodeApis = async (otp: string, email: string) => {
@@ -25,4 +35,16 @@ export const verifyCodeApis = async (otp: string, email: string) => {
   } catch (error) {
     throw new Error("Failed to verify OTP. Please try again.");
   }
+};
+
+export const printAsyncStorage = () => {
+  AsyncStorage.getAllKeys((err, keys) => {
+    AsyncStorage.multiGet(keys!, (error, stores) => {
+      let asyncStorage: any = {};
+      stores?.map((result, i, store) => {
+        asyncStorage[store[i][0]] = store[i][1];
+      });
+      console.log(JSON.stringify(asyncStorage, null, 2));
+    });
+  });
 };

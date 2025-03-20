@@ -21,6 +21,8 @@ import {
   TextInput,
 } from "react-native";
 import { LoginSchema } from "@/utils/validate.schema";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { loginApi } from "@/utils/api";
 
 const Login = () => {
   // const [email, setEmail] = useState<string>("");
@@ -28,10 +30,16 @@ const Login = () => {
   const [Loading, setLoading] = useState<boolean>(false);
 
   const handleLogin = async (email: string, password: string) => {
-    setLoading(true);
+    // setLoading(true);
+    // const res = await loginApi(email, password);
+    // console.log("res", res);
+    // if (res.data) {
+    //   router.navigate("/screens/DetailScreen/DetailScreen");
+    // }
 
     if (email === user.email && password === user.password) {
-      setLoading(false);
+      setLoading(true);
+      // await AsyncStorage.setItem("access_token"  )
       router.navigate("/screens/DetailScreen/DetailScreen");
     } else {
       alert("Login Failed");
