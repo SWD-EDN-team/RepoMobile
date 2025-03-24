@@ -17,8 +17,10 @@ import googleLogo from "@/assets/auth/google.png";
 import { LinearGradient } from "expo-linear-gradient";
 import TextBetweenLine from "@/components/text.between";
 import { Link, Redirect, router } from "expo-router";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { StatusBar } from "expo-status-bar";
+import { getAccountApi } from "@/utils/api";
+import { useCurrentApp } from "@/context/app.context";
 
 const styles = StyleSheet.create({
   container: {
@@ -54,9 +56,24 @@ const styles = StyleSheet.create({
 });
 
 const WelcomePage = () => {
-    if (true) {
-      return <Redirect href={"/(tabs)"}></Redirect>;
-    }
+  const { setAppState } = useCurrentApp();
+  if (true) {
+    return <Redirect href={"/auths/login"}></Redirect>;
+  }
+
+  useEffect(() => {
+    const fetAccount = async () => {
+      const res = await getAccountApi();
+      console.log(">>>>", res);
+
+      if (res.data) {
+        router.replace("/(tabs)");
+      } else {
+      }
+    };
+    fetAccount();
+  }, []);
+
   return (
     <ImageBackground style={{ flex: 1 }} source={BG2}>
       <StatusBar translucent backgroundColor="transparent" style="dark" />

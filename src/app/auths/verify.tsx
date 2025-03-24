@@ -2,7 +2,7 @@ import LoadingOverlay from "@/components/loading/overlay";
 import { verifyCodeApis } from "@/utils/api";
 import { APP_COLOR } from "@/utils/constant";
 import { router, useLocalSearchParams } from "expo-router";
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import { View, Text, StyleSheet, Keyboard } from "react-native";
 import OTPTextView from "react-native-otp-textinput";
 import Toast from "react-native-root-toast";
@@ -23,61 +23,72 @@ const VerifyPage = () => {
   const [isSummit, setIsSummit] = useState<boolean>(false);
 
   const otpRef = useRef<OTPTextView>(null);
-  const [code, setCode] = useState<string>("");
+  const [otp, setOtp] = useState<string>("");
 
   const { email } = useLocalSearchParams();
   console.log("Verifyingsokoskmd", email);
 
-  const handleCellTextChange = async (text: string, i: number) => {
-    console.log("check code", code);
+  const verifyCode = async () => {
+    Keyboard.dismiss();
+    setIsSummit(true);
+    const res = await verifyCodeApis(otp, email as string);
+    setIsSummit(false);
+    console.log(">>> check res: ", res);
+    router.navigate("/(tabs)");
 
-    console.log(">>> check text: ", text, " and i = ", i);
-    if (code && code.length === 4 && i === 4) {
-      Keyboard.dismiss();
-      setIsSummit(true);
-      const res = await verifyCodeApis(code, email as string);
-      setIsSummit(false);
+    if (res && res.data) {
+      console.log("API response is valid:", res.data);
+    } else {
+      console.error("API response is invalid:", res);
+    }
 
-      if (res.data) {
-        // alert("success");
-        otpRef?.current?.clear();
-        Toast.show("Kích hoạt tài khoản thành công", {
-          duration: Toast.durations.LONG,
-          textColor: "white",
-          backgroundColor: APP_COLOR.ORANGE,
-          opacity: 1,
-          position: -50,
-          containerStyle: {
-            shadowColor: "#000",
-            shadowOffset: { width: 0, height: 2 },
-            shadowOpacity: 0.3,
-            shadowRadius: 4,
-          },
-        });
-        router.navigate("/screens/CartScreen/ShoppingCartScreen");
-      } else {
-        Toast.show("Please enter vô di", {
-          duration: Toast.durations.LONG,
-          textColor: "white",
-          backgroundColor: APP_COLOR.ORANGE,
-          opacity: 1,
-          position: -50,
-          containerStyle: {
-            shadowColor: "#000",
-            shadowOffset: { width: 0, height: 2 },
-            shadowOpacity: 0.3,
-            shadowRadius: 4,
-          },
-        });
-      }
+    if (res.data) {
+      // alert("success");
+      otpRef?.current?.clear();
+      Toast.show("Kích hoạt tài khoản thành công", {
+        duration: Toast.durations.LONG,
+        textColor: "white",
+        backgroundColor: APP_COLOR.ORANGE,
+        opacity: 1,
+        position: -50,
+        containerStyle: {
+          shadowColor: "#000",
+          shadowOffset: { width: 0, height: 2 },
+          shadowOpacity: 0.3,
+          shadowRadius: 4,
+        },
+      });
+      router.navigate("/(tabs)");
+    } else {
+      Toast.show("Please enter vô di", {
+        duration: Toast.durations.LONG,
+        textColor: "white",
+        backgroundColor: APP_COLOR.ORANGE,
+        opacity: 1,
+        position: -50,
+        containerStyle: {
+          shadowColor: "#000",
+          shadowOffset: { width: 0, height: 2 },
+          shadowOpacity: 0.3,
+          shadowRadius: 4,
+        },
+      });
     }
   };
 
-  console.log("check code", code);
+  console.log("check otp>>>>", otp);
 
   const handleResendCode = async () => {
     otpRef?.current?.clear();
+    //call api resend code
+    // if(res)
   };
+
+  useEffect(() => {
+    if (otp.length === 5) {
+      verifyCode();
+    }
+  }, [otp]);
   return (
     <>
       <View style={styles.container}>
@@ -88,8 +99,7 @@ const VerifyPage = () => {
         <View style={{ marginVertical: 20 }}>
           <OTPTextView
             ref={otpRef}
-            handleTextChange={setCode}
-            handleCellTextChange={handleCellTextChange}
+            handleTextChange={setOtp}
             autoFocus
             inputCount={5}
             inputCellLength={1}

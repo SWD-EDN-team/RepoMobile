@@ -13,7 +13,7 @@ import FlatListHome from "@/components/home/flatlist.home";
 import { useNavigation } from "@react-navigation/native";
 import HeaderHome from "@/components/home/header.home";
 import SearchHome from "@/components/home/search.home";
-import { useCurrentTheme } from "@/context/app.context";
+import { useCurrentApp } from "@/context/app.context";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useEffect } from "react";
 import { printAsyncStorage } from "../../utils/api";

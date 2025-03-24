@@ -23,21 +23,21 @@ import {
 import { LoginSchema } from "@/utils/validate.schema";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { loginApi } from "@/utils/api";
+import { useCurrentApp } from "@/context/app.context";
 
 const Login = () => {
-  // const [email, setEmail] = useState<string>("");
-  // const [password, setPassword] = useState<string>("");
   const [Loading, setLoading] = useState<boolean>(false);
+  const { setAppState } = useCurrentApp();
 
   const handleLogin = async (email: string, password: string) => {
     try {
       const res = await loginApi(email, password, {
         headers: { "Content-Type": "application/json" },
       });
-
       console.log(">>>>", res.data);
-
       if (res.data) {
+        await AsyncStorage.setItem("assess_token", res.data.accessToken);
+        setAppState(res.data); // gán giá trị vào context
         router.navigate("/(tabs)");
       }
     } catch (err: any) {

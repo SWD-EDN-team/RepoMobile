@@ -2,7 +2,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import axios from "axios";
 
 export const registerApi = (name: string, email: string, password: string) => {
-  const url = `http://172.16.11.204:8081/api/v1/users/`;
+  const url = `${process.env.EXPO_PUBLIC_API_URL}/users/`;
   console.log("url", url);
   console.log("email", email, "name", name, "password", password);
 
@@ -14,15 +14,16 @@ export const loginApi = (
   password: string,
   p0: { headers: { "Content-Type": string } }
 ) => {
-  const url = `http://172.16.11.204:8081/api/v1/auth/signin`;
+  const url = `${process.env.EXPO_PUBLIC_API_URL}/auth/signin`;
   console.log("url", url);
   console.log("email", email, "password", password);
   console.log("??", axios.post(url, { email, password }));
 
   return axios.post(url, { email, password });
 };
+
 export const verifyCodeApis = async (otp: string, email: string) => {
-  const url = `http://localhost:8081/v1/api/auth/verify_code`;
+  const url = `${process.env.EXPO_PUBLIC_API_URL}/auth/verify_email`;
   console.log("Verifying ", url);
   try {
     const response = await axios.post<IBackendRes<any>>(
@@ -40,7 +41,10 @@ export const verifyCodeApis = async (otp: string, email: string) => {
   }
 };
 
-export const getProductList = () => {};
+export const getAccountApi = () => {
+  const url = `${process.env.EXPO_PUBLIC_API_URL}/auth/auth/getCurrentUser`;
+  return axios.get(url);
+};
 
 export const printAsyncStorage = () => {
   AsyncStorage.getAllKeys((err, keys) => {
