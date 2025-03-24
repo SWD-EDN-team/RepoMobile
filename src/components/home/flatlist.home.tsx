@@ -7,134 +7,92 @@ import {
   Image,
   TouchableOpacity,
 } from "react-native";
+import CollectionHome from "./collection.home";
 
-interface PizzaItem {
+interface ClothingItem {
   id: number;
-  title: string;
-  size: string;
-  rating: string;
-  price: number;
-  img: string;
+  name: string;
+  description: string;
+  imageRef: string;
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    // paddingHorizontal: 20,
-    marginTop: 10,
-  },
-  itemContainer: {
-    flex: 1,
-    flexDirection: "column",
-    padding: 10,
-    marginBottom: 10,
-    marginHorizontal: 10,
-    backgroundColor: "white",
-    borderRadius: 10,
     alignItems: "center",
   },
+  itemContainer: {
+    // flex: 1,
+    width: "100%",
+    // flexDirection: "column",
+    // padding: 10,
+    // margin: 10,
+    // borderRadius: 10,
+    // alignItems: "center",
+  },
   itemImage: {
-    width: 120,
-    height: 100,
-    borderRadius: 10,
+    // width: 120,
+    // height: 100,
+    // borderRadius: 10,
   },
   itemDetails: {
-    marginLeft: 20,
-    flex: 1,
+    // alignItems: "center",
+    // marginTop: 5,
   },
   itemTitle: {
-    fontSize: 18,
-    fontWeight: "bold",
-  },
-  itemSize: {
-    fontSize: 14,
-    color: "#666",
-    marginVertical: 5,
-  },
-  itemPrice: {
     fontSize: 16,
-    fontWeight: "600",
-    color: "#333",
+    fontWeight: "bold",
+    // textAlign: "center",
   },
-  itemRating: {
-    fontSize: 14,
-    color: "#ff9500",
-    marginTop: 5,
+  itemDescription: {
+    fontSize: 12,
+    color: "#666",
+    textAlign: "center",
   },
 });
 
 const FlatListHome = () => {
-  const data: PizzaItem[] = [
+  const data: ClothingItem[] = [
     {
       id: 1,
-      title: "Margretta Pizza",
-      size: "Medium",
-      rating: "4.5",
-      price: 300,
-      img: "https://t3.ftcdn.net/jpg/01/33/61/72/360_F_133617244_dWdivRXwoLVzowl1kn3iFP9JGcuNd8n6.jpg",
+      name: "Áo thun basic",
+      description: "Chất liệu cotton, form rộng, giá 150K",
+      imageRef:
+        "https://tse2.mm.bing.net/th?id=OIP.L8XNPW4wPTRvcUKvWuAYQQHaHa&pid=Api",
     },
     {
       id: 2,
-      title: "Chicken Blast Pizza",
-      size: "Medium",
-      rating: "5.0",
-      price: 500,
-      img: "https://media.istockphoto.com/id/1043604390/photo/butter-chicken-pizza.jpg?s=612x612&w=0&k=20&c=ahj3y6ktAvzcINubn0a0BfvovLTGDx_J_aMju4szqVQ=",
+      name: "Quần jean nam",
+      description: "Ống suông, chất liệu denim, giá 400K",
+      imageRef:
+        "https://tse1.mm.bing.net/th?id=OIP.Qh5FSZfdBmJYFHR0CQ6s3wHaHa&pid=Api",
     },
     {
       id: 3,
-      title: "Mushroom Pizza",
-      size: "Large",
-      rating: "4.0",
-      price: 700,
-      img: "https://media.istockphoto.com/id/1406515367/photo/pizza-with-chicken-and-mushrooms-with-cheese-top-view-on-dark-stone-table.jpg?s=612x612&w=0&k=20&c=URu6Cie6-ImCbzXoZ7IyJT4Y5ELRgPvkdalFR5H-vKQ=",
-    },
-    {
-      id: 4,
-      title: "Chicken Blast Pizza",
-      size: "Medium",
-      rating: "5.0",
-      price: 500,
-      img: "https://media.istockphoto.com/id/1043604390/photo/butter-chicken-pizza.jpg?s=612x612&w=0&k=20&c=ahj3y6ktAvzcINubn0a0BfvovLTGDx_J_aMju4szqVQ=",
-    },
-    {
-      id: 5,
-      title: "Chicken Blast Pizza",
-      size: "Medium",
-      rating: "5.0",
-      price: 500,
-      img: "https://media.istockphoto.com/id/1043604390/photo/butter-chicken-pizza.jpg?s=612x612&w=0&k=20&c=ahj3y6ktAvzcINubn0a0BfvovLTGDx_J_aMju4szqVQ=",
-    },
-    {
-      id: 6,
-      title: "Chicken Blast Pizza",
-      size: "Medium",
-      rating: "5.0",
-      price: 500,
-      img: "https://media.istockphoto.com/id/1043604390/photo/butter-chicken-pizza.jpg?s=612x612&w=0&k=20&c=ahj3y6ktAvzcINubn0a0BfvovLTGDx_J_aMju4szqVQ=",
+      name: "Áo sơ mi caro",
+      description: "Chất vải linen thoáng mát, giá 250K",
+      imageRef:
+        "https://tse4.mm.bing.net/th?id=OIP.4zbuzQvywRzHcrONnpFC7gHaHa&pid=Api",
     },
   ];
 
-  const renderItem = ({ item }: { item: PizzaItem }) => (
-    <TouchableOpacity style={styles.itemContainer}>
-      <Image source={{ uri: item.img }} style={styles.itemImage} />
-      <View style={styles.itemDetails}>
-        <Text style={styles.itemTitle}>{item.title}</Text>
-        <Text style={styles.itemSize}>Size: {item.size}</Text>
-        <Text style={styles.itemPrice}>Price: ${item.price}</Text>
-        <Text style={styles.itemRating}>Rating: {item.rating}</Text>
-      </View>
-    </TouchableOpacity>
+  const renderItem = ({ item }: { item: ClothingItem }) => (
+    <CollectionHome
+      name={item.name}
+      description={item.description}
+      imageRef={item.imageRef}
+    />
   );
 
   return (
     <View style={styles.container}>
       <FlatList
-        numColumns={2}
+        style={{ width: "100%" }}
+        numColumns={1}
         data={data}
         renderItem={renderItem}
         keyExtractor={(item) => item.id.toString()}
-        columnWrapperStyle={{ justifyContent: "space-between" }}
+        // columnWrapperStyle={{ justifyContent: "space-between" }}
       />
     </View>
   );

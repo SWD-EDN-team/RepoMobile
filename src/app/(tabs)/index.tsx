@@ -2,92 +2,128 @@ import {
   View,
   Text,
   StyleSheet,
-  ImageBackground,
-  TouchableOpacity,
-  TextInput,
-  Button,
+  Image,
+  FlatList,
+  ScrollView,
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-import avt from "@/assets/homepage/avt.png";
 import { APP_COLOR } from "@/utils/constant";
 import BannerHome from "@/components/home/banner.home";
 import FlatListHome from "@/components/home/flatlist.home";
-import { useNavigation, DrawerActions } from "@react-navigation/native";
-import FontAwesome from "@expo/vector-icons/FontAwesome";
+import { useNavigation } from "@react-navigation/native";
 import HeaderHome from "@/components/home/header.home";
-import { EvilIcons } from "@expo/vector-icons";
 import SearchHome from "@/components/home/search.home";
 import { useCurrentTheme } from "@/context/app.context";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useEffect } from "react";
 import { printAsyncStorage } from "../../utils/api";
+import { dataPage } from "@/data/page";
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    marginHorizontal: 4,
+    backgroundColor: "#fff",
+    paddingVertical: 10,
+    justifyContent: "center",
+    overflow: "hidden",
+    paddingHorizontal: 4,
   },
   headerContainer: {
-    flex: 0.1,
+    backgroundColor: "white",
+    zIndex: 100,
+    padding: 6,
+  },
+  productList: {
     flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "space-between",
-  },
-  headerText: {
-    flex: 0.3,
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  bodyContainer: {
-    flex: 0.3,
-  },
-  listContainer: {
-    flex: 0.6,
-  },
-  searchSection: {
+    flexWrap: "wrap",
     display: "flex",
+    justifyContent: "center",
+    // paddingVertical: 6,
+  },
+  itemContainer: {
+    height: 60,
+    width: 86,
+    display: "flex",
+    justifyContent: "center",
     alignItems: "center",
-    backgroundColor: APP_COLOR.GREY,
-    gap: 5,
-    flexDirection: "row",
-    margin: 5,
-    paddingHorizontal: 3,
-    paddingVertical: 10,
+    marginHorizontal: 8,
+    borderRadius: 8,
+    backgroundColor: "#f9f9f9",
+  },
+  itemImage: {
+    width: 40,
+    height: 40,
     borderRadius: 8,
   },
+  itemText: {
+    fontSize: 8,
+    marginTop: 3,
+    fontWeight: "500",
+  },
 });
+
 const HomeTab = () => {
-  const handleClick = async () => {
-    printAsyncStorage();
-  };
   useEffect(() => {
-    const test = async () => {
+    const saveData = async () => {
       await AsyncStorage.setItem("anhquan", "anhquan-value");
       await AsyncStorage.setItem("access_token", "anhquan-token");
     };
-    test();
+    saveData();
   }, []);
 
-  const navigation = useNavigation();
-  const { theme, setTheme } = useCurrentTheme();
+  interface Product {
+    id: string;
+    title: string;
+    price: number;
+    image: string;
+  }
+
+ 
+  const renderItem = ({ item }: { item: Product }) => (
+    <View style={styles.itemContainer}>
+      <Image source={{ uri: item.image }} style={styles.itemImage} />
+      <Text style={styles.itemText}>{item.title}</Text>
+    </View>
+  );
   return (
-    <>
-      <Button onPress={handleClick} title="check AsyncStorage"></Button>
-      <SafeAreaView style={styles.container}>
-        <View style={styles.headerContainer}>
-          <HeaderHome></HeaderHome>
-        </View>
-        <View style={styles.bodyContainer}>
-          <BannerHome></BannerHome>
-        </View>
-        <View>
-          <SearchHome></SearchHome>
-        </View>
-        <View style={styles.listContainer}>
-          <FlatListHome></FlatListHome>
-        </View>
-      </SafeAreaView>
-    </>
+    <SafeAreaView style={styles.container}>
+      <FlatList
+        data={[]}
+        renderItem={renderItem}
+        keyExtractor={(_, index) => index.toString()}
+        ListHeaderComponent={() => (
+          <View>
+            <View style={styles.headerContainer}>
+              <HeaderHome />
+              <SearchHome />
+            </View>
+            <BannerHome />
+            <View style={styles.productList}>
+              <FlatList
+                style={{ marginBottom: 6 }}
+                data={dataPage.filter((_, index) => index % 2 === 0)}
+                keyExtractor={(item) => item.id}
+                horizontal
+                showsHorizontalScrollIndicator={false}
+                renderItem={renderItem}
+              />
+              <FlatList
+                data={dataPage.filter((_, index) => index % 2 !== 0)}
+                keyExtractor={(item) => item.id}
+                horizontal
+                showsHorizontalScrollIndicator={false}
+                renderItem={renderItem}
+              />
+            </View>
+          </View>
+        )}
+        ListFooterComponent={
+          <View style={{ height: "100%" }}>
+            <FlatListHome />
+          </View>
+        }
+      />
+    </SafeAreaView>
   );
 };
 

@@ -17,14 +17,14 @@ const styles = StyleSheet.create({
     alignItems: "center",
     backgroundColor: APP_COLOR.GREY,
     gap: 5,
-    margin: 5,
-    paddingHorizontal: 10, 
+    marginBottom: 3,
+    paddingHorizontal: 10,
     paddingVertical: 8,
-    borderRadius: 8,
+    borderRadius: 5,
   },
   searchText: {
     color: "#707070",
-    fontSize: 14, 
+    fontSize: 14,
   },
 });
 

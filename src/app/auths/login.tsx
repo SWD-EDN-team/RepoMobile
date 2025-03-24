@@ -30,20 +30,20 @@ const Login = () => {
   const [Loading, setLoading] = useState<boolean>(false);
 
   const handleLogin = async (email: string, password: string) => {
-    // setLoading(true);
-    // const res = await loginApi(email, password);
-    // console.log("res", res);
-    // if (res.data) {
-    //   router.navigate("/screens/DetailScreen/DetailScreen");
-    // }
-
-    if (email === user.email && password === user.password) {
-      setLoading(true);
-      // await AsyncStorage.setItem("access_token"  )
-      router.navigate("/screens/DetailScreen/DetailScreen");
-    } else {
-      alert("Login Failed");
+    setLoading(true);
+    const res = await loginApi(email, password);
+    console.log("res>>>>>>>>>", res);
+    if (res.data) {
+      router.navigate("/(tabs)");
     }
+
+    // if (email === user.email && password === user.password) {
+    //   setLoading(true);
+    //   // await AsyncStorage.setItem("access_token"  )
+    //   router.navigate("/(tabs)");
+    // } else {
+    //   alert("Login Failed");
+    // }
   };
 
   return (

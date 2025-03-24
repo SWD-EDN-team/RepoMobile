@@ -19,6 +19,7 @@ import TextBetweenLine from "@/components/text.between";
 import { Link, Redirect, router } from "expo-router";
 import { useState } from "react";
 import { StatusBar } from "expo-status-bar";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const styles = StyleSheet.create({
   container: {
@@ -54,9 +55,9 @@ const styles = StyleSheet.create({
 });
 
 const WelcomePage = () => {
-  //   if (true) {
-  //     return <Redirect href={"/auths/login"}></Redirect>;
-  //   }
+  if (true) {
+    return <Redirect href={"/auths/login"}></Redirect>;
+  }
   return (
     <ImageBackground style={{ flex: 1 }} source={BG2}>
       <StatusBar translucent backgroundColor="transparent" style="dark" />

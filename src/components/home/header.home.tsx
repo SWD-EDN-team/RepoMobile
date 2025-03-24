@@ -33,12 +33,14 @@ const HeaderHome = () => {
 const styles = StyleSheet.create({
   wrapper: {
     flex: 1,
-    textAlign: "left",
     alignItems: "flex-start",
+    // paddingHorizontal: 2,
+    // paddingVertical: 2,
+    height: 45,
   },
   title: {
     fontSize: 16,
-    marginLeft: 6,
+    // marginLeft: 6,
     fontWeight: "bold",
   },
 
