@@ -9,45 +9,49 @@ const RootLayout = () => {
     <GestureHandlerRootView style={{ flex: 1 }}>
       <RootSiblingParent>
         <AppProvider>
-          <SafeAreaView style={{ flex: 1 }}>
-            <Stack
-              screenOptions={{
-                headerStyle: {
-                  backgroundColor: "#f4511e",
-                },
-                headerTintColor: "#fff",
-                headerTitleStyle: {
-                  fontWeight: "bold",
-                },
-                contentStyle: { backgroundColor: "#fff" },
-              }}
-            >
-              <Stack.Screen
-                name="index"
-                options={{ headerShown: false }}
-              ></Stack.Screen>
-              <Stack.Screen
-                name="auths"
-                options={{ headerShown: false }}
-              ></Stack.Screen>
-              <Stack.Screen
-                name="(tabs)"
-                options={{ headerShown: false }}
-              ></Stack.Screen>
-              <Stack.Screen
-                name="auths/verify"
-                options={{ headerShown: false }}
-              ></Stack.Screen>
-              <Stack.Screen
-                name="auths/login"
-                options={{ headerShown: false }}
-              ></Stack.Screen>
-              <Stack.Screen
-                name="auths/signup"
-                options={{ headerShown: false }}
-              ></Stack.Screen>
-            </Stack>
-          </SafeAreaView>
+          {/* <SafeAreaView style={{ flex: 1 }}> */}
+          <Stack
+            screenOptions={{
+              headerStyle: {
+                backgroundColor: "#f4511e",
+              },
+              headerTintColor: "#fff",
+              headerTitleStyle: {
+                fontWeight: "bold",
+              },
+              contentStyle: { backgroundColor: "#fff" },
+            }}
+          >
+            <Stack.Screen
+              name="index"
+              options={{ headerShown: false }}
+            ></Stack.Screen>
+            <Stack.Screen
+              name="auths"
+              options={{ headerShown: false }}
+            ></Stack.Screen>
+            <Stack.Screen
+              name="(tabs)"
+              options={{ headerShown: false }}
+            ></Stack.Screen>
+            <Stack.Screen
+              name="auths/verify"
+              options={{ headerShown: false }}
+            ></Stack.Screen>
+            <Stack.Screen
+              name="auths/login"
+              options={{ headerShown: false }}
+            ></Stack.Screen>
+            <Stack.Screen
+              name="auths/signup"
+              options={{ headerShown: false }}
+            ></Stack.Screen>
+            <Stack.Screen
+              name="product/[id]"
+              options={{ headerShown: false }}
+            ></Stack.Screen>
+          </Stack>
+          {/* </SafeAreaView> */}
         </AppProvider>
       </RootSiblingParent>
     </GestureHandlerRootView>

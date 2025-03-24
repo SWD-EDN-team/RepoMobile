@@ -29,6 +29,7 @@ const BannerHome = () => {
   return (
     <View style={{ flex: 1 }}>
       <Carousel
+        style={{ height: 120 }}
         ref={ref}
         width={width}
         height={width / 3}
@@ -47,13 +48,14 @@ const BannerHome = () => {
           </View>
         )}
         autoPlay
-        autoPlayInterval={5000} // 5s
+        autoPlayInterval={4000}
       />
       <Pagination.Basic
+        size={5}
         progress={progress}
         data={data}
         dotStyle={{ backgroundColor: "rgba(0,0,0,0.2)", borderRadius: 50 }}
-        containerStyle={{ gap: 5, marginTop: 10 }}
+        containerStyle={{ marginTop: 5, gap: 5 }}
         onPress={onPressPagination}
       />
     </View>

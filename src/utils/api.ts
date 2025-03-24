@@ -2,24 +2,27 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import axios from "axios";
 
 export const registerApi = (name: string, email: string, password: string) => {
-  const url = `${process.env.EXPO_PUBLIC_API_URL}/v1/api/users`;
+  const url = `http://172.16.11.204:8081/api/v1/users/`;
   console.log("url", url);
   console.log("email", email, "name", name, "password", password);
 
   return axios.post(url, { name, email, password });
 };
 
-export const loginApi = (email: string, password: string) => {
-  const url = `http://172.16.11.96:8080/v1/api/users/sign-in`; // Dùng IP máy tính
-  // http://localhost:8080/v1/api/users/sign-in
+export const loginApi = (
+  email: string,
+  password: string,
+  p0: { headers: { "Content-Type": string } }
+) => {
+  const url = `http://172.16.11.204:8081/api/v1/auth/signin`;
   console.log("url", url);
   console.log("email", email, "password", password);
+  console.log("??", axios.post(url, { email, password }));
 
   return axios.post(url, { email, password });
 };
-
 export const verifyCodeApis = async (otp: string, email: string) => {
-  const url = `${process.env.EXPO_PUBLIC_API_URL}/v1/api/auth/verify_email`;
+  const url = `http://localhost:8081/v1/api/auth/verify_code`;
   console.log("Verifying ", url);
   try {
     const response = await axios.post<IBackendRes<any>>(
@@ -36,6 +39,8 @@ export const verifyCodeApis = async (otp: string, email: string) => {
     throw new Error("Failed to verify OTP. Please try again.");
   }
 };
+
+export const getProductList = () => {};
 
 export const printAsyncStorage = () => {
   AsyncStorage.getAllKeys((err, keys) => {

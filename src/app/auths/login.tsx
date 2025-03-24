@@ -30,19 +30,20 @@ const Login = () => {
   const [Loading, setLoading] = useState<boolean>(false);
 
   const handleLogin = async (email: string, password: string) => {
-    // setLoading(true);
-    // const res = await loginApi(email, password);
-    // console.log("res", res);
-    // if (res.data) {
-    //   router.navigate("/screens/DetailScreen/DetailScreen");
-    // }
+    try {
+      const res = await loginApi(email, password, {
+        headers: { "Content-Type": "application/json" },
+      });
 
-    if (email === user.email && password === user.password) {
-      setLoading(true);
-      // await AsyncStorage.setItem("access_token"  )
-      router.navigate("/screens/DetailScreen/DetailScreen");
-    } else {
-      alert("Login Failed");
+      console.log(">>>>", res.data);
+
+      if (res.data) {
+        router.navigate("/(tabs)");
+      }
+    } catch (err: any) {
+      console.error("Lỗi đăng nhập:", err.response?.data || err);
+    } finally {
+      setLoading(false);
     }
   };
 

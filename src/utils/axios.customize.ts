@@ -2,6 +2,7 @@ import axios from "axios";
 
 const instance = axios.create({
   baseURL: "http://192.168.1.19:8081",
+  timeout: 5 * 1000,
 });
 
 // Add a request interceptor
