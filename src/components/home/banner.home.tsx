@@ -27,7 +27,7 @@ const BannerHome = () => {
   };
 
   return (
-    <View style={{ flex: 1, borderColor: "red", borderWidth: 1 }}>
+    <View style={{ flex: 1 }}>
       <Carousel
         style={{ height: 120 }}
         ref={ref}

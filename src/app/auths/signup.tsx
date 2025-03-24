@@ -41,10 +41,6 @@ const styles = StyleSheet.create({
 });
 
 const SignUpPage = () => {
-  const [name, setName] = useState<string>("");
-  const [email, setEmail] = useState<string>("");
-  const [password, setPassword] = useState<string>("");
-
   const handleSignUp = async (
     name: string,
     password: string,

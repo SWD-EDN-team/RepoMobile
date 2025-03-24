@@ -23,6 +23,7 @@ import {
 import { LoginSchema } from "@/utils/validate.schema";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { loginApi } from "@/utils/api";
+import axios from "axios";
 
 const Login = () => {
   // const [email, setEmail] = useState<string>("");
@@ -30,20 +31,21 @@ const Login = () => {
   const [Loading, setLoading] = useState<boolean>(false);
 
   const handleLogin = async (email: string, password: string) => {
-    setLoading(true);
-    const res = await loginApi(email, password);
-    console.log("res>>>>>>>>>", res);
-    if (res.data) {
-      router.navigate("/(tabs)");
-    }
+    try {
+      const res = await loginApi(email, password, {
+        headers: { "Content-Type": "application/json" },
+      });
 
-    // if (email === user.email && password === user.password) {
-    //   setLoading(true);
-    //   // await AsyncStorage.setItem("access_token"  )
-    //   router.navigate("/(tabs)");
-    // } else {
-    //   alert("Login Failed");
-    // }
+       console.log(">>>>",res.data);
+       
+      if (res.data) {
+        router.navigate("/(tabs)");
+      }
+    } catch (err: any) {
+      console.error("Lỗi đăng nhập:", err.response?.data || err);
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (

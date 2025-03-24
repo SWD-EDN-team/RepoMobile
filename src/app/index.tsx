@@ -1,7 +1,16 @@
 import { View, Text, StyleSheet, ActivityIndicator, Image } from "react-native";
-import { router } from "expo-router";
+import { ErrorBoundaryProps, router } from "expo-router";
 import { useEffect, useState } from "react";
 import * as SplashScreen from "expo-splash-screen";
+
+export function ErrorBoundary({ error, retry }: ErrorBoundaryProps) {
+  return (
+    <View style={{ flex: 1, backgroundColor: "red" }}>
+      <Text>{error.message}</Text>
+      <Text onPress={retry}>Try Again?</Text>
+    </View>
+  );
+}
 
 SplashScreen.preventAutoHideAsync();
 

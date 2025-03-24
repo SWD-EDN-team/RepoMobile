@@ -94,7 +94,7 @@ const CollectionHome = ({ name, description, imageRef }: Props) => {
               <Pressable
                 onPress={() =>
                   router.navigate({
-                    pathname: "/screens/product/[id]",
+                    pathname: "/product/[id]",
                     params: { id: item.key },
                   })
                 }
