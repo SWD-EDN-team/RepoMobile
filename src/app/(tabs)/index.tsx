@@ -63,14 +63,6 @@ const styles = StyleSheet.create({
 });
 
 const HomeTab = () => {
-  useEffect(() => {
-    const saveData = async () => {
-      await AsyncStorage.setItem("anhquan", "anhquan-value");
-      await AsyncStorage.setItem("access_token", "anhquan-token");
-    };
-    saveData();
-  }, []);
-
   interface Product {
     id: string;
     title: string;
@@ -78,7 +70,6 @@ const HomeTab = () => {
     image: string;
   }
 
- 
   const renderItem = ({ item }: { item: Product }) => (
     <View style={styles.itemContainer}>
       <Image source={{ uri: item.image }} style={styles.itemImage} />

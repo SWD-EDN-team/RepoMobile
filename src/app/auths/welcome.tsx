@@ -17,9 +17,10 @@ import googleLogo from "@/assets/auth/google.png";
 import { LinearGradient } from "expo-linear-gradient";
 import TextBetweenLine from "@/components/text.between";
 import { Link, Redirect, router } from "expo-router";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { StatusBar } from "expo-status-bar";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { printAsyncStorage } from "@/utils/api";
 
 const styles = StyleSheet.create({
   container: {
@@ -55,116 +56,129 @@ const styles = StyleSheet.create({
 });
 
 const WelcomePage = () => {
+  // useEffect(() => {
+  //   const saveData = async () => {
+  //     await AsyncStorage.setItem("my_key", "anhquan-value");
+  //     await AsyncStorage.setItem("access_token", "anhquan-token");
+  //   };
+  //   saveData();
+  // }, []);
+  const handleClick = async () => {
+    printAsyncStorage();
+  };
   if (true) {
-    return <Redirect href={"/auths/login"}></Redirect>;
+    return <Redirect href={"/auths/signup"}></Redirect>;
   }
   return (
-    <ImageBackground style={{ flex: 1 }} source={BG2}>
-      <StatusBar translucent backgroundColor="transparent" style="dark" />
-      <LinearGradient
-        style={{ flex: 1 }}
-        colors={["transparent", "rgba(0,0,0,0.8)"]}
-        locations={[0.2, 0.8]}
-      >
-        <View style={styles.container}>
-          <View style={styles.welcomeText}>
-            <Text style={styles.heading}>Welcome toe</Text>
-            <Text style={styles.body}>@_Clothers</Text>
-            <Text style={styles.footer}>
-              Nền tảng bán áo quần trực tuyến tại Việt Nam
-            </Text>
-          </View>
-          <View style={styles.welcomeBtn}>
-            <TextBetweenLine
-              title="Đăng nhập với"
-              textColor="white"
-            ></TextBetweenLine>
-            <View
-              style={{
-                display: "flex",
-                flexDirection: "row",
-                alignItems: "center",
-                justifyContent: "center",
-                gap: 30,
-              }}
-            >
-              <ShareButton
-                title="FACEBOOK"
-                onPress={() => alert("me")}
-                btnStyle={{
-                  backgroundColor: "#fff",
-                  justifyContent: "center",
-                  borderRadius: 30,
-                }}
-                icons={<Image source={fbLogo}></Image>}
-              ></ShareButton>
-              <ShareButton
-                title="GOOGLE"
-                onPress={() => alert("me")}
-                btnStyle={{
-                  backgroundColor: "#fff",
-                  paddingHorizontal: 20,
-                  justifyContent: "center",
-                  borderRadius: 30,
-                }}
-                icons={<Image source={googleLogo}></Image>}
-              ></ShareButton>
+    <>
+      <Button title="check me" onPress={handleClick}></Button>
+      <ImageBackground style={{ flex: 1 }} source={BG2}>
+        <StatusBar translucent backgroundColor="transparent" style="dark" />
+        <LinearGradient
+          style={{ flex: 1 }}
+          colors={["transparent", "rgba(0,0,0,0.8)"]}
+          locations={[0.2, 0.8]}
+        >
+          <View style={styles.container}>
+            <View style={styles.welcomeText}>
+              <Text style={styles.heading}>Welcome toe</Text>
+              <Text style={styles.body}>@_Clothers</Text>
+              <Text style={styles.footer}>
+                Nền tảng bán áo quần trực tuyến tại Việt Nam
+              </Text>
             </View>
-            <View>
-              <ShareButton
-                title="Đăng nhập với email"
-                onPress={() => {
-                  router.navigate("/auths/login");
-                }}
-                textStyleee={{
-                  color: "white",
-                  paddingVertical: 5,
-                  fontWeight: "bold",
-                }}
-                btnStyle={{
-                  justifyContent: "center",
-                  borderRadius: 30,
-                  marginHorizontal: 50,
-                  paddingVertical: 10,
-                  backgroundColor: "#2c2c2c",
-                  borderColor: "#505050",
-                  borderWidth: 1,
-                }}
-                pressStyle={{ alignSelf: "stretch" }}
-              ></ShareButton>
-            </View>
-            <View
-              style={{
-                flexDirection: "row",
-                gap: 10,
-                justifyContent: "center",
-              }}
-            >
-              <Text
+            <View style={styles.welcomeBtn}>
+              <TextBetweenLine
+                title="Đăng nhập với"
+                textColor="white"
+              ></TextBetweenLine>
+              <View
                 style={{
-                  textAlign: "center",
-                  color: "white",
-                  fontWeight: "bold",
+                  display: "flex",
+                  flexDirection: "row",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  gap: 30,
                 }}
               >
-                Chưa có tài khoản ?
-              </Text>
-              <Link href={"/auths/signup"}>
+                <ShareButton
+                  title="FACEBOOK"
+                  onPress={() => alert("me")}
+                  btnStyle={{
+                    backgroundColor: "#fff",
+                    justifyContent: "center",
+                    borderRadius: 30,
+                  }}
+                  icons={<Image source={fbLogo}></Image>}
+                ></ShareButton>
+                <ShareButton
+                  title="GOOGLE"
+                  onPress={() => alert("me")}
+                  btnStyle={{
+                    backgroundColor: "#fff",
+                    paddingHorizontal: 20,
+                    justifyContent: "center",
+                    borderRadius: 30,
+                  }}
+                  icons={<Image source={googleLogo}></Image>}
+                ></ShareButton>
+              </View>
+              <View>
+                <ShareButton
+                  title="Đăng nhập với email"
+                  onPress={() => {
+                    router.navigate("/auths/login");
+                  }}
+                  textStyleee={{
+                    color: "white",
+                    paddingVertical: 5,
+                    fontWeight: "bold",
+                  }}
+                  btnStyle={{
+                    justifyContent: "center",
+                    borderRadius: 30,
+                    marginHorizontal: 50,
+                    paddingVertical: 10,
+                    backgroundColor: "#2c2c2c",
+                    borderColor: "#505050",
+                    borderWidth: 1,
+                  }}
+                  pressStyle={{ alignSelf: "stretch" }}
+                ></ShareButton>
+              </View>
+              <View
+                style={{
+                  flexDirection: "row",
+                  gap: 10,
+                  justifyContent: "center",
+                }}
+              >
                 <Text
                   style={{
+                    textAlign: "center",
                     color: "white",
                     fontWeight: "bold",
-                    textDecorationLine: "underline",
                   }}
                 >
-                  Đăng Ký.
+                  Chưa có tài khoản ?
                 </Text>
-              </Link>
+                <Link href={"/auths/signup"}>
+                  <Text
+                    style={{
+                      color: "white",
+                      fontWeight: "bold",
+                      textDecorationLine: "underline",
+                    }}
+                  >
+                    Đăng Ký.
+                  </Text>
+                </Link>
+              </View>
             </View>
           </View>
-        </View>
-      </LinearGradient>
-    </ImageBackground>
+        </LinearGradient>
+      </ImageBackground>
+    </>
   );
 };
 
