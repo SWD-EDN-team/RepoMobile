@@ -21,20 +21,20 @@ const RootPage = () => {
   }
   const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    async function prepare() {
-      try {
-        await new Promise((resolve) => setTimeout(resolve, 2000));
-      } catch (e) {
-        console.warn(e);
-      } finally {
-        setLoading(false);
-        await SplashScreen.hideAsync();
-        router.replace("/auths/welcome");
-      }
-    }
-    prepare();
-  }, []);
+  // useEffect(() => {
+  //   async function prepare() {
+  //     try {
+  //       await new Promise((resolve) => setTimeout(resolve, 2000));
+  //     } catch (e) {
+  //       console.warn(e);
+  //     } finally {
+  //       setLoading(false);
+  //       await SplashScreen.hideAsync();
+  //       router.replace("/auths/welcome");
+  //     }
+  //   }
+  //   prepare();
+  // }, []);
 
   if (loading) {
     return (
