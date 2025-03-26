@@ -1,6 +1,7 @@
 import React, { useState } from "react";
-import { View, Text, StyleSheet } from "react-native";
+import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 import ShippingMethod from "./ShippingMethod";
+import { router } from "expo-router";
 
 const OrderSummary = ({ products }: { products: any[] }) => {
   const [selectedShipping, setSelectedShipping] = useState({ id: 1, name: "Giao hàng tiết kiệm", price: 15000 });
@@ -16,6 +17,16 @@ const OrderSummary = ({ products }: { products: any[] }) => {
         Tổng thanh toán ({products.length} sản phẩm): {totalPrice.toLocaleString("vi-VN")}đ
         </Text>
       </View>
+      <TouchableOpacity
+        onPress={() =>
+          router.push({
+            pathname: "/screens/Payment",
+            params: { total: totalPrice.toString() }, 
+          })
+        }
+      >
+        <Text style={styles.text}>Mua hàng</Text>
+      </TouchableOpacity>
     </View>
   );
 };
