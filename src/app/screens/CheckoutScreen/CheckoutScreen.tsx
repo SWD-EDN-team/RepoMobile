@@ -9,6 +9,7 @@ import { router } from "expo-router";
 
 interface Address {
   _id: string;
+  name: string;
   country: string;
   city: string;
   street: string;
@@ -19,6 +20,7 @@ export default function CheckoutScreen() {
   const products = cartData ? JSON.parse(cartData as string) : []; // Chuyển JSON về object
   const [address, setAddress] = useState<Address[]>([]);
   const [showAll, setShowAll] = useState(false);
+  const [selectedAddress, setSelectedAddress] = useState(address.length > 0 ? address[0] : null);
   useEffect(() => {
     const getAddress = async () => {
       try {
@@ -32,6 +34,11 @@ export default function CheckoutScreen() {
     getAddress();
   }, []);
 
+  const handleSelectAddress = (addressItem: React.SetStateAction<Address | null>) => {
+    setSelectedAddress(addressItem);
+    setShowAll(false); // Ẩn danh sách sau khi chọn
+  };
+  
   return (
     <>
       <Stack.Screen options={{ title: "Thanh toán" }} />
@@ -39,20 +46,33 @@ export default function CheckoutScreen() {
         {address.length > 0 ? (
           <Card style={styles.card}>
             <TouchableOpacity onPress={() => setShowAll(!showAll)}>
-              <Card.Content>
-                <Text style={styles.title}>Địa chỉ</Text>
-                <Text>
-                  {address[0].country}, {address[0].city}, {address[0].street}
-                </Text>
-              </Card.Content>
+            <Card.Content>
+              <Text style={styles.selectedAddressName}>
+                {selectedAddress ? selectedAddress.name : "Chưa chọn địa chỉ"}
+              </Text>
+              <Text style={styles.selectedAddressDetails}>
+                {selectedAddress
+                  ? `${selectedAddress.street}, ${selectedAddress.city}, ${selectedAddress.country}`
+                  : ""}
+              </Text>
+            </Card.Content>
             </TouchableOpacity>
-
+  
             {showAll && (
               <View style={styles.fullList}>
                 {address.map((item, index) => (
-                  <Text key={index} style={styles.addressText}>
-                    {item.country}, {item.city}, {item.street}
-                  </Text>
+                  <TouchableOpacity 
+                    key={index} 
+                    onPress={() => handleSelectAddress(item)} 
+                    style={styles.addressItem}
+                  >
+                    <Text style={selectedAddress?._id === item._id ? styles.selectedAddressName : styles.selectedAddressName}>
+                      {item.name}
+                    </Text>
+                    <Text style={selectedAddress?._id === item._id ? styles.selectedAddress : styles.addressText}>
+                      {item.country}, {item.city}, {item.street}
+                    </Text>
+                  </TouchableOpacity>
                 ))}
               </View>
             )}
@@ -60,19 +80,20 @@ export default function CheckoutScreen() {
         ) : (
           <View style={styles.container}>
             <Text>Không có địa chỉ nào</Text>
-            <TouchableOpacity 
-              style={styles.addButton}
-              onPress={() =>
-                router.navigate({
-                  pathname: "/screens/AddressScreen/AddressScreen",
-                })
-              }
-            >
-              <Text style={styles.addText}>+ Thêm địa chỉ</Text>
-            </TouchableOpacity>
           </View>
         )}
-
+  
+        <TouchableOpacity 
+          style={styles.addButton}
+          onPress={() =>
+            router.navigate({
+              pathname: "/screens/AddressScreen/AddressScreen",
+            })
+          }
+        >
+          <Text style={styles.addText}>+ Thêm địa chỉ</Text>
+        </TouchableOpacity>
+  
         <FlatList
           data={products}
           keyExtractor={(item) => item.id}
@@ -178,5 +199,23 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: "bold",
     marginBottom: 8,
+  },
+  addressItem: {
+    padding: 10,
+    borderBottomWidth: 1,
+    borderColor: "#ccc",
+  },
+  selectedAddress: {
+    fontWeight: "bold",
+    color: "blue",
+  },
+  selectedAddressName: {
+    fontWeight: "bold",
+    fontSize: 16,
+  },
+  selectedAddressDetails: {
+    fontSize: 14,
+    color: "black",
+    marginTop: 5,
   },
 });

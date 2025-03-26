@@ -1,12 +1,27 @@
 import { useState } from "react";
-import { View, Text, TextInput, TouchableOpacity, StyleSheet } from "react-native";
+import { View, Text, TextInput, TouchableOpacity, StyleSheet, Alert} from "react-native";
 import { Stack } from "expo-router";
+import { fetchAddAddress } from "../../../utils/api"; 
 
 const AddressScreen = () => {
+  const [name, setName] = useState("");
   const [country, setCountry] = useState("");
   const [city, setCity] = useState("");
   const [street, setStreet] = useState("");
 
+  const handleSave = async () => {
+    if (!name || !country || !city || !street) {
+      Alert.alert("Error", "Please fill in all fields.");
+      return;
+    }
+
+    try {
+      await fetchAddAddress(name, country, city, street);
+      Alert.alert("Success", "Address added successfully!");
+    } catch (error) {
+      Alert.alert("Error", "Failed to add address.");
+    }
+  };
   return (
     <>
       <Stack.Screen options={{ title: "Thanh toán" }} />
@@ -14,6 +29,14 @@ const AddressScreen = () => {
         <View style={styles.header}>
           <Text style={styles.headerText}>A new address</Text>
         </View>
+
+        <Text style={styles.label}>Name</Text>
+        <TextInput
+          style={styles.input}
+          placeholder="Enter Name"
+          value={name}
+          onChangeText={setName}
+        />
 
         {/* Country Input */}
         <Text style={styles.label}>Country</Text>
@@ -43,7 +66,7 @@ const AddressScreen = () => {
         />
 
         <View style={styles.containerButton}>
-          <TouchableOpacity style={styles.saveButton}>
+          <TouchableOpacity style={styles.saveButton} onPress={handleSave}>
             <Text style={styles.saveButtonText}>SAVE</Text>
           </TouchableOpacity>
         </View>
