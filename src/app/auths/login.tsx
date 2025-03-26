@@ -36,17 +36,17 @@ const Login = () => {
       });
       console.log(">>>>", res.data);
       if (res.data) {
-        await AsyncStorage.setItem("assess_token", res.data.accessToken);
+        await AsyncStorage.setItem("access_token", res.data.accessToken);
         setAppState(res.data); // gán giá trị vào context
         router.navigate("/(tabs)");
       }
     } catch (err: any) {
       console.error("Lỗi đăng nhập:", err.response?.data || err);
     } finally {
+      console.log("token",AsyncStorage.getItem("access_token"));
       setLoading(false);
     }
   };
-
   return (
     <SafeAreaView style={{ flex: 1 }}>
       <Formik

@@ -69,3 +69,9 @@ export const getProductDetail = (id:string) => {
   // const url = `${process.env.EXPO_PUBLIC_API_URL}/product/category`;
   return axios.get(url);
 };
+
+
+// export const addWidhList = (id:string) => {
+//   const url = "http://172.16.11.203:8081/api/v1/wishlist";
+//   return axios.post(url);
+// };
