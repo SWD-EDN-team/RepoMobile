@@ -9,6 +9,7 @@ import {
   SectionList,
   ViewToken,
   ScrollView,
+  ActivityIndicator,
 } from "react-native";
 import Animated, {
   useAnimatedScrollHandler,
@@ -19,10 +20,11 @@ import Animated, {
   interpolateColor,
 } from "react-native-reanimated";
 import Info from "./info";
-import demo from "@/assets/product/item_product.jpg";
+// import demo from "@/assets/product/item_product.jpg";
 import { APP_COLOR } from "@/utils/constant";
 import StickyHeader from "./sticky.header";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import { getProductCategory } from "@/utils/api";
 
 const AnimatedSectionList = Animated.createAnimatedComponent(SectionList);
 
@@ -46,6 +48,28 @@ const RMain = (props: IProps) => {
   const flatListRef = useRef<FlatList>(null);
   const [activeMenuIndex, setActiveMenuIndex] = useState<number | string>(0);
   const blockUpdateRef = useRef<boolean>(false);
+
+  const [error, setError] = useState<string | null>(null);
+  const [loading, setLoading] = useState<boolean>(true);
+  const [Products, setProducts] = useState<any>();
+  useEffect(() => {
+    const fetProduct = async () => {
+      try {
+        const res = await getProductCategory();
+        if (res && res.data) {
+          setProducts(res.data);
+        } else {
+          setError("No products found.");
+        }
+      } catch (err) {
+        console.error("Fetch error:", err);
+        setError("Failed to load products.");
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetProduct();
+  }, []);
 
   // lấy ra cuộn chuột dc bao nhiêu rồi
   const onScroll = useAnimatedScrollHandler((event) => {
@@ -214,122 +238,143 @@ const RMain = (props: IProps) => {
 
   return (
     <View>
-      <StickyHeader
-        headerHeight={HEADER_HEIGHT}
-        imageHeight={IMAGE_HEIGHT}
-        animatedBackgroundStyle={animatedBackgroundStyle}
-        animatedArrowColorStyle={animatedArrowColorStyle}
-        animatedStickyHeaderStyle={animatedStickyHeaderStyle}
-        animatedHeartIconStyle={animatedHeartIconStyle}
-      />
-      <View style={styles.header}>
-        <Image source={demo} style={styles.headerImage} />
-      </View>
-      <Animated.View style={[animatedInfoStyle]}>
-        <Info infoHeight={INFO_HEIGHT} />
-      </Animated.View>
-
-      {/* // slide menu */}
-      <Animated.FlatList
-        ref={flatListRef}
-        horizontal
-        data={DATA}
-        renderItem={({ item, index }) => (
-          <TouchableOpacity
-            key={index}
-            onPress={() => {
-              blockUpdateRef.current = true;
-              setActiveMenuIndex(index);
-              sectionListRef.current?.scrollToLocation({
-                sectionIndex: item.index,
-                itemIndex: 0,
-                viewOffset: HEADER_HEIGHT + SLIDE_MENU_HEIGHT,
-              });
-            }}
-          >
-            <View
-              style={{
-                paddingHorizontal: 7,
-                height: SLIDE_MENU_HEIGHT,
-                justifyContent: "center",
-                borderBottomColor:
-                  item.index === activeMenuIndex
-                    ? APP_COLOR.ORANGE
-                    : APP_COLOR.GREY,
-                borderBottomWidth: 2,
+      {loading ? (
+        <ActivityIndicator size="large" color="#0000ff" />
+      ) : error ? (
+        <Text style={{ color: "red" }}>{error}</Text>
+      ) : (
+        <>
+          <StickyHeader
+            id={infoProduct._id}
+            headerHeight={HEADER_HEIGHT}
+            imageHeight={IMAGE_HEIGHT}
+            animatedBackgroundStyle={animatedBackgroundStyle}
+            animatedArrowColorStyle={animatedArrowColorStyle}
+            animatedStickyHeaderStyle={animatedStickyHeaderStyle}
+            animatedHeartIconStyle={animatedHeartIconStyle}
+          />
+          <View style={styles.header}>
+            <Image
+              source={{
+                uri: `https://repo-node-5.onrender.com${infoProduct.image[0]}`,
               }}
-            >
-              <Text
-                style={{
-                  color:
-                    item.index === activeMenuIndex ? APP_COLOR.ORANGE : "black",
-                  marginHorizontal: 5,
+              alt="Product detail"
+              style={styles.headerImage}
+            />
+          </View>
+          <Animated.View style={[animatedInfoStyle]}>
+            <Info infoHeight={INFO_HEIGHT} data={infoProduct} />
+          </Animated.View>
+
+          {/* // slide menu */}
+          <Animated.FlatList
+            ref={flatListRef}
+            horizontal
+            data={Products}
+            renderItem={({ item, index }) => (
+              <TouchableOpacity
+                key={index}
+                onPress={() => {
+                  blockUpdateRef.current = true;
+                  setActiveMenuIndex(index);
+                  sectionListRef.current?.scrollToLocation({
+                    sectionIndex: item.categoryId,
+                    itemIndex: 0,
+                    viewOffset: HEADER_HEIGHT + SLIDE_MENU_HEIGHT,
+                  });
                 }}
               >
-                {item.title}
-              </Text>
-            </View>
-          </TouchableOpacity>
-        )}
-        showsHorizontalScrollIndicator={false}
-        style={[animatedMenuStyle]}
-      />
+                <View
+                  style={{
+                    paddingHorizontal: 7,
+                    height: SLIDE_MENU_HEIGHT,
+                    justifyContent: "center",
+                    borderBottomColor:
+                      item.categoryId === activeMenuIndex
+                        ? APP_COLOR.ORANGE
+                        : APP_COLOR.GREY,
+                    borderBottomWidth: 2,
+                  }}
+                >
+                  <Text
+                    style={{
+                      color:
+                        item.index === activeMenuIndex
+                          ? APP_COLOR.ORANGE
+                          : "black",
+                      marginHorizontal: 5,
+                    }}
+                  >
+                    {item.category}
+                  </Text>
+                </View>
+              </TouchableOpacity>
+            )}
+            showsHorizontalScrollIndicator={false}
+            style={[animatedMenuStyle]}
+          />
 
-      {/* // selection list */}
-      <AnimatedSectionList
-        ref={sectionListRef as any}
-        style={{ zIndex: 1 }}
-        onScroll={onScroll}
-        stickySectionHeadersEnabled={false}
-        contentContainerStyle={{
-          paddingTop: IMAGE_HEIGHT + INFO_HEIGHT + SLIDE_MENU_HEIGHT - 2,
-          paddingBottom: 30,
-        }}
-        sections={DATA}
-        renderItem={({ item, index }: { item: any; index: any }) => (
-          <TouchableOpacity onPress={() => alert("render item sections")}>
-            <View style={{ paddingHorizontal: 10, backgroundColor: "white" }}>
-              <View style={{ backgroundColor: "pink", height: 50 }}>
-                <Text>
-                  {item} - {index}
-                </Text>
-              </View>
-            </View>
-          </TouchableOpacity>
-        )}
-        renderSectionHeader={({ section }: { section: any }) => (
-          <View
-            style={{
-              backgroundColor: "white",
-              paddingHorizontal: 10,
-              paddingTop: 10,
+          {/* // selection list */}
+          <AnimatedSectionList
+            ref={sectionListRef as any}
+            style={{ zIndex: 1 }}
+            onScroll={onScroll}
+            stickySectionHeadersEnabled={false}
+            contentContainerStyle={{
+              paddingTop: IMAGE_HEIGHT + INFO_HEIGHT + SLIDE_MENU_HEIGHT - 2,
+              paddingBottom: 30,
             }}
-          >
-            <Text style={{ textTransform: "uppercase" }}>
-              {section.title} - {section.index}
-            </Text>
-          </View>
-        )}
-        ItemSeparatorComponent={() => (
-          <>
-            <View style={{ backgroundColor: "white", paddingHorizontal: 10 }}>
+            sections={DATA}
+            renderItem={({ item, index }: { item: any; index: any }) => (
+              <TouchableOpacity onPress={() => alert("render item sections")}>
+                <View
+                  style={{ paddingHorizontal: 10, backgroundColor: "white" }}
+                >
+                  <View style={{ backgroundColor: "pink", height: 50 }}>
+                    <Text>
+                      {item} - {index}
+                    </Text>
+                  </View>
+                </View>
+              </TouchableOpacity>
+            )}
+            renderSectionHeader={({ section }: { section: any }) => (
               <View
                 style={{
-                  height: 1,
-                  backgroundColor: "#ccc",
-                  marginVertical: 5,
+                  backgroundColor: "white",
+                  paddingHorizontal: 10,
+                  paddingTop: 10,
                 }}
-              />
-            </View>
-          </>
-        )}
-        viewabilityConfig={{
-          viewAreaCoveragePercentThreshold: 1,
-          waitForInteraction: true,
-        }}
-        onViewableItemsChanged={onViewableItemsChanged}
-        onMomentumScrollEnd={() => (blockUpdateRef.current = false)}
-      />
+              >
+                <Text style={{ textTransform: "uppercase" }}>
+                  {section.title} - {section.index}
+                </Text>
+              </View>
+            )}
+            ItemSeparatorComponent={() => (
+              <>
+                <View
+                  style={{ backgroundColor: "white", paddingHorizontal: 10 }}
+                >
+                  <View
+                    style={{
+                      height: 1,
+                      backgroundColor: "#ccc",
+                      marginVertical: 5,
+                    }}
+                  />
+                </View>
+              </>
+            )}
+            viewabilityConfig={{
+              viewAreaCoveragePercentThreshold: 1,
+              waitForInteraction: true,
+            }}
+            onViewableItemsChanged={onViewableItemsChanged}
+            onMomentumScrollEnd={() => (blockUpdateRef.current = false)}
+          />
+        </>
+      )}
     </View>
   );
 };

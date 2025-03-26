@@ -49,64 +49,51 @@ const ProductCard = ({
 };
 
 const styles = StyleSheet.create({
-  card: {
+  footer: {
     flexDirection: "row",
-    padding: 10,
-    marginBottom: 10,
-    backgroundColor: "#fff",
-    borderRadius: 5,
-    shadowColor: "#000",
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.1,
-    shadowRadius: 3,
-    elevation: 2,
-  },
-  productImage: {
-    width: 80,
-    height: 80,
-    borderRadius: 5,
-  },
-  details: {
-    flex: 1,
-    marginLeft: 10,
-  },
-  productName: {
-    fontSize: 16,
-    fontWeight: "bold",
-  },
-  productPrice: {
-    fontSize: 14,
-    color: "#333",
-  },
-  productReviews: {
-    fontSize: 12,
-    color: "#888",
-  },
-  quantityContainer: {
-    flexDirection: "row",
+    height: 70,
+    backgroundColor: "#FFFFFF",
+    paddingLeft: 26,
+    paddingRight: 26,
+    justifyContent: "space-between",
     alignItems: "center",
-    marginTop: 5,
   },
-  quantityButton: {
+  icon_shopping_cart: {
+    width: 30,
+    height: 30,
+  },
+  count: {
+    flexDirection: "row",
+    height: 50,
+    width: "30%",
+    justifyContent: "space-around",
+    alignItems: "center",
+    backgroundColor: "#F4F4F4",
+    borderRadius: 25,
+  },
+  calutation: {
+    width: 30,
+    textAlign: "center",
     fontSize: 20,
     fontWeight: "bold",
-    paddingHorizontal: 10,
   },
-  quantityText: {
-    fontSize: 16,
-    marginHorizontal: 10,
+  buttonAdd: {
+    height: 50,
+    width: "50%",
+    backgroundColor: "#FB741A",
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
+    gap: 5,
+    borderRadius: 35,
   },
-  removeButton: {
-    marginTop: 10,
-    backgroundColor: "#ff4d4d",
-    padding: 5,
-    borderRadius: 3,
+  addBag: {
+    height: 20,
+    width: 20,
   },
-  removeButtonText: {
-    color: "#fff",
-    textAlign: "center",
-    fontSize: 14,
+  titleAdd: {
+    color: "#FFFFFF",
+    fontSize: 18,
   },
 });
-
-export default ProductCard;
+export default FooterOrder;

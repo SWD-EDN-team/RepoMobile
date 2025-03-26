@@ -95,6 +95,10 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: "bold",
   },
+  containerbutton: {
+    justifyContent: "center",
+    alignItems: "center",
+  },
 });
 
 export default AddressScreen;

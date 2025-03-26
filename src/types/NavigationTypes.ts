@@ -20,4 +20,6 @@ export type RootStackParamList ={
   Checkout: { cartData: Product[] };
   Demo: undefined;
   Shipping: undefined;
+  Favorite: undefined; 
+  MyOrders: undefined;
 }

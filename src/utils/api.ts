@@ -61,6 +61,73 @@ export const printAsyncStorage = () => {
   });
 };
 
+export const getWishList =  async () => {
+  try{
+    const token = await AsyncStorage.getItem("access_token");
+    console.log("tokennn: ",token);
+    
+    if (!token) {
+      alert("Vui lòng đăng nhập!");
+      return;
+    }
+
+    const response = await axios.get(
+      "http://192.168.175.1:8081/api/v1/wishlist",
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+
+    console.log("Thêm vào wishlist thành công:", response.data);
+    return response.data;
+    } catch (error:any) {
+      return error
+    }
+};
+
+export const deleteProductWishlist =  async (id:string) => {
+  try{
+    const token = await AsyncStorage.getItem("access_token");
+    console.log("tokennn: ",token);
+    
+    if (!token) {
+      alert("Vui lòng đăng nhập!");
+      return;
+    }
+
+    const response = await axios.get(
+      `http://192.168.175.1:8081/api/v1/wishlist/${id}`,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+    return response;
+    } catch (error:any) {
+      return error
+    }
+};
+
+export const getProductCategory = () => {
+  const url = "http://172.16.11.203:8081/api/v1/product/category";
+  // const url = `${process.env.EXPO_PUBLIC_API_URL}/product/category`;
+  return axios.get(url);
+};
+
+export const getProductDetail = (id:string) => {
+  const url = `http://172.16.11.203:8081/api/v1/product/productDetail/${id}`;
+  // const url = `${process.env.EXPO_PUBLIC_API_URL}/product/category`;
+  return axios.get(url);
+};
+
+
+// export const addWidhList = (id:string) => {
+//   const url = "http://172.16.11.203:8081/api/v1/wishlist";
+//   return axios.post(url);
+// };
 export const fetchCart = async () => {
   try {
     const response = await instance.get("/cart");
