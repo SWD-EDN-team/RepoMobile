@@ -21,6 +21,7 @@ import { useEffect, useState } from "react";
 import { StatusBar } from "expo-status-bar";
 import { getAccountApi } from "@/utils/api";
 import { useCurrentApp } from "@/context/app.context";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const styles = StyleSheet.create({
   container: {
@@ -57,22 +58,32 @@ const styles = StyleSheet.create({
 
 const WelcomePage = () => {
   const { setAppState } = useCurrentApp();
-  if (true) {
-    return <Redirect href={"/auths/login"}></Redirect>;
-  }
+  // if (true) {
+  //   return <Redirect href={"/auths/login"}></Redirect>;
+  // }
 
-  useEffect(() => {
-    const fetAccount = async () => {
-      const res = await getAccountApi();
-      console.log(">>>>", res);
+  // useEffect(() => {
+  //   const fetAccount = async () => {
+  //     const res = await getAccountApi();
+  //     console.log(">>>>", res);
 
-      if (res.data) {
-        router.replace("/(tabs)");
-      } else {
-      }
-    };
-    fetAccount();
-  }, []);
+  //     if (res.data) {
+  //       const accessToken = await AsyncStorage.getItem("accessToken");
+  //       setAppState((prev: any) => {
+  //         if (prev.user?.id !== res.data.user.id) {
+  //           return {
+  //             user: res.data.user,
+  //             access_token: accessToken,
+  //           };
+  //         }
+  //         return prev;
+  //       });
+
+  //       router.replace("/(tabs)");
+  //     }
+  //   };
+  //   fetAccount();
+  // }, []);
 
   return (
     <ImageBackground style={{ flex: 1 }} source={BG2}>

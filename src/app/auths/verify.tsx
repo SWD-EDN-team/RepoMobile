@@ -34,7 +34,7 @@ const VerifyPage = () => {
     const res = await verifyCodeApis(otp, email as string);
     setIsSummit(false);
     console.log(">>> check res: ", res);
-    router.navigate("/(tabs)");
+    router.navigate("/auths/login");
 
     if (res && res.data) {
       console.log("API response is valid:", res.data);
@@ -58,7 +58,7 @@ const VerifyPage = () => {
           shadowRadius: 4,
         },
       });
-      router.navigate("/(tabs)");
+      router.navigate("/auths/login");
     } else {
       Toast.show("Please enter vô di", {
         duration: Toast.durations.LONG,

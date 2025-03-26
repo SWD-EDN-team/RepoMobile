@@ -15,7 +15,6 @@ import HeaderHome from "@/components/home/header.home";
 import SearchHome from "@/components/home/search.home";
 import { useCurrentApp } from "@/context/app.context";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { useEffect } from "react";
 import { printAsyncStorage } from "../../utils/api";
 import { dataPage } from "@/data/page";
 

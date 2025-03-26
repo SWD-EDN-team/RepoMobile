@@ -51,6 +51,8 @@ const styles = StyleSheet.create({
   },
 });
 
+
+
 const FlatListHome = () => {
   const data: ClothingItem[] = [
     {

@@ -11,7 +11,7 @@ const FavoritePage = () => {
       }}
     >
       <Text style={{ color: "white", fontSize: 18, textAlign: "center" }}>
-        FavoritePage
+        FavoritePagessss
       </Text>
     </View>
   );

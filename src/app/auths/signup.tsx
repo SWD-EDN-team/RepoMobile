@@ -5,9 +5,9 @@ import { registerApi } from "@/utils/api";
 import { APP_COLOR } from "@/utils/constant";
 import axios from "axios";
 import { Link, router } from "expo-router";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { Formik } from "formik";
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
 
 import {
   View,
@@ -44,9 +44,6 @@ const styles = StyleSheet.create({
 });
 
 const SignUpPage = () => {
-  const [name, setName] = useState<string>("");
-  const [email, setEmail] = useState<string>("");
-  const [password, setPassword] = useState<string>("");
 
   const handleSignUp = async (
     name: string,
