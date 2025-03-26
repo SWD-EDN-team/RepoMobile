@@ -10,6 +10,9 @@ import {
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 import Animated from "react-native-reanimated";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
+import axios from "axios";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { useCurrentApp } from "@/context/app.context";
 
 const AnimatedMaterialIcons = Animated.createAnimatedComponent(MaterialIcons);
 const { height: sHeight, width: sWidth } = Dimensions.get("window");
@@ -18,6 +21,7 @@ const styles = StyleSheet.create({});
 interface IProps {
   headerHeight: number;
   imageHeight: number;
+  id:string;
 
   animatedBackgroundStyle: any;
   animatedArrowColorStyle: any;
@@ -26,8 +30,12 @@ interface IProps {
 }
 
 const StickyHeader = (props: IProps) => {
+    const { setAppState } = useCurrentApp();
+  console.log("setAppState",setAppState);
+  
   const insets = useSafeAreaInsets();
   const {
+    id,
     headerHeight,
     imageHeight,
     animatedBackgroundStyle,
@@ -35,6 +43,34 @@ const StickyHeader = (props: IProps) => {
     animatedStickyHeaderStyle,
     animatedHeartIconStyle,
   } = props;
+
+  const handlerAddWishList = async (id: string)=>{
+    try{
+    const token = await AsyncStorage.getItem("access_token");
+
+    if (!token) {
+      alert("Vui lòng đăng nhập!");
+      return;
+    }
+
+    const response = await axios.post(
+      "https://repo-node-5.onrender.com/api/v1/wishlist",
+      { product_id: id },
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+
+    console.log("Thêm vào wishlist thành công:", response.data);
+    alert("Đã thêm sản phẩm vào danh sách yêu thích!");
+    } catch (error:any) {
+      console.error("Chi tiết lỗi:", error.response); // In lỗi ra console
+      alert("Thêm sản phẩm thất bại: " + (error.response?.data?.message || error.message));
+    }
+
+  }
 
   // nút Back và like/dislike gộp vào component này, vì nó có zIndex cao nhất => có thể pressabled
   return (
@@ -119,7 +155,7 @@ const StickyHeader = (props: IProps) => {
       >
         {/* <MaterialIcons name="favorite" size={20} color="black" /> */}
         <MaterialIcons
-          onPress={() => alert("like")}
+          onPress={() => handlerAddWishList(id)}
           name="favorite-outline"
           size={20}
           color={APP_COLOR.GREY}

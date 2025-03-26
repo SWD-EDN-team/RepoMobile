@@ -29,121 +29,121 @@
       const [Loading, setLoading] = useState<boolean>(false);
       const { setAppState } = useCurrentApp();
 
-      const handleLogin = async (email: string, password: string) => {
-        try {
-          const res = await loginApi(email, password, {
-            headers: { "Content-Type": "application/json" },
-          });
-          console.log(">>>>", res.data);
-          if (res.data) {
-            await AsyncStorage.setItem("access_token", res.data.accessToken);
-            setAppState(res.data); // gán giá trị vào context
-            router.navigate("/(tabs)");
-          }
-        } catch (err: any) {
-          console.error("Lỗi đăng nhập:", err.response?.data || err);
-        } finally {
-          setLoading(false);
-        }
-      };
-
-      return (
-        <SafeAreaView style={{ flex: 1 }}>
-          <Formik
-            validationSchema={LoginSchema}
-            initialValues={{ email: "", password: "" }}
-            onSubmit={(values) => handleLogin(values.email, values.password)}
+  const handleLogin = async (email: string, password: string) => {
+    try {
+      const res = await loginApi(email, password, {
+        headers: { "Content-Type": "application/json" },
+      });
+      console.log(">>>>", res.data);
+      if (res.data) {
+        await AsyncStorage.setItem("access_token", res.data.accessToken);
+        setAppState(res.data); // gán giá trị vào context
+        router.navigate("/(tabs)");
+      }
+    } catch (err: any) {
+      console.error("Lỗi đăng nhập:", err.response?.data || err);
+    } finally {
+      console.log("token",AsyncStorage.getItem("access_token"));
+      setLoading(false);
+    }
+  };
+  return (
+    <SafeAreaView style={{ flex: 1 }}>
+      <Formik
+        validationSchema={LoginSchema}
+        initialValues={{ email: "", password: "" }}
+        onSubmit={(values) => handleLogin(values.email, values.password)}
+      >
+        {({ handleChange, handleBlur, handleSubmit, values, errors }) => (
+          <View
+            style={{
+              flex: 1,
+              marginHorizontal: 20,
+              gap: 10,
+            }}
           >
-            {({ handleChange, handleBlur, handleSubmit, values, errors }) => (
-              <View
+            <View>
+              <Text
                 style={{
-                  flex: 1,
-                  marginHorizontal: 20,
-                  gap: 10,
+                  fontSize: 25,
+                  fontWeight: 600,
+                  marginVertical: 10,
                 }}
               >
-                <View>
-                  <Text
-                    style={{
-                      fontSize: 25,
-                      fontWeight: 600,
-                      marginVertical: 10,
-                    }}
-                  >
-                    Login
-                  </Text>
-                </View>
-                <ShareInput
-                  title="Email"
-                  keyboardType="email-address"
-                  onChangeText={handleChange("email")}
-                  onBlur={handleBlur("email")}
-                  value={values.email}
-                  error={errors.email}
-                ></ShareInput>
-                <ShareInput
-                  title="Password"
-                  secureTextEntry
-                  onChangeText={handleChange("password")}
-                  onBlur={handleBlur("password")}
-                  value={values.password}
-                  error={errors.password}
-                ></ShareInput>
-                <View style={{ marginVertical: 10 }} />
-                <ShareButton
-                  loading={Loading}
-                  title="Sign Up "
-                  onPress={handleSubmit as any}
-                  textStyleee={{
-                    textTransform: "uppercase",
-                    color: "#fff",
-                    paddingVertical: 5,
-                    fontWeight: "bold",
-                  }}
-                  btnStyle={{
-                    justifyContent: "center",
-                    borderRadius: 30,
-                    marginHorizontal: 50,
-                    paddingVertical: 10,
-                    backgroundColor: APP_COLOR.ORANGE,
-                  }}
-                  pressStyle={{ alignSelf: "stretch" }}
-                ></ShareButton>
-                <SocialButton></SocialButton>
-                <View
+                Login
+              </Text>
+            </View>
+            <ShareInput
+              title="Email"
+              keyboardType="email-address"
+              onChangeText={handleChange("email")}
+              onBlur={handleBlur("email")}
+              value={values.email}
+              error={errors.email}
+            ></ShareInput>
+            <ShareInput
+              title="Password"
+              secureTextEntry
+              onChangeText={handleChange("password")}
+              onBlur={handleBlur("password")}
+              value={values.password}
+              error={errors.password}
+            ></ShareInput>
+            <View style={{ marginVertical: 10 }} />
+            <ShareButton
+              loading={Loading}
+              title="Sign In "
+              onPress={handleSubmit as any}
+              textStyleee={{
+                textTransform: "uppercase",
+                color: "#fff",
+                paddingVertical: 5,
+                fontWeight: "bold",
+              }}
+              btnStyle={{
+                justifyContent: "center",
+                borderRadius: 30,
+                marginHorizontal: 50,
+                paddingVertical: 10,
+                backgroundColor: APP_COLOR.ORANGE,
+              }}
+              pressStyle={{ alignSelf: "stretch" }}
+            ></ShareButton>
+            <SocialButton></SocialButton>
+            <View
+              style={{
+                marginVertical: 15,
+                flexDirection: "row",
+                gap: 10,
+                justifyContent: "center",
+              }}
+            >
+              <Text
+                style={{
+                  textAlign: "center",
+                  color: "black",
+                  fontWeight: "bold",
+                }}
+              >
+                Don't have an account?
+              </Text>
+              <Link href={"/auths/signup"}>
+                <Text
                   style={{
-                    marginVertical: 15,
-                    flexDirection: "row",
-                    gap: 10,
-                    justifyContent: "center",
+                    color: "black",
+                    fontWeight: "bold",
+                    textDecorationLine: "underline",
                   }}
                 >
-                  <Text
-                    style={{
-                      textAlign: "center",
-                      color: "black",
-                      fontWeight: "bold",
-                    }}
-                  >
-                    Don't have an account?
-                  </Text>
-                  <Link href={"/auths/signup"}>
-                    <Text
-                      style={{
-                        color: "black",
-                        fontWeight: "bold",
-                        textDecorationLine: "underline",
-                      }}
-                    >
-                      Sign Up
-                    </Text>
-                  </Link>
-                </View>
-              </View>
-            )}
-          </Formik>
-        </SafeAreaView>
-      );
-    };
+                  Sign Up
+                </Text>
+              </Link>
+            </View>
+          </View>
+        )}
+      </Formik>
+    </SafeAreaView>
+  );
+};
 
     export default Login;

@@ -31,10 +31,10 @@ const TabLayout = () => {
         }}
       />
       <Tabs.Screen
-        name="order"
+        name="cart"
         options={{
-          href: "/(tabs)/order",
-          tabBarLabel: "Đơn hàng",
+          href: "/(tabs)/cart",
+          tabBarLabel: "Giỏ hàng",
           tabBarIcon: ({ color, size, focused }) => (
             <Ionicons
               name={focused ? "cart" : "cart-outline"}

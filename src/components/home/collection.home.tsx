@@ -1,126 +1,87 @@
+import { getProductCategory } from "@/utils/api";
 import { APP_COLOR } from "@/utils/constant";
 import { router } from "expo-router";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { View, Image, Text, StyleSheet, Button, Pressable } from "react-native";
 import { FlatList } from "react-native-gesture-handler";
 
-interface Props {
-  name: string;
-  description: string;
-  imageRef: string;
-}
-interface StoreItem {
-  key: number;
-  image: string;
-  name: string;
-}
-
-const data = [
-  [
-    {
-      key: 1,
-      image:
-        "https://tse2.mm.bing.net/th?id=OIP.L8XNPW4wPTRvcUKvWuAYQQHaHa&pid=Api",
-      name: "cửa hàng2 1 hello chơi da bong khong aenh",
-    },
-    {
-      key: 2,
-      image:
-        "https://tse1.mm.bing.net/th?id=OIP.Qh5FSZfdBmJYFHR0CQ6s3wHaHa&pid=Api",
-      name: "Item 2",
-    },
-    {
-      key: 3,
-      image:
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTR4rzbEYQq7bZkf6iud3EFJSpRs1HVSwBo9w&s",
-      name: "Item 3",
-    },
-  ],
-  [
-    {
-      key: 4,
-      image:
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTR4rzbEYQq7bZkf6iud3EFJSpRs1HVSwBo9w&s",
-      name: "Item 4",
-    },
-    {
-      key: 5,
-      image:
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTR4rzbEYQq7bZkf6iud3EFJSpRs1HVSwBo9w&s",
-      name: "Item 5",
-    },
-    {
-      key: 6,
-      image:
-        "https://tse2.mm.bing.net/th?id=OIP.L8XNPW4wPTRvcUKvWuAYQQHaHa&pid=Api",
-      name: "Item 6",
-    },
-  ],
-];
-
-const CollectionHome = ({ name, description, imageRef }: Props) => {
+const CollectionHome = () => {
+  const [data, setData] = useState<any>([]);
+  useEffect(() => {
+    const fetProduct = async () => {
+      const res = await getProductCategory();
+      setData(res.data.data);
+      console.log("product", res);
+    };
+    fetProduct();
+  }, []);
+  console.log("product...", data);
   return (
     <>
       <View style={{ height: 8, backgroundColor: "#e9e9e9" }}></View>
       <View style={styles.itemContainer}>
-        <View
-          style={{
-            display: "flex",
-            justifyContent: "space-evenly",
-            flexDirection: "row",
-            gap: 80,
-            paddingHorizontal: 6,
-          }}
-        >
-          <View style={styles.itemDetails}>
-            <Text style={styles.itemTitle}>{name}</Text>
-            <Text
-              style={styles.itemDescription}
-              numberOfLines={2}
-              ellipsizeMode="tail"
+        {data.map((group: any, index: number) => (
+          <>
+            <View
+              style={{
+                display: "flex",
+                justifyContent: "space-evenly",
+                flexDirection: "row",
+                gap: 80,
+                paddingHorizontal: 6,
+              }}
             >
-              {description}
-            </Text>
-          </View>
-          <Text style={{ color: "#5a5a5a" }}>Xem tất cả</Text>
-        </View>
-
-        {data.map((group, index) => (
-          <FlatList
-            key={index}
-            data={group}
-            renderItem={({ item }) => (
-              <Pressable
-                onPress={() =>
-                  router.navigate({
-                    pathname: "/product/[id]",
-                    params: { id: item.key },
-                  })
-                }
-              >
-                <View style={styles.storeItem}>
-                  <Image
-                    source={{ uri: item.image }}
-                    style={styles.itemImage}
-                  />
-                  <Text
-                    numberOfLines={1}
-                    ellipsizeMode="tail"
-                    style={styles.storeName}
-                  >
-                    {item.name}
-                  </Text>
-                  <View style={styles.sale}>
-                    <Text style={{ color: APP_COLOR.ORANGE }}>Flash Sell</Text>
+              <View style={styles.itemDetails}>
+                <Text style={styles.itemTitle}>{group.category}</Text>
+                <Text
+                  style={styles.itemDescription}
+                  numberOfLines={2}
+                  ellipsizeMode="tail"
+                >
+                  {group.description}
+                </Text>
+              </View>
+              <Text style={{ color: "#5a5a5a" }}>Xem tất cả</Text>
+            </View>
+            <FlatList
+              key={index}
+              data={group.products}
+              renderItem={({ item }) => (
+                <Pressable
+                  onPress={() =>
+                    router.navigate({
+                      pathname: "/product/[id]",
+                      params: { id: item._id },
+                    })
+                  }
+                >
+                  <View style={styles.storeItem}>
+                    <Image
+                      source={{ uri: `https://repo-node-5.onrender.com${item.image[0]}`  }}
+                      alt="image "
+                      style={styles.itemImage}
+                    />
+                    <Text
+                      numberOfLines={1}
+                      ellipsizeMode="tail"
+                      style={styles.storeName}
+                    >
+                      {item.product_name}
+                    </Text>
+                    <View style={styles.sale}>
+                      <Text style={{ color: APP_COLOR.ORANGE }}>
+                        Flash Sell
+                      </Text>
+                    </View>
                   </View>
-                </View>
-              </Pressable>
-            )}
-            keyExtractor={(item) => item.key.toString()}
-            numColumns={3} // Hiển thị 3 item trên mỗi hàng
-            showsHorizontalScrollIndicator={false}
-            style={styles.list}
-          />
+                </Pressable>
+              )}
+              keyExtractor={(item) => item.key}
+              numColumns={3} // Hiển thị 3 item trên mỗi hàng
+              showsHorizontalScrollIndicator={false}
+              style={styles.list}
+            />
+          </>
         ))}
       </View>
     </>

@@ -77,23 +77,20 @@ const FlatListHome = () => {
   ];
 
   const renderItem = ({ item }: { item: ClothingItem }) => (
-    <CollectionHome
-      name={item.name}
-      description={item.description}
-      imageRef={item.imageRef}
-    />
+    <CollectionHome/>
   );
 
   return (
     <View style={styles.container}>
-      <FlatList
+      <CollectionHome/>
+      {/* <FlatList
         style={{ width: "100%" }}
         numColumns={1}
         data={data}
         renderItem={renderItem}
         keyExtractor={(item) => item.id.toString()}
         // columnWrapperStyle={{ justifyContent: "space-between" }}
-      />
+      /> */}
     </View>
   );
 };
