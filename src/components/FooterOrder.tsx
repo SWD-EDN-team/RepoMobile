@@ -1,90 +1,112 @@
-import { View, StyleSheet, Text, Image } from "react-native";
-import React, { useState } from "react";
+import React from "react";
+import { View, Text, StyleSheet, Image, TouchableOpacity } from "react-native";
 
-const FooterOrder = () => {
-  const [count, setCount] = useState<number>(0);
+interface ProductCardProps {
+  item: {
+    id: string;
+    name: string;
+    price: number;
+    quantity: number;
+    image: string;
+    selectedColor: string;
+    selectedSize: string;
+  };
+  updateQuantity: (id: string, change: number) => void;
+  removeItem: (id: string) => void;
+}
 
-  const add = () => {
-    setCount(count + 1);
-  };
-  const sub = () => {
-    if (count > 0) {
-      setCount(count - 1);
-    }
-  };
+const ProductCard = ({
+  item,
+  updateQuantity,
+  removeItem,
+}: ProductCardProps) => {
   return (
-    <View style={styles.footer}>
-      <Image
-        style={styles.icon_shopping_cart}
-        source={require("../assets/img/icon_cart.png")}
-      />
-      <View style={styles.count}>
-        <Text style={styles.calutation} onPress={() => sub()}>
-          -
-        </Text>
-        <Text style={styles.calutation}>{count}</Text>
-        <Text style={styles.calutation} onPress={() => add()}>
-          +
-        </Text>
-      </View>
-      <View style={styles.buttonAdd}>
-        <Image
-          style={styles.addBag}
-          source={require("../assets/img/shopping-bag.png")}
-        />
-
-        <Text style={styles.titleAdd}>Add to Cart</Text>
+    <View style={styles.card}>
+      <Image source={{ uri: item.image }} style={styles.productImage} />
+      <View style={styles.details}>
+        <Text style={styles.productName}>{item.name}</Text>
+        <Text style={styles.productPrice}>{item.price}đ</Text>
+        <Text style={styles.productName}>Màu sắc: {item.selectedColor}</Text>
+        <Text style={styles.productName}>Kích thước: {item.selectedSize}</Text>
+        <View style={styles.quantityContainer}>
+          <TouchableOpacity onPress={() => updateQuantity(item.id, -1)}>
+            <Text style={styles.quantityButton}>-</Text>
+          </TouchableOpacity>
+          <Text style={styles.quantityText}>{item.quantity}</Text>
+          <TouchableOpacity onPress={() => updateQuantity(item.id, 1)}>
+            <Text style={styles.quantityButton}>+</Text>
+          </TouchableOpacity>
+        </View>
+        <TouchableOpacity
+          onPress={() => removeItem(item.id)}
+          style={styles.removeButton}
+        >
+          <Text style={styles.removeButtonText}>Remove</Text>
+        </TouchableOpacity>
       </View>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
-  footer: {
+  card: {
     flexDirection: "row",
-    height: 70,
-    backgroundColor: "#FFFFFF",
-    paddingLeft: 26,
-    paddingRight: 26,
-    justifyContent: "space-between",
-    alignItems: "center",
+    padding: 10,
+    marginBottom: 10,
+    backgroundColor: "#fff",
+    borderRadius: 5,
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.1,
+    shadowRadius: 3,
+    elevation: 2,
   },
-  icon_shopping_cart: {
-    width: 30,
-    height: 30,
+  productImage: {
+    width: 80,
+    height: 80,
+    borderRadius: 5,
   },
-  count: {
-    flexDirection: "row",
-    height: 50,
-    width: "30%",
-    justifyContent: "space-around",
-    alignItems: "center",
-    backgroundColor: "#F4F4F4",
-    borderRadius: 25,
+  details: {
+    flex: 1,
+    marginLeft: 10,
   },
-  calutation: {
-    width: 30,
-    textAlign: "center",
-    fontSize: 20,
+  productName: {
+    fontSize: 16,
     fontWeight: "bold",
   },
-  buttonAdd: {
-    height: 50,
-    width: "50%",
-    backgroundColor: "#FB741A",
+  productPrice: {
+    fontSize: 14,
+    color: "#333",
+  },
+  productReviews: {
+    fontSize: 12,
+    color: "#888",
+  },
+  quantityContainer: {
     flexDirection: "row",
     alignItems: "center",
-    justifyContent: "center",
-    gap: 5,
-    borderRadius: 35,
+    marginTop: 5,
   },
-  addBag: {
-    height: 20,
-    width: 20,
+  quantityButton: {
+    fontSize: 20,
+    fontWeight: "bold",
+    paddingHorizontal: 10,
   },
-  titleAdd: {
-    color: "#FFFFFF",
-    fontSize: 18,
+  quantityText: {
+    fontSize: 16,
+    marginHorizontal: 10,
+  },
+  removeButton: {
+    marginTop: 10,
+    backgroundColor: "#ff4d4d",
+    padding: 5,
+    borderRadius: 3,
+  },
+  removeButtonText: {
+    color: "#fff",
+    textAlign: "center",
+    fontSize: 14,
   },
 });
-export default FooterOrder;
+
+export default ProductCard;

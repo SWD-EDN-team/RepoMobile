@@ -1,128 +1,103 @@
-import React, { useState } from "react";
-import {
-  View,
-  Text,
-  TextInput,
-  TouchableOpacity,
-  StyleSheet,
-  ScrollView
-} from "react-native";
-import Dropdownmenu from "./dropdowmenu";
+import { useState } from "react";
+import { View, Text, TextInput, TouchableOpacity, StyleSheet } from "react-native";
+import { Stack } from "expo-router";
 
 const AddressScreen = () => {
-  const [fullName, setFullName] = useState("");
-  const [mobileNumber, setMobileNumber] = useState("");
+  const [country, setCountry] = useState("");
+  const [city, setCity] = useState("");
   const [street, setStreet] = useState("");
 
   return (
-    <ScrollView style={styles.container}>
-      <View style={styles.header}>
-        <Text style={styles.headerText}>A new address</Text>
+    <>
+      <Stack.Screen options={{ title: "Thanh toán" }} />
+      <View style={styles.container}>
+        <View style={styles.header}>
+          <Text style={styles.headerText}>A new address</Text>
+        </View>
+
+        {/* Country Input */}
+        <Text style={styles.label}>Country</Text>
+        <TextInput
+          style={styles.input}
+          placeholder="Enter country"
+          value={country}
+          onChangeText={setCountry}
+        />
+
+        {/* City Input */}
+        <Text style={styles.label}>City</Text>
+        <TextInput
+          style={styles.input}
+          placeholder="Enter city"
+          value={city}
+          onChangeText={setCity}
+        />
+
+        {/* Street Input */}
+        <Text style={styles.label}>Street (Include house number)</Text>
+        <TextInput
+          style={styles.input}
+          placeholder="Enter street"
+          value={street}
+          onChangeText={setStreet}
+        />
+
+        <View style={styles.containerButton}>
+          <TouchableOpacity style={styles.saveButton}>
+            <Text style={styles.saveButtonText}>SAVE</Text>
+          </TouchableOpacity>
+        </View>
       </View>
-
-      <Text style={styles.label}>Full name</Text>
-      <TextInput
-        style={styles.input}
-        placeholder="Enter full name"
-        value={fullName}
-        onChangeText={setFullName}
-      />
-
-      <Text style={styles.label}>Mobile number</Text>
-      <TextInput
-        style={[styles.input]}
-        placeholder="Enter mobile number"
-        keyboardType="phone-pad"
-        value={mobileNumber}
-        onChangeText={setMobileNumber}
-      />
-
-      <Dropdownmenu />
-
-      <Text style={styles.label}>Street (Include house number)</Text>
-      <TextInput
-        style={styles.input}
-        placeholder="Street"
-        value={street}
-        onChangeText={setStreet}
-      />
-      <View style={styles.containerbutton}>
-        <TouchableOpacity style={styles.saveButton}>
-          <Text style={styles.saveButtonText}>SAVE</Text>
-        </TouchableOpacity>
-      </View>
-    </ScrollView>
+    </>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: "#fff",
     padding: 20,
-    backgroundColor: "white",
   },
   header: {
     alignItems: "center",
-    marginBottom: 50,
-    margin: 30,
+    marginBottom: 20,
   },
   headerText: {
-    fontSize: 18,
+    fontSize: 20,
     fontWeight: "bold",
-    marginLeft: 10,
   },
   label: {
-    fontSize: 14,
-    fontWeight: "bold",
-    color: "#555",
+    fontSize: 16,
+    fontWeight: "500",
     marginBottom: 5,
   },
   input: {
-    height: 80,
-    borderWidth: 1,
-    borderColor: "#ddd",
-    borderRadius: 10,
-    paddingHorizontal: 15,
-    fontSize: 16,
-    backgroundColor: "#f8f8f8",
-    marginBottom: 50,
-  },
-  inputError: {
-    borderColor: "red",
-  },
-  selectInput: {
     height: 50,
     borderWidth: 1,
-    borderColor: "#ddd",
-    borderRadius: 10,
-    paddingHorizontal: 15,
+    borderColor: "#ccc",
+    borderRadius: 8,
+    paddingHorizontal: 10,
     fontSize: 16,
-    backgroundColor: "#f8f8f8",
     marginBottom: 15,
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "space-between",
   },
-  selectText: {
-    fontSize: 16,
-    color: "#555",
+  containerButton: {
+    marginTop: 20,
+    alignItems: "center",
   },
   saveButton: {
-    backgroundColor: "#ff7043",
-    paddingVertical: 15,
-    borderRadius: 30,
-    alignItems: "center",
-    width: "70%",
+    backgroundColor: "#007BFF",
+    paddingVertical: 12,
+    paddingHorizontal: 20,
+    borderRadius: 8,
   },
   saveButtonText: {
-    color: "white",
+    color: "#fff",
     fontSize: 16,
     fontWeight: "bold",
   },
   containerbutton: {
     justifyContent: "center",
     alignItems: "center",
-    marginBottom:30
   },
 });
 

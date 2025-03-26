@@ -10,6 +10,7 @@ import DetailScreen from "./src/app/screens/DetailScreen/DetailScreen";
 import { SafeAreaView } from "react-native";
 import Login from "./src/app/screens/LoginScreen/Login";
 import AddressScreen from "./src/app/screens/AddressScreen/AddressScreen";
+import CheckoutScreen from "./src/app/screens/CheckoutScreen/CheckoutScreen";
 import FavoritePage from "@/app/(tabs)/favorite";
 import DemoScreen from "./src/app/screens/DemoScreen/DemoScreen";
 // import ShippingAddressScreen from "./src/app/screens/ShippingScreen/ShippingScreen";
@@ -48,6 +49,12 @@ export default function App() {
           {/* <Stack.Screen
             name="Cart"
             component={Cart}
+            options={{ headerShown: true }}
+          /> */}
+
+          <Stack.Screen 
+            name="Checkout" 
+            component={CheckoutScreen} 
             options={{ headerShown: true }}
           />
           {/* <Stack.Screen name="Shipping" component={ShippingAddressScreen} /> */}
