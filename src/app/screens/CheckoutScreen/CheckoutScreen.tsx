@@ -1,9 +1,9 @@
 import { useLocalSearchParams } from "expo-router";
-import { View, Text, FlatList, StyleSheet, Image, TouchableOpacity} from "react-native";
+import { View, Text, FlatList, StyleSheet, Image, TouchableOpacity, Alert} from "react-native";
 import { Stack } from "expo-router";
 import React, { useEffect, useState } from "react";
 import OrderSummary from "@/components/OrderSummary";
-import { fetchAddress } from "../../../utils/api";
+import { fetchAddress, deleteAddress } from "../../../utils/api";
 import { Card } from "react-native-paper";
 import { router } from "expo-router";
 
@@ -38,7 +38,26 @@ export default function CheckoutScreen() {
     setSelectedAddress(addressItem);
     setShowAll(false); // Ẩn danh sách sau khi chọn
   };
-  
+
+  const handleDeleteAddress = async (id: string) => {
+    Alert.alert("Xác nhận", "Bạn có chắc chắn muốn xóa địa chỉ này?", [
+      { text: "Hủy", style: "cancel" },
+      {
+        text: "Xóa",
+        onPress: async () => {
+          try {
+            await deleteAddress(id);
+            Alert.alert("Thành công", "Địa chỉ đã được xóa.");
+            // Cập nhật lại danh sách địa chỉ sau khi xóa
+            setAddress(address.filter(item => item._id !== id));
+          } catch (error) {
+            Alert.alert("Lỗi", "Không thể xóa địa chỉ.");
+          }
+        },
+      },
+    ]);
+  };
+
   return (
     <>
       <Stack.Screen options={{ title: "Thanh toán" }} />
@@ -59,22 +78,32 @@ export default function CheckoutScreen() {
             </TouchableOpacity>
   
             {showAll && (
-              <View style={styles.fullList}>
-                {address.map((item, index) => (
-                  <TouchableOpacity 
-                    key={index} 
-                    onPress={() => handleSelectAddress(item)} 
-                    style={styles.addressItem}
-                  >
-                    <Text style={selectedAddress?._id === item._id ? styles.selectedAddressName : styles.selectedAddressName}>
-                      {item.name}
-                    </Text>
-                    <Text style={selectedAddress?._id === item._id ? styles.selectedAddress : styles.addressText}>
-                      {item.country}, {item.city}, {item.street}
-                    </Text>
-                  </TouchableOpacity>
-                ))}
-              </View>
+                <View style={styles.fullList}>
+                    {address.map((item, index) => (
+                      <View key={index} style={styles.addressItem}>
+                        <TouchableOpacity 
+                          key={index} 
+                          onPress={() => handleSelectAddress(item)} 
+                          style={styles.addressItem}
+                        >
+                        <TouchableOpacity onPress={() => handleSelectAddress(item)} style={styles.addressContent}>
+                          <Text style={selectedAddress?._id === item._id ? styles.selectedAddressName : styles.selectedAddressName}>
+                            {item.name}
+                          </Text>
+                          <Text style={selectedAddress?._id === item._id ? styles.selectedAddress : styles.addressText}>
+                            {item.country}, {item.city}, {item.street}
+                          </Text>
+                        </TouchableOpacity>
+                        </TouchableOpacity>
+                        <TouchableOpacity
+                          onPress={() => handleDeleteAddress(item._id)}
+                          style={styles.deleteButton}
+                        >
+                          <Text style={styles.deleteButtonText}>X</Text>
+                        </TouchableOpacity>
+                      </View>
+                    ))}
+                </View>
             )}
           </Card>
         ) : (
@@ -200,11 +229,6 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     marginBottom: 8,
   },
-  addressItem: {
-    padding: 10,
-    borderBottomWidth: 1,
-    borderColor: "#ccc",
-  },
   selectedAddress: {
     fontWeight: "bold",
     color: "blue",
@@ -217,5 +241,39 @@ const styles = StyleSheet.create({
     fontSize: 14,
     color: "black",
     marginTop: 5,
+  },
+  
+  addressItem: {
+    flexDirection: "row",  // Hiển thị ngang
+    alignItems: "center",  // Căn giữa theo chiều dọc
+    justifyContent: "space-between", // Đẩy nút "Xóa" sang phải
+    paddingVertical: 10,
+    paddingHorizontal: 15,
+    borderBottomWidth: 1,
+    borderBottomColor: "#ddd",
+    backgroundColor: "#f9f9f9",
+    borderRadius: 8,
+    marginBottom: 5,
+  },
+  
+  deleteButton: {
+    backgroundColor: "red",
+    paddingVertical: 5,
+    paddingHorizontal: 10,
+    borderRadius: 5,
+    justifyContent: "center",
+    alignItems: "center",
+    width: 30,
+    height: 30,
+  },
+  
+  deleteButtonText: {
+    color: "#fff",
+    fontSize: 14,
+    fontWeight: "bold",
+  },
+  addressContent: {
+
+    flexDirection: "column",  // Hiển thị theo cột
   },
 });
