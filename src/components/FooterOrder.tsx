@@ -49,51 +49,64 @@ const ProductCard = ({
 };
 
 const styles = StyleSheet.create({
-  footer: {
+  card: {
     flexDirection: "row",
-    height: 70,
-    backgroundColor: "#FFFFFF",
-    paddingLeft: 26,
-    paddingRight: 26,
-    justifyContent: "space-between",
-    alignItems: "center",
+    padding: 10,
+    marginBottom: 10,
+    backgroundColor: "#fff",
+    borderRadius: 5,
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.1,
+    shadowRadius: 3,
+    elevation: 2,
   },
-  icon_shopping_cart: {
-    width: 30,
-    height: 30,
+  productImage: {
+    width: 80,
+    height: 80,
+    borderRadius: 5,
   },
-  count: {
-    flexDirection: "row",
-    height: 50,
-    width: "30%",
-    justifyContent: "space-around",
-    alignItems: "center",
-    backgroundColor: "#F4F4F4",
-    borderRadius: 25,
+  details: {
+    flex: 1,
+    marginLeft: 10,
   },
-  calutation: {
-    width: 30,
-    textAlign: "center",
-    fontSize: 20,
+  productName: {
+    fontSize: 16,
     fontWeight: "bold",
   },
-  buttonAdd: {
-    height: 50,
-    width: "50%",
-    backgroundColor: "#FB741A",
+  productPrice: {
+    fontSize: 14,
+    color: "#333",
+  },
+  productReviews: {
+    fontSize: 12,
+    color: "#888",
+  },
+  quantityContainer: {
     flexDirection: "row",
     alignItems: "center",
-    justifyContent: "center",
-    gap: 5,
-    borderRadius: 35,
+    marginTop: 5,
   },
-  addBag: {
-    height: 20,
-    width: 20,
+  quantityButton: {
+    fontSize: 20,
+    fontWeight: "bold",
+    paddingHorizontal: 10,
   },
-  titleAdd: {
-    color: "#FFFFFF",
-    fontSize: 18,
+  quantityText: {
+    fontSize: 16,
+    marginHorizontal: 10,
+  },
+  removeButton: {
+    marginTop: 10,
+    backgroundColor: "#ff4d4d",
+    padding: 5,
+    borderRadius: 3,
+  },
+  removeButtonText: {
+    color: "#fff",
+    textAlign: "center",
+    fontSize: 14,
   },
 });
-export default FooterOrder;
+
+export default ProductCard;
