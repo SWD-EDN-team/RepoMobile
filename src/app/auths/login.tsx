@@ -92,7 +92,7 @@ const Login = () => {
             <View style={{ marginVertical: 10 }} />
             <ShareButton
               loading={Loading}
-              title="Sign Up "
+              title="Sign In "
               onPress={handleSubmit as any}
               textStyleee={{
                 textTransform: "uppercase",

@@ -10,7 +10,7 @@ import DetailScreen from "./src/app/screens/DetailScreen/DetailScreen";
 import { SafeAreaView } from "react-native";
 import Login from "./src/app/screens/LoginScreen/Login";
 import AddressScreen from "./src/app/screens/AddressScreen/AddressScreen";
-import Cart from "./src/app/screens/CartScreen/ShoppingCartScreen";
+import FavoritePage from "@/app/(tabs)/favorite";
 import DemoScreen from "./src/app/screens/DemoScreen/DemoScreen";
 // import ShippingAddressScreen from "./src/app/screens/ShippingScreen/ShippingScreen";
 import { Text } from "react-native";
@@ -26,7 +26,9 @@ export default function App() {
         >
           <Stack.Screen name="SignUp" component={SignUpScreen} />
           <Stack.Screen name="SignIn" component={Login} />
+          <Stack.Screen name="Favorite" component={FavoritePage} />
           <Stack.Screen name="Home" component={HomeScreen} />
+
           <Stack.Screen
             name="DescriptionCard"
             component={DescriptionCardScreen}
@@ -43,12 +45,11 @@ export default function App() {
             options={{ headerShown: true }}
           />
 
-          <Stack.Screen
+          {/* <Stack.Screen
             name="Cart"
             component={Cart}
             options={{ headerShown: true }}
           />
-          <Text>đáada</Text>
           {/* <Stack.Screen name="Shipping" component={ShippingAddressScreen} /> */}
         </Stack.Navigator>
       </SafeAreaProvider>
