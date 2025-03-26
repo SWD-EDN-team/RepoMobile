@@ -10,7 +10,7 @@ import DetailScreen from "./src/app/screens/DetailScreen/DetailScreen";
 import { SafeAreaView } from "react-native";
 import Login from "./src/app/screens/LoginScreen/Login";
 import AddressScreen from "./src/app/screens/AddressScreen/AddressScreen";
-import Cart from "./src/app/screens/CartScreen/ShoppingCartScreen";
+import CheckoutScreen from "./src/app/screens/CheckoutScreen/CheckoutScreen";
 import DemoScreen from "./src/app/screens/DemoScreen/DemoScreen";
 // import ShippingAddressScreen from "./src/app/screens/ShippingScreen/ShippingScreen";
 const Stack = createStackNavigator<RootStackParamList>();
@@ -42,9 +42,15 @@ export default function App() {
             options={{ headerShown: true }}
           />
 
-          <Stack.Screen
+          {/* <Stack.Screen
             name="Cart"
             component={Cart}
+            options={{ headerShown: true }}
+          /> */}
+
+          <Stack.Screen 
+            name="Checkout" 
+            component={CheckoutScreen} 
             options={{ headerShown: true }}
           />
           {/* <Stack.Screen name="Shipping" component={ShippingAddressScreen} /> */}

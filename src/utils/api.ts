@@ -1,5 +1,6 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import axios from "axios";
+import instance from "../utils/axios.customize"
 
 export const registerApi = (name: string, email: string, password: string) => {
   const url = `${process.env.EXPO_PUBLIC_API_URL}/users/`;
@@ -9,7 +10,7 @@ export const registerApi = (name: string, email: string, password: string) => {
   return axios.post(url, { name, email, password });
 };
 
-export const loginApi = (
+export const loginApi = async (
   email: string,
   password: string,
   p0: { headers: { "Content-Type": string } }
@@ -18,7 +19,9 @@ export const loginApi = (
   console.log("url", url);
   console.log("email", email, "password", password);
   console.log("??", axios.post(url, { email, password }));
-
+  const response = await axios.post(url, { email, password });
+  const { accessToken } = response.data;
+  await AsyncStorage.setItem("userToken", accessToken);
   return axios.post(url, { email, password });
 };
 
@@ -56,4 +59,24 @@ export const printAsyncStorage = () => {
       console.log(JSON.stringify(asyncStorage, null, 2));
     });
   });
+};
+
+export const fetchCart = async () => {
+  try {
+    const response = await instance.get("/cart");
+    return response.data; 
+  } catch (error) {
+    console.error("Lỗi khi gọi API:", error);
+    throw error;
+  }
+};
+
+export const fetchAddress = async () => {
+  try {
+    const response = await instance.get("/address/current");
+    return response.data; 
+  } catch (error) {
+    console.error("Lỗi khi gọi API:", error);
+    throw error;
+  }
 };
