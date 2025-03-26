@@ -1,33 +1,33 @@
-import { Link, router } from "expo-router";
-import ShareInput from "@/components/input/share.input";
-import ShareButton from "@/components/button/share.button";
-import { APP_COLOR } from "@/utils/constant";
-import SocialButton from "@/components/button/social.button";
-import { useState } from "react";
-import { Formik } from "formik";
+    import { Link, router } from "expo-router";
+    import ShareInput from "@/components/input/share.input";
+    import ShareButton from "@/components/button/share.button";
+    import { APP_COLOR } from "@/utils/constant";
+    import SocialButton from "@/components/button/social.button";
+    import { useState } from "react";
+    import { Formik } from "formik";
 
-const user = {
-  email: "admin@gmail.com",
-  password: "123456",
-};
-import {
-  View,
-  Text,
-  Button,
-  StyleSheet,
-  ImageBackground,
-  Image,
-  SafeAreaView,
-  TextInput,
-} from "react-native";
-import { LoginSchema } from "@/utils/validate.schema";
-import AsyncStorage from "@react-native-async-storage/async-storage";
-import { loginApi } from "@/utils/api";
-import { useCurrentApp } from "@/context/app.context";
+    const user = {
+      email: "admin@gmail.com",
+      password: "123456",
+    };
+    import {
+      View,
+      Text,
+      Button,
+      StyleSheet,
+      ImageBackground,
+      Image,
+      SafeAreaView,
+      TextInput,
+    } from "react-native";
+    import { LoginSchema } from "@/utils/validate.schema";
+    import AsyncStorage from "@react-native-async-storage/async-storage";
+    import { loginApi } from "@/utils/api";
+    import { useCurrentApp } from "@/context/app.context";
 
-const Login = () => {
-  const [Loading, setLoading] = useState<boolean>(false);
-  const { setAppState } = useCurrentApp();
+    const Login = () => {
+      const [Loading, setLoading] = useState<boolean>(false);
+      const { setAppState } = useCurrentApp();
 
   const handleLogin = async (email: string, password: string) => {
     try {
@@ -146,4 +146,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+    export default Login;

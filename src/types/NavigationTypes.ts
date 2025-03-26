@@ -22,4 +22,7 @@ export type RootStackParamList ={
   Shipping: undefined;
   Favorite: undefined; 
   MyOrders: undefined;
+  Account:undefined;
+  ProfileScreen:undefined;
+  changeProfile:undefined;
 }

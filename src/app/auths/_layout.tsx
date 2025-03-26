@@ -11,6 +11,7 @@ const TabLayout = () => {
     "/auths/verify",
     "/auths/signup",
     "/auths/welcome",
+    "/account/login", // Đã thêm điều hướng mới
   ];
 
   return (
