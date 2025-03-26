@@ -42,9 +42,35 @@ export const verifyCodeApis = async (otp: string, email: string) => {
 };
 
 export const getAccountApi = () => {
-  const url = `${process.env.EXPO_PUBLIC_API_URL}/auth/auth/getCurrentUser`;
+  const url = `${process.env.EXPO_PUBLIC_API_URL}/auth/getCurrentUser`;
   return axios.get(url);
 };
+
+export const resetPasswordApi = async (oldPassword: string, newPassword: string) => {
+  const url = `${process.env.EXPO_PUBLIC_API_URL}/auth/reset_password`;
+  console.log("Reset Password URL:", url);
+
+  try {
+    const token = await AsyncStorage.getItem("access_token");
+    if (!token) throw new Error("Không tìm thấy token đăng nhập.");
+
+    const response = await axios.post(
+      url,
+      { oldPassword, newPassword },
+      {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+
+    return response.data;
+  } catch (error: any) {
+    throw new Error(error.response?.data?.message || "Lỗi khi đổi mật khẩu.");
+  }
+};
+
 
 export const printAsyncStorage = () => {
   AsyncStorage.getAllKeys((err, keys) => {

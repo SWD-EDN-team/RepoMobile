@@ -10,4 +10,7 @@ export type RootStackParamList ={
   Cart: undefined;
   Demo: undefined;
   Shipping: undefined;
+  Account:undefined;
+  ProfileScreen:undefined;
+  changeProfile:undefined;
 }
