@@ -24,6 +24,7 @@ import Info from "./info";
 import { APP_COLOR } from "@/utils/constant";
 import StickyHeader from "./sticky.header";
 import { useEffect, useRef, useState } from "react";
+import { router } from "expo-router";
 import { getProductCategory } from "@/utils/api";
 
 const AnimatedSectionList = Animated.createAnimatedComponent(SectionList);
@@ -51,13 +52,13 @@ const RMain = (props: IProps) => {
 
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
-  const [Products, setProducts] = useState<any>();
+  const [products, setProducts] = useState<any>();
   useEffect(() => {
     const fetProduct = async () => {
       try {
         const res = await getProductCategory();
         if (res && res.data) {
-          setProducts(res.data);
+          setProducts(res.data.data);
         } else {
           setError("No products found.");
         }
@@ -70,6 +71,14 @@ const RMain = (props: IProps) => {
     };
     fetProduct();
   }, []);
+  console.log("ppppppppppppppppppp", products);
+
+  const sections = Array.isArray(products)
+    ? products.map((category: { category: any; products: any }) => ({
+        title: category.category, // Tiêu đề danh mục
+        data: category.products, // Danh sách sản phẩm
+      }))
+    : [];
 
   // lấy ra cuộn chuột dc bao nhiêu rồi
   const onScroll = useAnimatedScrollHandler((event) => {
@@ -166,62 +175,62 @@ const RMain = (props: IProps) => {
     };
   });
 
-  const DATA = [
-    {
-      title: "Áo Nam",
-      data: ["Áo thun", "Áo sơ mi", "Áo khoác"],
-      index: 0,
-      key: "menu-0",
-    },
-    {
-      title: "Áo Nữ",
-      data: ["Áo croptop", "Áo sơ mi", "Áo khoác"],
-      index: 1,
-      key: "menu-1",
-    },
-    {
-      title: "Quần Nam",
-      data: ["Quần jeans", "Quần kaki", "Quần short"],
-      index: 2,
-      key: "menu-2",
-    },
-    {
-      title: "Quần Nữ",
-      data: ["Quần jeans", "Quần legging", "Chân váy"],
-      index: 3,
-      key: "menu-3",
-    },
-    {
-      title: "Phụ kiện",
-      data: ["Nón", "Thắt lưng", "Balo"],
-      index: 4,
-      key: "menu-4",
-    },
-    {
-      title: "Giày Dép",
-      data: ["Giày thể thao", "Giày cao gót", "Dép sandal"],
-      index: 5,
-      key: "menu-5",
-    },
-    {
-      title: "Túi xách",
-      data: ["Túi tote", "Túi đeo chéo", "Balo"],
-      index: 6,
-      key: "menu-6",
-    },
-    {
-      title: "Đồ trẻ em",
-      data: ["Áo bé trai", "Áo bé gái", "Quần bé trai"],
-      index: 7,
-      key: "menu-7",
-    },
-    {
-      title: "Đồ thể thao",
-      data: ["Áo thể thao", "Quần thể thao", "Giày thể thao"],
-      index: 8,
-      key: "menu-8",
-    },
-  ];
+  // const DATA = [
+  //   {
+  //     title: "Áo Nam",
+  //     data: ["Áo thun", "Áo sơ mi", "Áo khoác"],
+  //     index: 0,
+  //     key: "menu-0",
+  //   },
+  //   {
+  //     title: "Áo Nữ",
+  //     data: ["Áo croptop", "Áo sơ mi", "Áo khoác"],
+  //     index: 1,
+  //     key: "menu-1",
+  //   },
+  //   {
+  //     title: "Quần Nam",
+  //     data: ["Quần jeans", "Quần kaki", "Quần short"],
+  //     index: 2,
+  //     key: "menu-2",
+  //   },
+  //   {
+  //     title: "Quần Nữ",
+  //     data: ["Quần jeans", "Quần legging", "Chân váy"],
+  //     index: 3,
+  //     key: "menu-3",
+  //   },
+  //   {
+  //     title: "Phụ kiện",
+  //     data: ["Nón", "Thắt lưng", "Balo"],
+  //     index: 4,
+  //     key: "menu-4",
+  //   },
+  //   {
+  //     title: "Giày Dép",
+  //     data: ["Giày thể thao", "Giày cao gót", "Dép sandal"],
+  //     index: 5,
+  //     key: "menu-5",
+  //   },
+  //   {
+  //     title: "Túi xách",
+  //     data: ["Túi tote", "Túi đeo chéo", "Balo"],
+  //     index: 6,
+  //     key: "menu-6",
+  //   },
+  //   {
+  //     title: "Đồ trẻ em",
+  //     data: ["Áo bé trai", "Áo bé gái", "Quần bé trai"],
+  //     index: 7,
+  //     key: "menu-7",
+  //   },
+  //   {
+  //     title: "Đồ thể thao",
+  //     data: ["Áo thể thao", "Quần thể thao", "Giày thể thao"],
+  //     index: 8,
+  //     key: "menu-8",
+  //   },
+  // ];
 
   const onViewableItemsChanged = useRef(
     ({ viewableItems }: { viewableItems: Array<ViewToken> }) => {
@@ -270,7 +279,7 @@ const RMain = (props: IProps) => {
           <Animated.FlatList
             ref={flatListRef}
             horizontal
-            data={Products}
+            data={products}
             renderItem={({ item, index }) => (
               <TouchableOpacity
                 key={index}
@@ -324,15 +333,27 @@ const RMain = (props: IProps) => {
               paddingTop: IMAGE_HEIGHT + INFO_HEIGHT + SLIDE_MENU_HEIGHT - 2,
               paddingBottom: 30,
             }}
-            sections={DATA}
+            sections={sections}
             renderItem={({ item, index }: { item: any; index: any }) => (
-              <TouchableOpacity onPress={() => alert("render item sections")}>
-                <View
+              <TouchableOpacity>
+                <View 
                   style={{ paddingHorizontal: 10, backgroundColor: "white" }}
                 >
-                  <View style={{ backgroundColor: "pink", height: 50 }}>
-                    <Text>
-                      {item} - {index}
+                  <View
+                    style={{
+                      backgroundColor: "pink",
+                      height: 50,
+                      justifyContent: "center",
+                      paddingLeft: 10,
+                    }}
+                  >
+                    <Text  onPress={() =>{
+                router.navigate({
+                  pathname: "/product/[id]",
+                  params: { id: item._id },
+                })}
+              }>
+                      {item.product_name} - {item.price} VND
                     </Text>
                   </View>
                 </View>
@@ -346,25 +367,23 @@ const RMain = (props: IProps) => {
                   paddingTop: 10,
                 }}
               >
-                <Text style={{ textTransform: "uppercase" }}>
-                  {section.title} - {section.index}
+                <Text
+                  style={{ textTransform: "uppercase", fontWeight: "bold" }}
+                >
+                  {section.title}
                 </Text>
               </View>
             )}
             ItemSeparatorComponent={() => (
-              <>
+              <View style={{ backgroundColor: "white", paddingHorizontal: 10 }}>
                 <View
-                  style={{ backgroundColor: "white", paddingHorizontal: 10 }}
-                >
-                  <View
-                    style={{
-                      height: 1,
-                      backgroundColor: "#ccc",
-                      marginVertical: 5,
-                    }}
-                  />
-                </View>
-              </>
+                  style={{
+                    height: 1,
+                    backgroundColor: "#ccc",
+                    marginVertical: 5,
+                  }}
+                />
+              </View>
             )}
             viewabilityConfig={{
               viewAreaCoveragePercentThreshold: 1,

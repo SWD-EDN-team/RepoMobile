@@ -5,60 +5,6 @@ import React, { useEffect, useState } from "react";
 import { View, Image, Text, StyleSheet, Button, Pressable } from "react-native";
 import { FlatList } from "react-native-gesture-handler";
 
-// interface Props {
-//   name: string;
-//   description: string;
-//   imageRef: string;
-// }
-// interface StoreItem {
-//   key: number;
-//   image: string;
-//   name: string;
-// }
-
-// const data = [
-//   [
-//     {
-//       key: 1,
-//       image:
-//         "https://tse2.mm.bing.net/th?id=OIP.L8XNPW4wPTRvcUKvWuAYQQHaHa&pid=Api",
-//       name: "cửa hàng2 1 hello chơi da bong khong aenh",
-//     },
-//     {
-//       key: 2,
-//       image:
-//         "https://tse1.mm.bing.net/th?id=OIP.Qh5FSZfdBmJYFHR0CQ6s3wHaHa&pid=Api",
-//       name: "Item 2",
-//     },
-//     {
-//       key: 3,
-//       image:
-//         "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTR4rzbEYQq7bZkf6iud3EFJSpRs1HVSwBo9w&s",
-//       name: "Item 3",
-//     },
-//   ],
-//   [
-//     {
-//       key: 4,
-//       image:
-//         "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTR4rzbEYQq7bZkf6iud3EFJSpRs1HVSwBo9w&s",
-//       name: "Item 4",
-//     },
-//     {
-//       key: 5,
-//       image:
-//         "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTR4rzbEYQq7bZkf6iud3EFJSpRs1HVSwBo9w&s",
-//       name: "Item 5",
-//     },
-//     {
-//       key: 6,
-//       image:
-//         "https://tse2.mm.bing.net/th?id=OIP.L8XNPW4wPTRvcUKvWuAYQQHaHa&pid=Api",
-//       name: "Item 6",
-//     },
-//   ],
-// ];
-
 const CollectionHome = () => {
   const [data, setData] = useState<any>([]);
   useEffect(() => {
@@ -111,7 +57,7 @@ const CollectionHome = () => {
                 >
                   <View style={styles.storeItem}>
                     <Image
-                      source={{ uri: item.image[0] }}
+                      source={{ uri: `https://repo-node-5.onrender.com${item.image[0]}`  }}
                       alt="image "
                       style={styles.itemImage}
                     />
