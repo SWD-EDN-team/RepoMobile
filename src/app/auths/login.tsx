@@ -36,7 +36,7 @@ const Login = () => {
       });
       console.log(">>>>", res.data);
       if (res.data) {
-        await AsyncStorage.setItem("assess_token", res.data.accessToken);
+        await AsyncStorage.setItem("access_token", res.data.accessToken);
         setAppState(res.data); // gán giá trị vào context
         router.navigate("/(tabs)");
       }
@@ -92,7 +92,7 @@ const Login = () => {
             <View style={{ marginVertical: 10 }} />
             <ShareButton
               loading={Loading}
-              title="Sign Up "
+              title="Sign In "
               onPress={handleSubmit as any}
               textStyleee={{
                 textTransform: "uppercase",
