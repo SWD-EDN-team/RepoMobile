@@ -5,9 +5,10 @@ import { View, Text } from "react-native";
 
 interface IProps {
   infoHeight: number;
+  data:any
 }
 const Info = (props: IProps) => {
-  const { infoHeight } = props;
+  const { infoHeight,data } = props;
 
   return (
     <View
@@ -31,9 +32,12 @@ const Info = (props: IProps) => {
           <Text>{` `}</Text>
           <Ionicons name="shirt-outline" size={20} color="orange" />
           <Text style={{ fontSize: 20, fontWeight: "600" }}>
-            {" "}
-            Thời Trang - Quần Áo Nam Nữ
+              {data.product_name}
           </Text>
+          <Text style={{ fontSize: 20, fontWeight: "600" }}>{" "} - {data.price}đ</Text>
+        </Text>
+        <Text style={{ fontSize: 16, fontWeight: "600" }}>
+          {data.description}
         </Text>
       </View>
       <View

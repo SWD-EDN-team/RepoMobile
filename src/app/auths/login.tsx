@@ -43,10 +43,10 @@ const Login = () => {
     } catch (err: any) {
       console.error("Lỗi đăng nhập:", err.response?.data || err);
     } finally {
+      console.log("token",AsyncStorage.getItem("access_token"));
       setLoading(false);
     }
   };
-
   return (
     <SafeAreaView style={{ flex: 1 }}>
       <Formik

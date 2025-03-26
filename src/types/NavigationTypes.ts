@@ -11,4 +11,5 @@ export type RootStackParamList ={
   Demo: undefined;
   Shipping: undefined;
   Favorite: undefined; 
+  MyOrders: undefined;
 }

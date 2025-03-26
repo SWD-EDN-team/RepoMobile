@@ -13,6 +13,7 @@ import AddressScreen from "./src/app/screens/AddressScreen/AddressScreen";
 import FavoritePage from "@/app/(tabs)/favorite";
 import DemoScreen from "./src/app/screens/DemoScreen/DemoScreen";
 // import ShippingAddressScreen from "./src/app/screens/ShippingScreen/ShippingScreen";
+import { Text } from "react-native";
 const Stack = createStackNavigator<RootStackParamList>();
 
 export default function App() {
@@ -48,7 +49,7 @@ export default function App() {
             name="Cart"
             component={Cart}
             options={{ headerShown: true }}
-          /> */}
+          />
           {/* <Stack.Screen name="Shipping" component={ShippingAddressScreen} /> */}
         </Stack.Navigator>
       </SafeAreaProvider>
