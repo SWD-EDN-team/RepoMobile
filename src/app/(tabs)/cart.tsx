@@ -24,7 +24,7 @@ export default function Cart() {
     const getCart = async () => {
       try {
         const response = await fetchCart();
-        // console.log("Dữ liệu giỏ hàng:", JSON.stringify(response.cart, null, 2));
+        console.log("Dữ liệu giỏ hàng:", JSON.stringify(response.cart, null, 2));
         const formattedProducts: Product[] = response.cart.items.map((item: { product_id: { _id: any; product_name: any; price: any; image: any[]; }; quantity: any; selected_size: any; selected_color: any; }) => ({
           id: item.product_id._id,
           name: item.product_id.product_name,
