@@ -57,3 +57,15 @@ export const printAsyncStorage = () => {
     });
   });
 };
+
+export const getProductCategory = () => {
+  const url = "http://172.16.11.203:8081/api/v1/product/category";
+  // const url = `${process.env.EXPO_PUBLIC_API_URL}/product/category`;
+  return axios.get(url);
+};
+
+export const getProductDetail = (id:string) => {
+  const url = `http://172.16.11.203:8081/api/v1/product/productDetail/${id}`;
+  // const url = `${process.env.EXPO_PUBLIC_API_URL}/product/category`;
+  return axios.get(url);
+};

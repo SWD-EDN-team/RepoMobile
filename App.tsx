@@ -13,6 +13,7 @@ import AddressScreen from "./src/app/screens/AddressScreen/AddressScreen";
 import Cart from "./src/app/screens/CartScreen/ShoppingCartScreen";
 import DemoScreen from "./src/app/screens/DemoScreen/DemoScreen";
 // import ShippingAddressScreen from "./src/app/screens/ShippingScreen/ShippingScreen";
+import { Text } from "react-native";
 const Stack = createStackNavigator<RootStackParamList>();
 
 export default function App() {
@@ -47,6 +48,7 @@ export default function App() {
             component={Cart}
             options={{ headerShown: true }}
           />
+          <Text>đáada</Text>
           {/* <Stack.Screen name="Shipping" component={ShippingAddressScreen} /> */}
         </Stack.Navigator>
       </SafeAreaProvider>

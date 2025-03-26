@@ -19,7 +19,7 @@ import Animated, {
   interpolateColor,
 } from "react-native-reanimated";
 import Info from "./info";
-import demo from "@/assets/product/item_product.jpg";
+// import demo from "@/assets/product/item_product.jpg";
 import { APP_COLOR } from "@/utils/constant";
 import StickyHeader from "./sticky.header";
 import { useRef, useState } from "react";
@@ -39,6 +39,9 @@ interface IProps {
 
 const RMain = (props: IProps) => {
   const { infoProduct } = props;
+console.log(infoProduct);
+console.log(`https://repo-node-5.onrender.com${infoProduct.image[0]}`);
+
 
   const scrollY = useSharedValue(0);
 
@@ -223,10 +226,10 @@ const RMain = (props: IProps) => {
         animatedHeartIconStyle={animatedHeartIconStyle}
       />
       <View style={styles.header}>
-        <Image source={demo} style={styles.headerImage} />
+        <Image source={{ uri: `https://repo-node-5.onrender.com${infoProduct.image[0]}` }} alt="Product detail" style={styles.headerImage} />
       </View>
       <Animated.View style={[animatedInfoStyle]}>
-        <Info infoHeight={INFO_HEIGHT} />
+        <Info infoHeight={INFO_HEIGHT} data={infoProduct} />
       </Animated.View>
 
       {/* // slide menu */}
