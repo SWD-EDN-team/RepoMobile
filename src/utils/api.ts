@@ -98,7 +98,7 @@ export const getWishList =  async () => {
     }
 
     const response = await axios.get(
-      "http://192.168.175.1:8081/api/v1/wishlist",
+      "http://192.168.1.3:8081/api/v1/wishlist",
       {
         headers: {
           Authorization: `Bearer ${token}`,
@@ -124,7 +124,7 @@ export const deleteProductWishlist =  async (id:string) => {
     }
 
     const response = await axios.get(
-      `http://192.168.175.1:8081/api/v1/wishlist/${id}`,
+      `http://192.168.1.3:8081/api/v1/wishlist/${id}`,
       {
         headers: {
           Authorization: `Bearer ${token}`,
@@ -138,13 +138,13 @@ export const deleteProductWishlist =  async (id:string) => {
 };
 
 export const getProductCategory = () => {
-  const url = "http://172.16.11.203:8081/api/v1/product/category";
+  const url = "http://192.168.1.3:8081/api/v1/product/category";
   // const url = `${process.env.EXPO_PUBLIC_API_URL}/product/category`;
   return axios.get(url);
 };
 
 export const getProductDetail = (id:string) => {
-  const url = `http://172.16.11.203:8081/api/v1/product/productDetail/${id}`;
+  const url = `http://192.168.1.3:8081/api/v1/product/productDetail/${id}`;
   // const url = `${process.env.EXPO_PUBLIC_API_URL}/product/category`;
   return axios.get(url);
 };

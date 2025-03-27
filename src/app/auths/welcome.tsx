@@ -63,7 +63,7 @@ const WelcomePage = () => {
     [APP_FONT]: require("@/assets/font/OpenSans-Regular.ttf"),
   });
   if (true) {
-    return <Redirect href={"/(tabs)"}></Redirect>;
+    return <Redirect href={"/auths/login"}></Redirect>;
   }
   useEffect(() => {
     const fetAccount = async () => {
