@@ -24,6 +24,7 @@
     "debounce": "2.1.1",
     "expo": "~52.0.25",
     "expo-constants": "~17.0.5",
+    "expo-font": "12.0.10",
     "expo-linear-gradient": "^14.0.2",
     "expo-linking": "~7.0.5",
     "expo-router": "~4.0.17",
