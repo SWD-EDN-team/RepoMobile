@@ -6,14 +6,13 @@ import { useState } from "react";
 import { SafeAreaView, View, Text, Image, TextInput, FlatList } from "react-native";
 
 const SearchPage = () => {
-  const [searchText, setSearchText] = useState(""); // Lưu từ khóa tìm kiếm
-  const [searchItem, setSearchItem] = useState<any>(dataPage); // Danh sách sản phẩm đã lọc
+  const [searchText, setSearchText] = useState(""); 
+  const [searchItem, setSearchItem] = useState<any>(dataPage); 
 
-  // Xử lý khi nhập vào ô tìm kiếm
   const handleSearch = (text: string) => {
-    setSearchText(text); // Cập nhật từ khóa
+    setSearchText(text);
     if (text.trim() === "") {
-      setSearchItem(dataPage); // Nếu rỗng, hiển thị toàn bộ
+      setSearchItem(dataPage); 
     } else {
       const filtered = dataPage.filter((item) =>
         item.title.toLowerCase().includes(text.toLowerCase())
@@ -29,7 +28,7 @@ const SearchPage = () => {
         <TextInput
           placeholder="Tìm kiếm sản phẩm"
           value={searchText}
-          onChangeText={handleSearch} // Gọi hàm tìm kiếm khi nhập
+          onChangeText={handleSearch} 
           style={{
             flex: 1,
             backgroundColor: "#eee",
