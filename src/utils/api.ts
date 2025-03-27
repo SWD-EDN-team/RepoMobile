@@ -20,8 +20,8 @@ export const loginApi = async (
   console.log("email", email, "password", password);
   console.log("??", axios.post(url, { email, password }));
   const response = await axios.post(url, { email, password });
-  const { accessToken } = response.data;
-  await AsyncStorage.setItem("userToken", accessToken);
+  // const { accessToken } = response.data;
+  // await AsyncStorage.setItem("userToken", accessToken);
   return axios.post(url, { email, password });
 };
 
