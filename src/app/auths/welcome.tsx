@@ -8,7 +8,7 @@ import {
 } from "react-native";
 import ShareButton from "@/components/button/share.button";
 import AntDesign from "@expo/vector-icons/AntDesign";
-import { APP_COLOR } from "@/utils/constant";
+import { APP_COLOR, APP_FONT } from "@/utils/constant";
 import FontAwesome5 from "@expo/vector-icons/FontAwesome5";
 import BG from "@/assets/auth/welcome-background.png";
 import BG2 from "@/assets/auth/welcome-bg.jpeg";
@@ -21,6 +21,7 @@ import { useEffect, useState } from "react";
 import { StatusBar } from "expo-status-bar";
 import { getAccountApi } from "@/utils/api";
 import { useCurrentApp } from "@/context/app.context";
+import { useFonts } from "expo-font";
 
 const styles = StyleSheet.create({
   container: {
@@ -57,10 +58,13 @@ const styles = StyleSheet.create({
 
 const WelcomePage = () => {
   const { setAppState } = useCurrentApp();
-  if (true) {
-    return <Redirect href={"/auths/login"}></Redirect>;
-  }
 
+  const [loaded, error] = useFonts({
+    [APP_FONT]: require("@/assets/font/OpenSans-Regular.ttf"),
+  });
+  if (true) {
+    return <Redirect href={"/(tabs)"}></Redirect>;
+  }
   useEffect(() => {
     const fetAccount = async () => {
       const res = await getAccountApi();

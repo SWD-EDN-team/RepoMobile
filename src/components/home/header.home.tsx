@@ -5,7 +5,7 @@ import {
   StyleSheet,
   Dimensions,
 } from "react-native";
-import { APP_COLOR } from "@/utils/constant";
+import { APP_COLOR, APP_FONT } from "@/utils/constant";
 import avt from "@/assets/homepage/avt.png";
 import Entypo from "@expo/vector-icons/Entypo";
 
@@ -55,6 +55,7 @@ const styles = StyleSheet.create({
     flex: 1,
     fontSize: 16,
     fontWeight: "500",
+    fontFamily: APP_FONT,
   },
 });
 

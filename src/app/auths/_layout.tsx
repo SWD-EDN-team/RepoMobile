@@ -11,6 +11,7 @@ const TabLayout = () => {
     "/auths/verify",
     "/auths/signup",
     "/auths/welcome",
+    "/auths/search",
   ];
 
   return (
@@ -30,6 +31,7 @@ const TabLayout = () => {
       <Tabs.Screen name="signup" options={{ href: "/auths/signup" }} />
       <Tabs.Screen name="verify" options={{ href: "/auths/verify" }} />
       <Tabs.Screen name="welcome" options={{ href: "/auths/welcome" }} />
+      <Tabs.Screen name="search" options={{ href: "/auths/search" }} />
     </Tabs>
   );
 };

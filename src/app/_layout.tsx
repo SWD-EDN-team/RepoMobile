@@ -47,6 +47,10 @@ const RootLayout = () => {
               options={{ headerShown: false }}
             ></Stack.Screen>
             <Stack.Screen
+              name="auths/search"
+              options={{ headerShown: false }}
+            ></Stack.Screen>
+            <Stack.Screen
               name="product/[id]"
               options={{ headerShown: false }}
             ></Stack.Screen>
