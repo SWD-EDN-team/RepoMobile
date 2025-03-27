@@ -13,6 +13,8 @@ import AddressScreen from "./src/app/screens/AddressScreen/AddressScreen";
 import CheckoutScreen from "./src/app/screens/CheckoutScreen/CheckoutScreen";
 import FavoritePage from "@/app/(tabs)/favorite";
 import DemoScreen from "./src/app/screens/DemoScreen/DemoScreen";
+import AccountPage from "@/app/(tabs)/account";
+import ChangeProfileScreen from "@/app/screens/changeProfile/changeProfile";
 // import ShippingAddressScreen from "./src/app/screens/ShippingScreen/ShippingScreen";
 import { Text } from "react-native";
 const Stack = createStackNavigator<RootStackParamList>();
@@ -55,6 +57,18 @@ export default function App() {
           <Stack.Screen 
             name="Checkout" 
             component={CheckoutScreen} 
+            options={{ headerShown: true }}
+          />
+
+          <Stack.Screen
+            name="Account"
+            component={AccountPage}
+            options={{ headerShown: true }}
+          />
+
+          <Stack.Screen
+            name="changeProfile"
+            component={ChangeProfileScreen}
             options={{ headerShown: true }}
           />
           {/* <Stack.Screen name="Shipping" component={ShippingAddressScreen} /> */}

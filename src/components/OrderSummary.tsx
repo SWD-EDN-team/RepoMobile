@@ -1,6 +1,7 @@
 import React, { useState } from "react";
-import { View, Text, StyleSheet } from "react-native";
+import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 import ShippingMethod from "./ShippingMethod";
+import { router } from "expo-router";
 
 const OrderSummary = ({ products }: { products: any[] }) => {
   const [selectedShipping, setSelectedShipping] = useState({ id: 1, name: "Giao hàng tiết kiệm", price: 15000 });
@@ -16,6 +17,16 @@ const OrderSummary = ({ products }: { products: any[] }) => {
         Tổng thanh toán ({products.length} sản phẩm): {totalPrice.toLocaleString("vi-VN")}đ
         </Text>
       </View>
+      <TouchableOpacity
+        onPress={() =>
+          router.push({
+            pathname: "/screens/Payment",
+            params: { total: totalPrice.toString() }, 
+          })
+        }
+      >
+        <Text style={styles.text}>Mua hàng</Text>
+      </TouchableOpacity>
     </View>
   );
 };
@@ -49,7 +60,25 @@ const styles = StyleSheet.create({
     },
     shippingText: { fontSize: 16 },
     summaryBox: { marginTop: 20, padding: 15, borderWidth: 1, borderColor: "#ddd", borderRadius: 5 },
-    text: { fontSize: 16, marginBottom: 5 },
+    text: {
+      backgroundColor: "#007BFF", // Màu xanh dương
+      color: "#fff", // Chữ màu trắng
+      fontSize: 16, // Cỡ chữ
+      fontWeight: "bold", // Chữ đậm
+      textAlign: "center", // Căn giữa chữ
+      paddingVertical: 10, // Khoảng cách trên dưới
+      paddingHorizontal: 20, // Khoảng cách trái phải
+      borderRadius: 8, // Bo tròn góc
+      overflow: "hidden", // Đảm bảo không bị tràn viền
+      elevation: 3, // Tạo bóng trên Android
+      shadowColor: "#000", // Màu bóng trên iOS
+      shadowOffset: { width: 0, height: 2 },
+      shadowOpacity: 0.2,
+      shadowRadius: 3,
+      width: 150, // Định rõ chiều rộng
+      alignSelf: "center", // Căn giữa theo chiều ngang
+      marginTop: 20, // Khoảng cách với phần tử phía trên
+    },
     totalText: { fontSize: 18, fontWeight: "bold", color: "red", marginTop: 5 },
   });
 
