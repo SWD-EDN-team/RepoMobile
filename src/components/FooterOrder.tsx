@@ -3,15 +3,16 @@ import { View, Text, StyleSheet, Image, TouchableOpacity } from "react-native";
 
 interface ProductCardProps {
   item: {
-    id: number;
+    id: string;
     name: string;
     price: number;
-    reviews: number;
-    image: any;
     quantity: number;
+    image: string;
+    selectedColor: string;
+    selectedSize: string;
   };
-  updateQuantity: (id: number, change: number) => void;
-  removeItem: (id: number) => void;
+  updateQuantity: (id: string, change: number) => void;
+  removeItem: (id: string) => void;
 }
 
 const ProductCard = ({
@@ -21,11 +22,12 @@ const ProductCard = ({
 }: ProductCardProps) => {
   return (
     <View style={styles.card}>
-      <Image source={item.image} style={styles.productImage} />
+      <Image source={{ uri: item.image }} style={styles.productImage} />
       <View style={styles.details}>
         <Text style={styles.productName}>{item.name}</Text>
-        <Text style={styles.productPrice}>${item.price}</Text>
-        <Text style={styles.productReviews}>{item.reviews} reviews</Text>
+        <Text style={styles.productPrice}>{item.price}đ</Text>
+        <Text style={styles.productName}>Màu sắc: {item.selectedColor}</Text>
+        <Text style={styles.productName}>Kích thước: {item.selectedSize}</Text>
         <View style={styles.quantityContainer}>
           <TouchableOpacity onPress={() => updateQuantity(item.id, -1)}>
             <Text style={styles.quantityButton}>-</Text>

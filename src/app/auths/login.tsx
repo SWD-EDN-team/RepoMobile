@@ -1,33 +1,33 @@
-import { Link, router } from "expo-router";
-import ShareInput from "@/components/input/share.input";
-import ShareButton from "@/components/button/share.button";
-import { APP_COLOR } from "@/utils/constant";
-import SocialButton from "@/components/button/social.button";
-import { useState } from "react";
-import { Formik } from "formik";
+    import { Link, router } from "expo-router";
+    import ShareInput from "@/components/input/share.input";
+    import ShareButton from "@/components/button/share.button";
+    import { APP_COLOR } from "@/utils/constant";
+    import SocialButton from "@/components/button/social.button";
+    import { useState } from "react";
+    import { Formik } from "formik";
 
-const user = {
-  email: "admin@gmail.com",
-  password: "123456",
-};
-import {
-  View,
-  Text,
-  Button,
-  StyleSheet,
-  ImageBackground,
-  Image,
-  SafeAreaView,
-  TextInput,
-} from "react-native";
-import { LoginSchema } from "@/utils/validate.schema";
-import AsyncStorage from "@react-native-async-storage/async-storage";
-import { loginApi } from "@/utils/api";
-import { useCurrentApp } from "@/context/app.context";
+    const user = {
+      email: "admin@gmail.com",
+      password: "123456",
+    };
+    import {
+      View,
+      Text,
+      Button,
+      StyleSheet,
+      ImageBackground,
+      Image,
+      SafeAreaView,
+      TextInput,
+    } from "react-native";
+    import { LoginSchema } from "@/utils/validate.schema";
+    import AsyncStorage from "@react-native-async-storage/async-storage";
+    import { loginApi } from "@/utils/api";
+    import { useCurrentApp } from "@/context/app.context";
 
-const Login = () => {
-  const [Loading, setLoading] = useState<boolean>(false);
-  const { setAppState } = useCurrentApp();
+    const Login = () => {
+      const [Loading, setLoading] = useState<boolean>(false);
+      const { setAppState } = useCurrentApp();
 
   const handleLogin = async (email: string, password: string) => {
     try {
@@ -36,17 +36,17 @@ const Login = () => {
       });
       console.log(">>>>", res.data);
       if (res.data) {
-        await AsyncStorage.setItem("assess_token", res.data.accessToken);
+        await AsyncStorage.setItem("access_token", res.data.accessToken);
         setAppState(res.data); // gán giá trị vào context
         router.navigate("/(tabs)");
       }
     } catch (err: any) {
       console.error("Lỗi đăng nhập:", err.response?.data || err);
     } finally {
+      console.log("token",AsyncStorage.getItem("access_token"));
       setLoading(false);
     }
   };
-
   return (
     <SafeAreaView style={{ flex: 1 }}>
       <Formik
@@ -92,7 +92,7 @@ const Login = () => {
             <View style={{ marginVertical: 10 }} />
             <ShareButton
               loading={Loading}
-              title="Sign Up "
+              title="Sign In "
               onPress={handleSubmit as any}
               textStyleee={{
                 textTransform: "uppercase",
@@ -146,4 +146,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+    export default Login;

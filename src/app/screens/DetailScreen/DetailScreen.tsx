@@ -1,12 +1,16 @@
 import { View, Text, Image, StyleSheet } from "react-native";
 import React from "react";
 import { ScrollView } from "react-native-gesture-handler";
-// import FooterOrder from "@/components/FooterOrder";
+import FooterOrder from "@/components/FooterOrder";
+import {router} from "expo-router";
 
 const DetailScreen = () => {
   return (
     <View style={{ flex: 1 }}>
       <ScrollView>
+        <Text 
+          onPress={() => router.navigate("/screens/HomeScreen/HomeScreen")}
+        > back home</Text>
         <View style={styles.container}>
           <Image
             style={styles.imageClothers}
@@ -49,7 +53,7 @@ const DetailScreen = () => {
           </Text>
         </View>
       </ScrollView>
-      {/* <FooterOrder /> */}
+      <FooterOrder />
     </View>
   );
 };

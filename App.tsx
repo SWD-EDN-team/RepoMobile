@@ -10,9 +10,13 @@ import DetailScreen from "./src/app/screens/DetailScreen/DetailScreen";
 import { SafeAreaView } from "react-native";
 import Login from "./src/app/screens/LoginScreen/Login";
 import AddressScreen from "./src/app/screens/AddressScreen/AddressScreen";
-import Cart from "./src/app/screens/CartScreen/ShoppingCartScreen";
+import CheckoutScreen from "./src/app/screens/CheckoutScreen/CheckoutScreen";
+import FavoritePage from "@/app/(tabs)/favorite";
 import DemoScreen from "./src/app/screens/DemoScreen/DemoScreen";
+import AccountPage from "@/app/(tabs)/account";
+import ChangeProfileScreen from "@/app/screens/changeProfile/changeProfile";
 // import ShippingAddressScreen from "./src/app/screens/ShippingScreen/ShippingScreen";
+import { Text } from "react-native";
 const Stack = createStackNavigator<RootStackParamList>();
 
 export default function App() {
@@ -25,7 +29,9 @@ export default function App() {
         >
           <Stack.Screen name="SignUp" component={SignUpScreen} />
           <Stack.Screen name="SignIn" component={Login} />
+          <Stack.Screen name="Favorite" component={FavoritePage} />
           <Stack.Screen name="Home" component={HomeScreen} />
+
           <Stack.Screen
             name="DescriptionCard"
             component={DescriptionCardScreen}
@@ -42,9 +48,27 @@ export default function App() {
             options={{ headerShown: true }}
           />
 
-          <Stack.Screen
+          {/* <Stack.Screen
             name="Cart"
             component={Cart}
+            options={{ headerShown: true }}
+          /> */}
+
+          <Stack.Screen 
+            name="Checkout" 
+            component={CheckoutScreen} 
+            options={{ headerShown: true }}
+          />
+
+          <Stack.Screen
+            name="Account"
+            component={AccountPage}
+            options={{ headerShown: true }}
+          />
+
+          <Stack.Screen
+            name="changeProfile"
+            component={ChangeProfileScreen}
             options={{ headerShown: true }}
           />
           {/* <Stack.Screen name="Shipping" component={ShippingAddressScreen} /> */}
