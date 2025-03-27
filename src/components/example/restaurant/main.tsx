@@ -283,7 +283,7 @@ const RMain = (props: IProps) => {
         stickySectionHeadersEnabled={false}
         contentContainerStyle={{
           paddingTop: IMAGE_HEIGHT + INFO_HEIGHT + SLIDE_MENU_HEIGHT - 2,
-          paddingBottom: 50,
+          paddingBottom: 30,
         }}
         sections={DATA}
         renderItem={({ item, index }: { item: any; index: any }) => (

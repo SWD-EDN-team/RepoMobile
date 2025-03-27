@@ -1,5 +1,5 @@
 import { View, Text, StyleSheet, ActivityIndicator, Image } from "react-native";
-import { ErrorBoundaryProps, Redirect, router } from "expo-router";
+import { ErrorBoundaryProps, router } from "expo-router";
 import { useEffect, useState } from "react";
 import * as SplashScreen from "expo-splash-screen";
 
@@ -15,26 +15,22 @@ export function ErrorBoundary({ error, retry }: ErrorBoundaryProps) {
 SplashScreen.preventAutoHideAsync();
 
 const RootPage = () => {
-
-    if (true) {
-    return <Redirect href={"/auths/welcome"}></Redirect>;
-  }
   const [loading, setLoading] = useState(true);
 
-  // useEffect(() => {
-  //   async function prepare() {
-  //     try {
-  //       await new Promise((resolve) => setTimeout(resolve, 2000));
-  //     } catch (e) {
-  //       console.warn(e);
-  //     } finally {
-  //       setLoading(false);
-  //       await SplashScreen.hideAsync();
-  //       router.replace("/auths/welcome");
-  //     }
-  //   }
-  //   prepare();
-  // }, []);
+  useEffect(() => {
+    async function prepare() {
+      try {
+        await new Promise((resolve) => setTimeout(resolve, 2000));
+      } catch (e) {
+        console.warn(e);
+      } finally {
+        setLoading(false);
+        await SplashScreen.hideAsync();
+        router.replace("/auths/welcome");
+      }
+    }
+    prepare();
+  }, []);
 
   if (loading) {
     return (

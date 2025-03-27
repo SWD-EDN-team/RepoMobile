@@ -57,8 +57,3 @@ export const printAsyncStorage = () => {
     });
   });
 };
-
-export const getAllProduct = () => {
-  const url = `${process.env.EXPO_PUBLIC_API_URL}/product`;
-  return axios.get(url);
-};

@@ -125,7 +125,7 @@ const Login = () => {
                   fontWeight: "bold",
                 }}
               >
-                Bạn chưa có tài khoản ?
+                Don't have an account?
               </Text>
               <Link href={"/auths/signup"}>
                 <Text
@@ -135,7 +135,7 @@ const Login = () => {
                     textDecorationLine: "underline",
                   }}
                 >
-                  Đăng ký
+                  Sign Up
                 </Text>
               </Link>
             </View>

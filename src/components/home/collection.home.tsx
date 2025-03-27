@@ -1,6 +1,4 @@
-import { getAllProduct } from "@/utils/api";
 import { APP_COLOR } from "@/utils/constant";
-import axios from "axios";
 import { router } from "expo-router";
 import React from "react";
 import { View, Image, Text, StyleSheet, Button, Pressable } from "react-native";
@@ -59,17 +57,10 @@ const data = [
     },
   ],
 ];
-let data2: any = {};
-const handleClick = async () => {
-  const res = await getAllProduct();
-  data2 = res; // Gán dữ liệu vào data2
-  console.log("res>>>", data2);
-};
 
 const CollectionHome = ({ name, description, imageRef }: Props) => {
   return (
     <>
-      {/* <Button title="clickj" onPress={handleClick}></Button> */}
       <View style={{ height: 8, backgroundColor: "#e9e9e9" }}></View>
       <View style={styles.itemContainer}>
         <View
